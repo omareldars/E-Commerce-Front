@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { UserService } from './components/_Services/user.service';
 import { UsersettingComponent } from './components/usersetting/usersetting.component';
+import { SellwithusComponent } from './components/sellwithus/sellwithus.component';
+import { MerchantService } from './components/_Services/merchant.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -47,7 +49,8 @@ export function tokenGetter() {
     AdminDashboardComponent,
     AdminFooterComponent,
     AdminHeaderComponent,
-    UsersettingComponent
+    UsersettingComponent,
+    SellwithusComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ export function tokenGetter() {
   ],
   providers: [
     UserService,
+    MerchantService
   ],
   bootstrap: [AppComponent]
 })
