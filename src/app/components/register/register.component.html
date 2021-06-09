@@ -14,41 +14,132 @@
     <div class="container">
         <div class="row">
 <div class="col-sm-12 col-md-12 col-lg-8 col-xs-12 ml-200">
-    <form action="#">
+    <form   [formGroup]="profileForm" method="post" action="#">
         <div class="login-form">
             <h4 class="login-title text-center">Register</h4>
             <div class="row">
                 <div class="col-md-6 col-12 mb-20">
                     <label>First Name</label>
-                    <input class="mb-0" type="text" placeholder="First Name">
+                    <input class="mb-0" type="text"  formControlName="firstname" #Firstname placeholder="First Name">
+                    
+                  <div *ngIf="
+                  firstname?.invalid &&
+                  (firstname?.dirty || firstname?.touched)
+                " class="alert alert-danger">
+                <div *ngIf="firstname?.errors?.required">
+                  firstname is required.
+                </div>
+              </div>
                 </div>
                 <div class="col-md-6 col-12 mb-20">
                     <label>Last Name</label>
-                    <input class="mb-0" type="text" placeholder="Last Name">
+                    <input class="mb-0" type="text" formControlName="lastname" #Lastname placeholder="Last Name">
+                    <div *ngIf="
+                    lastname?.invalid &&
+                    (lastname?.dirty || lastname?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="lastname?.errors?.required">
+                    lastname is required.
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-12 mb-20">
+                    <label>Username</label>
+                    <input class="mb-0" type="text" formControlName="username" #Username  placeholder="Username">
+                    <div *ngIf="
+                    username?.invalid &&
+                    (username?.dirty || username?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="username?.errors?.required">
+                    Username is required.
+                  </div>
+                  <div *ngIf="username?.errors?.minlength">
+                    Username must be at least 8 characters long.
+                  </div>
+                </div>
                 </div>
                 <div class="col-md-12 mb-20">
                     <label>Email Address*</label>
-                    <input class="mb-0" type="email" placeholder="Email Address">
+                    <input class="mb-0" type="email" placeholder="Email Address" formControlName="email" #Email>
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+                        <div *ngIf="email?.errors?.required">
+                          Email is required.
+                        </div>
+                        <div *ngIf="email?.errors?.email">
+                          Email must be match email format(example@example.com).
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-12 mb-20">
+                    <label>Phone</label>
+                    <input class="mb-0" type="tel" placeholder="Phone" formControlName="phone" #Phone>
+                    <div *ngIf="
+                    phone?.invalid &&
+                    (phone?.dirty || phone?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="phone?.errors?.required">
+                    Phone  is required.
+                  </div>
+                  <div *ngIf="phone?.errors?.pattern || phone?.errors?.minlength ||  phone?.errors?.maxlength">
+                    phone must be 11 number long.
+                  </div>
+                </div>
+
+                </div>
+
+                
+                <div class="col-md-6 mb-20">
+                    <label>City</label>
+                    <input class="mb-0" type="text" placeholder="City"  formControlName="city" #City>
+                    <div *ngIf="
+                    city?.invalid &&
+                    (city?.dirty || city?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="city?.errors?.required">
+                    city input  is required.
+                  </div>
+                </div>
                 </div>
                 <div class="col-md-6 mb-20">
+                    <label>Country</label>
+                    <input class="mb-0" type="text" placeholder="Country" formControlName="country" #Country>
+                    <div *ngIf="
+                    country?.invalid &&
+                    (country?.dirty || country?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="country?.errors?.required">
+                    country input  is required.
+                  </div>
+                </div>
+                </div>
+
+
+
+                <div class="col-md-6 mb-20">
                     <label>Password</label>
-                    <input class="mb-0" type="password" placeholder="Password">
+                    <input class="mb-0" type="password" placeholder="Password" formControlName="password"  #Password>
+                    <div *ngIf="
+                    password?.invalid &&
+                    (password?.dirty || password?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="password?.errors?.required">
+                    password is required.
+                  </div>
+                  <div *ngIf="password?.errors?.minlength">
+                    password must be at least 8 characters long.
+                  </div>
+                </div>
                 </div>
                 <div class="col-md-6 mb-20">
                     <label>Confirm Password</label>
                     <input class="mb-0" type="password" placeholder="Confirm Password">
                 </div>
-                <div class="col-md-12 mb-20">
-                  <label>Register As:</label>
-                  <select class="mb-0" name="user_type">
-                    <optgroup label="Register As: ">
-                      <option value="merchant">Merchant</option>
-                      <option value="user">User</option>
-                    </optgroup>
-                  </select>
-                </div>
+               
                 <div class="col-12">
-                    <button class="register-button mt-0">Register</button>
+                    <button  class="register-button mt-0" type="submit" (click)="Submit()" [disabled]="!profileForm.valid" > Register</button>
+                  <div *ngIf="errors" class="alert alert-danger">
+                        Enter Valid data.
+                      </div> 
                 </div>
             </div>
         </div>

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -19,8 +20,14 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AdminDashboardComponent } from "./components/admin-dashboard/admin-dashboard.component";
 import { AdminFooterComponent } from './components/admin-footer/admin-footer.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { UserService } from './components/_Services/user.service';
+import { UsersettingComponent } from './components/usersetting/usersetting.component';
 
-
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,13 +46,25 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
     WishListComponent,
     AdminDashboardComponent,
     AdminFooterComponent,
-    AdminHeaderComponent
+    AdminHeaderComponent,
+    UsersettingComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    UserService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

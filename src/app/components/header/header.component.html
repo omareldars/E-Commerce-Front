@@ -28,10 +28,9 @@
                                             <div class="ht-setting-trigger"><span>Setting</span></div>
                                             <div class="setting ht-setting">
                                                 <ul class="ht-setting-list">
-                                                    <li><a href="login-register.html">My Account</a></li>
-                                                    <li><a href="/checkout">Checkout</a></li>
-                                                    <li><a href="/login">Login</a></li>
-                                                    <li><a href="/register">register</a></li>
+                                                    <li><a routerLink="/profile" *ngIf="u.loggedIn">My Account</a></li>
+                                                    <li><a routerLink="/checkout" >Checkout</a></li>
+                                                    
 
                                                 </ul>
                                             </div>
@@ -39,18 +38,28 @@
                                         <!-- Setting Area End Here -->
                                         <!-- Begin Currency Area -->
                                         <li>
-                                            <span class="currency-selector-wrapper">Currency :</span>
-                                            <div class="ht-currency-trigger"><span>USD $</span></div>
-                                            <div class="currency ht-currency">
-                                                <ul class="ht-setting-list">
-                                                    <li><a href="#">EUR €</a></li>
-                                                    <li class="active"><a href="#">USD $</a></li>
-                                                </ul>
-                                            </div>
+                                            <span class="currency-selector-wrapper"><a style="color:gray;" routerLink="/login"  *ngIf="!u.loggedIn" >Login</a> 
+                                            <a (click)="logout()"  style="color:gray;" *ngIf="u.loggedIn">Logut</a></span>
+                                           
                                         </li>
+                                        <!-- <li>
+                                            <a class="nav-link" (click)="logout()" *ngIf="u.loggedIn">Logut</a>
+                                            </li>-->
+                                        <li> 
+                                            <span class="currency-selector-wrapper"><a style="color:gray;" *ngIf="!u.loggedIn" routerLink="/register">Register</a> </span>
+                                    
+                                        </li>
+
+                                       
+
+
+
+
+
+
                                         <!-- Currency Area End Here -->
                                         <!-- Begin Language Area -->
-                                        <li>
+                                        <!-- <li>
                                             <span class="language-selector-wrapper">Language :</span>
                                             <div class="ht-language-trigger"><span>English</span></div>
                                             <div class="language ht-language">
@@ -59,7 +68,7 @@
                                                     <li><a href="#"><img src="../assets/images/menu/flag-icon/2.jpg" alt="">Français</a></li>
                                                 </ul>
                                             </div>
-                                        </li>
+                                        </li> -->
                                         <!-- Language Area End Here -->
                                     </ul>
                                 </div>
@@ -239,7 +248,7 @@
                                 <div class="hb-menu hb-menu-2 d-xl-block">
                                     <nav>
                                         <ul>
-                                            <li class=""><a href="/home">Home</a>
+                                            <li class=""><a routerLink="/home">Home</a>
                                             </li>
                                             <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                                 <ul class="megamenu hb-megamenu">

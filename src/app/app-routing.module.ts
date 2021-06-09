@@ -12,6 +12,7 @@ import {ShopListComponent} from "./components/shop-list/shop-list.component";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 import {WishListComponent} from "./components/wish-list/wish-list.component";
 import {AdminDashboardComponent} from "./components/admin-dashboard/admin-dashboard.component";
+import { UsersettingComponent } from './components/usersetting/usersetting.component';
 
 const routes: Routes = [
 // User Section
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'shop-list', component:ShopListComponent},
   {path: 'wish-list', component:WishListComponent},
   {path: 'product-details', component:ProductDetailsComponent},
+  {path: 'profile',component:UsersettingComponent},
   //  Admin Section
   {path: 'dashboard', component: AdminDashboardComponent},
   // Not Found
