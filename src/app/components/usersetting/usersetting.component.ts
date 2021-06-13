@@ -8,7 +8,7 @@ import { UserService } from '../_Services/user.service';
   styleUrls: ['./usersetting.component.css']
 })
 export class UsersettingComponent implements OnInit {
-  Euser !: User;
+  Euser : User;
   constructor(private UserService: UserService, private ar: ActivatedRoute, private router: Router) { }
   save() {
     console.log(this.Euser)
