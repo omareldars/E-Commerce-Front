@@ -18,14 +18,18 @@ import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AdminDashboardComponent } from "./components/admin-dashboard/admin-dashboard.component";
-import { AdminFooterComponent } from './components/admin-footer/admin-footer.component';
-import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { UserService } from './components/_Services/user.service';
 import { UsersettingComponent } from './components/usersetting/usersetting.component';
 import { SellwithusComponent } from './components/sellwithus/sellwithus.component';
 import { MerchantService } from './components/_Services/merchant.service';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { MerchantComponent } from './components/merchant/merchant.component';
+import { UsersComponent } from './components/users/users.component';
+import { ProductsComponent } from './components/products/products.component';
+import { AdminDashboardHeaderComponent } from './components/admin-dashboard-header/admin-dashboard-header.component';
+import { AdminDashboardFooterComponent } from './components/admin-dashboard-footer/admin-dashboard-footer.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -47,10 +51,15 @@ export function tokenGetter() {
     ProductDetailsComponent,
     WishListComponent,
     AdminDashboardComponent,
-    AdminFooterComponent,
-    AdminHeaderComponent,
     UsersettingComponent,
-    SellwithusComponent
+    SellwithusComponent,
+    CategoriesComponent,
+    MerchantComponent,
+    UsersComponent,
+    ProductsComponent,
+    AdminDashboardHeaderComponent,
+    AdminDashboardFooterComponent
+
   ],
   imports: [
     BrowserModule,

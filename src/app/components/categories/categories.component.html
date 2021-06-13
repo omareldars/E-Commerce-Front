@@ -1,4 +1,5 @@
-<app-admin-dashboard-header></app-admin-dashboard-header>
+  
+  <app-admin-dashboard-header></app-admin-dashboard-header>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,5 +19,25 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+<div class="container text-center">
+    <br><br>
+  <button  class="btn btn-success"><a style="color:white;" href="">Add New Category</a></button>
+</div>
+<br><br>
+
+<div class="container">
+<table class="table table-dark">
+    <th >CategoryName</th>
+    <th colspan="2">Action</th>
+  
+    <tr>
+        <td></td>
+        <td><a  class="btn btn-primary"href="">Edit</a></td>
+        <td ><a class="btn btn-danger" href="" onclick= "return confirm('are you sure ?');">Delete</a></td>
+    </tr>
+   
+</table>
+</div>
   </div>
 <app-admin-dashboard-footer></app-admin-dashboard-footer>

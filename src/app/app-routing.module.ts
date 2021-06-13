@@ -14,6 +14,10 @@ import {WishListComponent} from "./components/wish-list/wish-list.component";
 import {AdminDashboardComponent} from "./components/admin-dashboard/admin-dashboard.component";
 import { UsersettingComponent } from './components/usersetting/usersetting.component';
 import { SellwithusComponent } from './components/sellwithus/sellwithus.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { MerchantComponent } from './components/merchant/merchant.component';
+import { ProductsComponent } from './components/products/products.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
 // User Section
@@ -32,8 +36,13 @@ const routes: Routes = [
   {path:'sellerrequest',component:SellwithusComponent},
   //  Admin Section
   {path: 'dashboard', component: AdminDashboardComponent},
+  {path: 'users', component:UsersComponent},
+  {path: 'categories', component:CategoriesComponent},
+  {path: 'merchant', component:MerchantComponent},
+  {path: 'products', component:ProductsComponent},
   // Not Found
   {path: '**', component:ErrorComponent},
+
 
 
 ];
