@@ -44,7 +44,7 @@ export class AddCategoryComponent implements OnInit {
     this.CategoryService.add(this.ncategory).subscribe(
       d => {
         console.log(d)
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/categories')
       },
       err => this.errors = 'Could not authenticate'
     )

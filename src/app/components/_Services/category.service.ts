@@ -23,7 +23,7 @@ export class CategoryService {
     return this.http.put<Category>(this.baseUrl+"/"+id,category,{ headers: { authorization: this.token } });
   }
   deleteById(id: string){
-    return this.http.delete<Category>(this.baseUrl+"/delete"+id,{ headers: { authorization: this.token } });
+    return this.http.delete<Category>(this.baseUrl+"/delete/"+id,{ headers: { authorization: this.token } });
   }
   getCategoryById(id: string){
     return this.http.get<Category>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
