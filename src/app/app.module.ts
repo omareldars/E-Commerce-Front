@@ -30,6 +30,8 @@ import { UsersComponent } from './components/users/users.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AdminDashboardHeaderComponent } from './components/admin-dashboard-header/admin-dashboard-header.component';
 import { AdminDashboardFooterComponent } from './components/admin-dashboard-footer/admin-dashboard-footer.component';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
+import { CategoryService } from './components/_Services/category.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -58,7 +60,8 @@ export function tokenGetter() {
     UsersComponent,
     ProductsComponent,
     AdminDashboardHeaderComponent,
-    AdminDashboardFooterComponent
+    AdminDashboardFooterComponent,
+    AddCategoryComponent
 
   ],
   imports: [
@@ -76,7 +79,8 @@ export function tokenGetter() {
   ],
   providers: [
     UserService,
-    MerchantService
+    MerchantService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

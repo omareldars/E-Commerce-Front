@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('access_token', result.token!)
           localStorage.setItem('access_id', result._id!);
           localStorage.setItem('access_name', result.email)
-          this.router.navigate(['/home'])
+          this.router.navigateByUrl('/home')
           console.log(result)
         },
         err => this.errors = 'Could not authenticate'

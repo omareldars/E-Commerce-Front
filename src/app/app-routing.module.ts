@@ -18,6 +18,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { MerchantComponent } from './components/merchant/merchant.component';
 import { ProductsComponent } from './components/products/products.component';
 import { UsersComponent } from './components/users/users.component';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
 
 const routes: Routes = [
 // User Section
@@ -40,6 +41,8 @@ const routes: Routes = [
   {path: 'categories', component:CategoriesComponent},
   {path: 'merchant', component:MerchantComponent},
   {path: 'products', component:ProductsComponent},
+  {path: 'add-category', component:AddCategoryComponent},
+
   // Not Found
   {path: '**', component:ErrorComponent},
 

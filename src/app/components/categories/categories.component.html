@@ -22,15 +22,20 @@
 
 <div class="container text-center">
     <br><br>
-  <button  class="btn btn-success"><a style="color:white;" href="">Add New Category</a></button>
+  <button  class="btn btn-success"><a style="color:white;" routerLink="/add-category">Add New Category</a></button>
 </div>
 <br><br>
 
 <div class="container">
 <table class="table table-dark">
-    <th >CategoryName</th>
+  <thead>
+    <tr>
+    <th >Name</th>
+    <th >Description</th>
+    <th>Created at</th>
     <th colspan="2">Action</th>
-  
+    </tr>
+  </thead>
     <tr>
         <td></td>
         <td><a  class="btn btn-primary"href="">Edit</a></td>
