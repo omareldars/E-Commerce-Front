@@ -58,12 +58,18 @@
 
           <td>{{ merchant.created }}</td>
           <td>
-            <a class="btn btn-primary p-1" routerLink="/edit">Edit</a>
+            <button
+              (click)="Approved(merchant._id)"
+              class="btn btn-primary p-1"
+              style="color: azure"
+            >
+              Approve
+            </button>
             <button
               class="btn btn-danger p-1 ml-4"
-              (click)="delete(merchant._id)"
+              (click)="Reject(merchant._id)"
             >
-              Delete
+              Reject
             </button>
           </td>
         </tr>
