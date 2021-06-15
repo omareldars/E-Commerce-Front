@@ -32,6 +32,7 @@ import { AdminDashboardHeaderComponent } from './components/admin-dashboard-head
 import { AdminDashboardFooterComponent } from './components/admin-dashboard-footer/admin-dashboard-footer.component';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { CategoryService } from './components/_Services/category.service';
+import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -61,7 +62,8 @@ export function tokenGetter() {
     ProductsComponent,
     AdminDashboardHeaderComponent,
     AdminDashboardFooterComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    EditCategoryComponent
 
   ],
   imports: [

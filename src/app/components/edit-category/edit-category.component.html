@@ -1,0 +1,64 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Edit Categories Page</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+              <li class="breadcrumb-item active">Edit Categories Page</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+  <!-- Begin Login Content Area -->
+  <div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-8 mb-30 ml-150">
+                <!-- Login Form s-->
+                <form [formGroup]="editcategory" (ngSubmit)="collection()">
+                    <div class="login-form">
+                        <h4 class="login-title">Edit Category</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb-20">
+                                <label>Title</label>
+                                <input class="mb-0" type="text" placeholder="Title" name="name" formControlName="name" #Name/>
+                                <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+                                    <div *ngIf="name?.errors?.required">name is required.</div>
+                                </div></div>
+                            <div class="col-12 mb-20">
+                              <label>Description</label>
+                              <textarea class="mb-0" type="text" placeholder="Description" name="description" formControlName="description" #Description></textarea>
+                              <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="alert alert-danger">
+                                <div *ngIf="description?.errors?.required">description is required.</div>
+                                <div *ngIf="description?.errors?.minlength">description must be at least 10 characters long.</div>
+                              </div>
+                            </div>
+                       </div>
+                       <div class="col-md-12" width>
+                        <button  class="register-button m-2" type="submit">Update </button>
+                        <button type="button" id="cancel" name="cancel" class="btn btn-warning m-2" (click)="cancel()">Cancel</button> 
+                      </div>
+                      </div>
+                     
+                    
+                 </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Login Content Area End Here -->
+
+<app-admin-dashboard-footer></app-admin-dashboard-footer>

@@ -10,22 +10,14 @@
                             <h2 class="categories-toggle"><span>categories</span></h2>
                         </div>
                         <div id="cate-toggle" class="category-menu-list">
-                            <ul>
+                            <ul *ngFor="let category of categories">
+                                <li class="right-menu"><a routerLink="{{category.id}}">{{category.name}}</a></li>
+                            </ul>
+                            <!-- <ul>
                                 <li class="right-menu"><a href="shop-left-sidebar.html">Laptops</a>
                                     <ul class="cat-mega-menu">
                                         <li class="right-menu cat-mega-title">
                                            <a href="shop-left-sidebar.html">Prime Video</a>
-                                            <ul>
-                                                <li><a href="#">All Videos</a></li>
-                                                <li><a href="#">Blouses</a></li>
-                                                <li><a href="#">Evening Dresses</a></li>
-                                                <li><a href="#">Summer Dresses</a></li>
-                                                <li><a href="#">T-shirts</a></li>
-                                                <li><a href="#">Rent or Buy</a></li>
-                                                <li><a href="#">Your Watchlist</a></li>
-                                                <li><a href="#">Watch Anywhere</a></li>
-                                                <li><a href="#">Getting Started</a></li>
-                                            </ul>
                                         </li>
                                         <li class="right-menu cat-mega-title">
                                            <a href="shop-left-sidebar.html">Computers</a>
@@ -128,7 +120,7 @@
                                     <a class="rx-default">More Categories</a>
                                     <a class="rx-show">Less Categories</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <!--Category Menu End-->
