@@ -21,6 +21,8 @@ import { UsersComponent } from './components/users/users.component';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { MerchantRequestsComponent } from './components/merchant-requests/merchant-requests.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
 
 const routes: Routes = [
 // User Section
@@ -47,6 +49,11 @@ const routes: Routes = [
   {path: 'edit-category/:id', component:EditCategoryComponent},
   {path: 'merchant-requests', component:MerchantRequestsComponent},
   {path: 'create-product', component:ProductsComponent},
+  {path: 'edit-product', component:EditProductComponent},
+  {path: 'admin-product', component:AdminDashboardProductComponent},
+
+
+
 
 
   // Not Found

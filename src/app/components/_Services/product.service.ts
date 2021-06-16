@@ -18,13 +18,13 @@ export class ProductService {
   }
 
   getAllProducts() {
-    return this.http.get<Product[]>(this.baseUrl+"/home");
+    return this.http.get<Product[]>(this.baseUrl+'/home');
   }
   editProduct(id: string,product: any){
     return this.http.patch<Product>(this.baseUrl+"/"+id,product,{ headers: { authorization: this.token } });
   }
   deleteById(id: string){
-    return this.http.delete<Product>(this.baseUrl+"/"+id,{ headers: { authorization: this.token } });
+    return this.http.delete<Product>(this.baseUrl+"/delete/"+id,{ headers: { authorization: this.token } });
   }
   getProductById(id: string){
     return this.http.get<Product>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
