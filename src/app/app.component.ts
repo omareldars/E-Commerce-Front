@@ -21,7 +21,7 @@ export class AppComponent {
     // on route change to '/login', set the variable showHead to false
       router.events.forEach((event) => {
         if (event instanceof NavigationStart) {
-          if (event['url'] == '/dashboard' || event['url'] == '/categories' ||  event['url'] == '/add-category' || event['url'].includes('/edit-category/')) {
+          if (event['url'] == '/dashboard' || event['url'] == '/categories' ||  event['url'] == '/add-category' || event['url'].includes('/edit-category/') || event['url'] == '/merchant-requests'  || event['url'] == '/merchant' ) {
             this.Dashboard = false;
           } else {
             // console.log("NU")

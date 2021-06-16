@@ -7,6 +7,7 @@ import { Merchant } from './../_Models/Merchant';
 })
 export class MerchantService {
   public token: any = localStorage.getItem('access_token');
+  baseUrl = "http://localhost:3000/merchants";
   constructor(private http: HttpClient) { }
 
   sellerRequest(newMerchant: Merchant) {
@@ -14,5 +15,26 @@ export class MerchantService {
   }
 
 
+approveSeller(id:string){
+  console.log("approvale func");
+  console.log(this.token);
+  return this.http.patch<Merchant>(this.baseUrl+"/approve/"+id,{ headers: { authorization: this.token }} , {withCredentials: true});
+
+}
+
+
+getAllApprovalMechants() {
+  return this.http.get<Merchant[]>(this.baseUrl+"/list",{ headers: { authorization: this.token } });
+}
+getAllwaitingMechants() {
+  return this.http.get<Merchant[]>(this.baseUrl+"/list/approval",{ headers: { authorization: this.token } });
+}
+
+deleteById(id: string){
+  return this.http.delete<Merchant>(this.baseUrl+"/delete/"+id,{ headers: { authorization: this.token } });
+}
+// getCategoryById(id: string){
+//   return this.http.get<Category>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
+// }
 
 }

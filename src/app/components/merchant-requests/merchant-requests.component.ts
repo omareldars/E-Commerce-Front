@@ -3,18 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MerchantService } from '../_Services/merchant.service';
 
 @Component({
-  selector: 'app-merchant',
-  templateUrl: './merchant.component.html',
-  styleUrls: ['./merchant.component.css']
+  selector: 'app-merchant-requests',
+  templateUrl: './merchant-requests.component.html',
+  styleUrls: ['./merchant-requests.component.css']
 })
-export class MerchantComponent implements OnInit {
+export class MerchantRequestsComponent implements OnInit {
 
   constructor(private merchant:MerchantService,private router: Router) { }
 
   merchants:any;
 
   ngOnInit(): void {
-    this.merchant.getAllApprovalMechants().subscribe(
+    this.merchant.getAllwaitingMechants().subscribe(
       (res)=>{this.merchants= res['merchants'];},
       (err)=>{console.log(err);}
     );
@@ -36,12 +36,22 @@ export class MerchantComponent implements OnInit {
     
   // }
 
-//   SellerRequest(merchant:any){
-// this.merchant.sellerRequest(merchant).subscribe(
-//   (res)=>{console.log(res)},
-//   (err)=>{console.log(err)}
-// )
-// this.router.navigateByUrl('/merchants');
+ 
+Approved(id:string){
 
-//   }
+  let result = confirm("Are you sure?");
+
+    if(result){
+      this.merchant.approveSeller(id).subscribe(
+        (res)=>{console.log(res);},
+        (err)=>{console.log(err);}
+      );
+      this.merchants = this.merchants.filter((item: { id: any; }) => item.id != id);
+      this.router.navigateByUrl('/merchant-requests');
+
+    }
+
+}
+
+
 }
