@@ -46,7 +46,24 @@ Approved(id:string){
         (res)=>{console.log(res);},
         (err)=>{console.log(err);}
       );
-      this.merchants = this.merchants.filter((item: { id: any; }) => item.id != id);
+      // this.merchants = this.merchants.filter((item: { id: any; }) => item.id != id);
+      this.router.navigateByUrl('/merchant-requests');
+
+    }
+
+}
+
+
+
+Reject(id:string){
+   let result = confirm("Are you sure?");
+
+    if(result){
+      this.merchant.approveSeller(id).subscribe(
+        (res)=>{console.log(res);},
+        (err)=>{console.log(err);}
+      );
+      // this.merchants = this.merchants.filter((item: { id: any; }) => item.id != id);
       this.router.navigateByUrl('/merchant-requests');
 
     }

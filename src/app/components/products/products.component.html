@@ -1,73 +1,127 @@
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+<!--Body Content-->
+<div id="page-content">
+  <!--Page Title-->
+  <div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">Create &nbsp; Product</h1>
+      </div>
     </div>
-    <!-- /.content-header -->
-
-<div class="container text-center">
-    <br /><br />
-    <button class="btn btn-success">
-      <a style="color: white" href="/register">Add New Product</a>
-    </button>
   </div>
-  <br /><br />
-
+  <!--End Page Title-->
   <div class="container">
-    <table class="table table-dark">
-      <th>Title</th>
-      <th>description</th>
-      <th>create Date</th>
-      <th span="6">Actions</th>
-  
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+        <div class="mb-4">
+          <form
+            method="post"
+            action="/products/store"
+            id="CustomerLoginForm"
+            accept-charset="UTF-8"
+            class="contact-form"
+          >
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Product Title</label>
+                  <input
+                    type="text"
+                    id="CustomerEmail"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    name="product"
+                    [(ngModel)]="nproduct.title"
+                  />
+                </div>
+              </div>
 
-        <td>
-          <a class="btn btn-primary" href="#">Edit</a>
-        </td>
-        <td>
-          <a
-            class="btn btn-danger"
-            href=""
-            onclick="return confirm('are you sure ?');"
-            >Delete</a
-          >
-        </td>
-        <td>
-          <a href=""
-            ><button
-              type="button"
-              class="btn btn-danger"
-              onclick="return confirm('are you sure ?');"
-            >
-              lock
-            </button></a
-          >
-        </td>
-  
-        <td>
-          <a href=""
-            ><button type="button" class="btn btn-primary"  onclick="return confirm('are you sure ?');">Unlock</button></a
-          >
-        </td>
-      </tr>
-    
-    </table>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerCaegory">Ctegory</label>
+                  <select   *ngFor="let category of categories">
+                    <option>{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerQuantity">Quantity</label>
+                  <input
+                    type="number"
+                    id="CustomerQuantity"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    name="quantity"
+                    [(ngModel)]="nproduct.quantity"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Total price</label>
+                  <input
+                    type="number"
+                    id="CustomerEmail"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    name="price"
+                    [(ngModel)]="nproduct.price"
+                  />
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Image</label>
+                  <input
+                    type="file"
+                    (input)="onselect($event)"
+                    [(ngModel)]="nproduct.photo"
+                    id="CustomerEmail"
+                    class=""
+                    name="photo"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                  />
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Description</label>
+                  <textarea
+                    [(ngModel)]="nproduct.description"
+                    name="description"
+                    id="CustomerEmail"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="form-group my-4 text-center text-center col-12 col-sm-12 col-md-12 col-lg-12"
+              >
+                <button class="btn btn-secondary" (click)="save()">
+                  Create product
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!--End Body Content-->

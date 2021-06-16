@@ -15,12 +15,27 @@ export class MerchantService {
   }
 
 
-approveSeller(id:string){
-  console.log("approvale func");
-  console.log(this.token);
-  return this.http.patch<Merchant>(this.baseUrl+"/approve/"+id,{ headers: { authorization: this.token }} , {withCredentials: true});
-
+approveSeller(merchantId:string){
+  return this.http.put<Merchant>(this.baseUrl+"/approve/"+merchantId,{ headers: { authorization: this.token } });
 }
+
+rejectSeller(merchantId:string){
+  return this.http.put<Merchant>(this.baseUrl+"/reject/"+merchantId,{});
+}
+
+// getAllMechants() {
+//   return this.http.get<Merchant[]>(this.baseUrl+"/list",{ headers: { authorization: this.token } });
+// }
+
+// deleteById(id: string){
+//   return this.http.delete<Merchant>(this.baseUrl+"/delete/"+id,{ headers: { authorization: this.token } });
+// }
+// getCategoryById(id: string){
+//   return this.http.get<Category>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
+// }
+
+
+
 
 
 getAllApprovalMechants() {
@@ -30,11 +45,5 @@ getAllwaitingMechants() {
   return this.http.get<Merchant[]>(this.baseUrl+"/list/approval",{ headers: { authorization: this.token } });
 }
 
-deleteById(id: string){
-  return this.http.delete<Merchant>(this.baseUrl+"/delete/"+id,{ headers: { authorization: this.token } });
-}
-// getCategoryById(id: string){
-//   return this.http.get<Category>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
-// }
 
 }

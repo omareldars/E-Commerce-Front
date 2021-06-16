@@ -34,6 +34,10 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
 import { CategoryService } from './components/_Services/category.service';
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { MerchantRequestsComponent } from './components/merchant-requests/merchant-requests.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
+import { ProductService } from './components/_Services/product.service';
+// import { ProductComponent } from './components/product/product.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -65,7 +69,10 @@ export function tokenGetter() {
     AdminDashboardFooterComponent,
     AddCategoryComponent,
     EditCategoryComponent,
-    MerchantRequestsComponent
+    MerchantRequestsComponent,
+    EditProductComponent,
+    AdminDashboardProductComponent,
+
 
   ],
   imports: [
@@ -84,7 +91,8 @@ export function tokenGetter() {
   providers: [
     UserService,
     MerchantService,
-    CategoryService
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
