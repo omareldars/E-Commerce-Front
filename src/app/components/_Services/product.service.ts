@@ -18,7 +18,7 @@ export class ProductService {
   }
 
   getAllProducts() {
-    return this.http.get<Product[]>(this.baseUrl);
+    return this.http.get<Product[]>(this.baseUrl+"/home");
   }
   editProduct(id: string,product: any){
     return this.http.patch<Product>(this.baseUrl+"/"+id,product,{ headers: { authorization: this.token } });

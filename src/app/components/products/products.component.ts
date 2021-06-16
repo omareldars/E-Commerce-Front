@@ -12,7 +12,7 @@ import { ProductService } from '../_Services/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  
+
   currentProduct:any=null;
   categories:any[]
   getproducts:any
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
     this.addForm = this.fb.group({
       product: [''],
      description: ['']
-      
+
 
     })
   }
@@ -67,10 +67,10 @@ export class ProductsComponent implements OnInit {
 
     this.Product.append('price', this.nproduct.price);
     this.Product.append('quantity', this.nproduct.quantity);
-    
+
 
     this.Product.append('photo', this.selectedFile);
-    // this.Product.append('category', this.nproduct.category)
+    // this.Product.append('category', this.nproduct.category);
 
 
 
