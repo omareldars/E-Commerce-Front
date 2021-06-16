@@ -36,7 +36,7 @@ const routes: Routes = [
   {path: 'checkout', component:CheckOutComponent},
   {path: 'shop-list', component:ShopListComponent},
   {path: 'wish-list', component:WishListComponent},
-  {path: 'product-details', component:ProductDetailsComponent},
+  {path: 'product-details/:id', component:ProductDetailsComponent},
   {path: 'profile',component:UsersettingComponent},
   {path:'sellerrequest',component:SellwithusComponent},
   //  Admin Section
@@ -51,6 +51,7 @@ const routes: Routes = [
   {path: 'create-product', component:ProductsComponent},
   {path: 'edit-product', component:EditProductComponent},
   {path: 'admin-product', component:AdminDashboardProductComponent},
+  {path: 'addcart', component:CartComponent},
 
 
 

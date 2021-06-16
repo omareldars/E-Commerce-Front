@@ -3,60 +3,13 @@
   <div class="container">
     <div class="breadcrumb-content">
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="/home">Home</a></li>
         <li class="active">Single Product Tab Left</li>
       </ul>
     </div>
   </div>
 </div>
 <!-- Li's Breadcrumb Area End Here -->
-
-<!-- Teeeeeeeeeeeeeeeeeeeeeeeeeeeest -->
-<div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let item of pro">
-<div class="container offset-5 mt-4">
-  <div class="card" style="width: 18rem">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <a routerLink="products/{{ item.id }}"> </a>
-      </li>
-<!--      <li class="list-group-item">-->
-<!--        <img-->
-<!--          class="img-fluid w-100"-->
-<!--          [src]="'http://localhost:3000/' + item.photo"-->
-<!--          alt="..."-->
-<!--        />-->
-<!--      </li>-->
-      <li class="list-group-item">Price :{{ item.title }}</li>
-      <li class="list-group-item">Product :{{ item.description }}</li>
-<!--      <li class="list-group-item">Price :{{ item.price }}</li>-->
-      <li class="list-group-item">
-        <div class="product-overlay">
-          <ul class="mb-0 list-inline">
-            <li class="list-inline-item m-0 p-0">
-              <a class="btn btn-sm btn-outline-dark" href="#"
-              ><i class="far fa-heart"></i
-              ></a>
-            </li>
-            <li class="list-inline-item m-0 p-0">
-              <a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-            </li>
-            <li class="list-inline-item mr-0">
-              <a
-                class="btn btn-sm btn-outline-dark"
-                href="#productView"
-                data-toggle="modal"
-              ><i class="fas fa-expand"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-</div>
-<!-- Tesssssssssssssssssssssssssssssssssssssssssst -->
-
 <!-- content-wraper start -->
 <div class="content-wraper">
   <div class="container">
@@ -65,54 +18,49 @@
         <!-- Product Details Left -->
         <div class="product-details-left sp-tab-style-left-page">
           <div class="product-details-images slider-navigation-1">
-            <div class="lg-image">
+            <div class="lg-image" style="margin-top:21%;">
               <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/1.jpg" data-gall="myGallery">
-                <img src="../assets/images/product/large-size/1.jpg" alt="product image">
+                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
               </a>
             </div>
-            <div class="lg-image">
+            <!-- <div class="lg-image">
               <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/2.jpg" data-gall="myGallery">
-                <img src="../assets/images/product/large-size/2.jpg" alt="product image">
+                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
               </a>
-            </div>
-            <div class="lg-image">
+            </div> -->
+            <!-- <div class="lg-image">
               <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/3.jpg" data-gall="myGallery">
-                <img src="../assets/images/product/large-size/3.jpg" alt="product image">
+                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
               </a>
             </div>
             <div class="lg-image">
               <a class="popup-img venobox vbox-item" href="images/product/large-size/4.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/4.jpg" alt="product image">
+                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
               </a>
             </div>
             <div class="lg-image">
               <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/5.jpg" data-gall="myGallery">
-                <img src="../assets/images/product/large-size/5.jpg" alt="product image">
+                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
               </a>
             </div>
             <div class="lg-image">
               <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/6.jpg" data-gall="myGallery">
-                <img src="../assets/images/product/large-size/6.jpg" alt="product image">
+                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
               </a>
-            </div>
+            </div> -->
           </div>
-          <div class="tab-style-left">
-            <div class="sm-image"><img src="../assets/images/product/small-size/1.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="../assets/images/product/small-size/2.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="../assets/images/product/small-size/3.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="../assets/images/product/small-size/4.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="../assets/images/product/small-size/5.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="../assets/images/product/small-size/6.jpg" alt="product image thumb"></div>
-          </div>
-        </div>
+          <!-- <div class="tab-style-left">
+            <div class="sm-image"><img [src]="'http://localhost:3000/' + product.photo" alt="product image thumb"></div>
+          </div> -->
+        </div> 
         <!--// Product Details Left -->
       </div>
 
       <div class="col-lg-7 col-md-6">
         <div class="product-details-view-content pt-60">
           <div class="product-info">
-            <h2>Today is a good day Framed poster</h2>
-            <span class="product-details-ref">Reference: demo_15</span>
+            <h2>{{product.title}}</h2>
+            <span class="product-details-ref"></span>
             <div class="rating-box pt-20">
               <ul class="rating rating-with-review-item">
                 <li><i class="fa fa-star-o"></i></li>
@@ -125,12 +73,11 @@
               </ul>
             </div>
             <div class="price-box pt-20">
-              <span class="new-price new-price-2">$57.98</span>
+              <span class="new-price new-price-2">${{product.price}}</span>
             </div>
             <div class="product-desc">
               <p>
-                <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. quibusdam corporis, earum facilis et nostrum dolorum accusamus similique eveniet quia pariatur.
-                </span>
+                <span>{{product.description}}</span>
               </p>
             </div>
             <div class="product-variants">
@@ -146,18 +93,18 @@
             <div class="single-add-to-cart">
               <form action="#" class="cart-quantity">
                 <div class="quantity">
-                  <label>Quantity</label>
+                  <label>{{product.quantity}}</label>
                   <div class="cart-plus-minus">
                     <input class="cart-plus-minus-box" value="1" type="text">
                     <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                     <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                   </div>
                 </div>
-                <button class="add-to-cart" type="submit">Add to cart</button>
+                <button routerLink="/addcart" class="add-to-cart" type="submit">Add to cart</button>
               </form>
             </div>
             <div class="product-additional-info pt-25">
-              <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
+              <a class="wishlist-btn" routerLink="/wish-list"><i class="fa fa-heart-o"></i>Add to wishlist</a>
               <div class="product-social-sharing pt-25">
                 <ul>
                   <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>

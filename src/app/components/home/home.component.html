@@ -242,7 +242,7 @@
               <!-- single-product-wrap start -->
               <div class="single-product-wrap">
                 <div class="product-image">
-                  <a href="single-product.html">
+                  <a routerLink="/product-details/{{product._id}}">
                     <img
                       [src]="'http://localhost:3000/' + product.photo"
                       alt="Li's Product Image"
@@ -254,7 +254,7 @@
                   <div class="product_desc_info">
                     <div class="product-review">
                       <h5 class="manufacturer">
-                        <a href="shop-left-sidebar.html">{{product.title}}</a>
+                        <a routerLink="/product-details/{{product._id}}">{{product.title}}</a>
                       </h5>
                       <div class="rating-box">
                         <ul class="rating">
@@ -267,7 +267,7 @@
                       </div>
                     </div>
                     <h4>
-                      <a class="product_name" href="/product-details"
+                      <a class="product_name" routerLink="/product-details/{{product._id}}"
                         >{{product.name}}</a
                       >
                     </h4>
