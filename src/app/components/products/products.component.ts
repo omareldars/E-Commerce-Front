@@ -15,10 +15,11 @@ export class ProductsComponent implements OnInit {
 
   currentProduct:any=null;
   categories:any[]
-  getproducts:any
+  getproducts:any;
+  // products:any[];
   // ProductToUpdate;
 
-  nproduct: Product = new Product(" ", " "," "," "," ");
+  nproduct: Product = new Product(" ", " "," "," "," ", " ");
   selectedFile!: File;
   addForm!: FormGroup;
 
@@ -39,13 +40,12 @@ export class ProductsComponent implements OnInit {
     this.getProduct(this.ar.snapshot.paramMap.get('id'));
 
   this.CategoryService.getAllCategories().subscribe(
-    (res)=>{this.categories = res['categories'];},
+    (res)=>{this.categories = res['categories']; console.log(this.categories);},
     (err)=>{console.log(err);}
   );
 
-
   this.ProductService.getAllProducts().subscribe(
-    (res)=>{this.categories = res['categories'];},
+    (res)=>{this.products = res['products'];},
     (err)=>{console.log(err);}
   );
   }
@@ -64,15 +64,10 @@ export class ProductsComponent implements OnInit {
   save() {
     this.Product.append('title', this.nproduct.title)
     this.Product.append('description', this.nproduct.description)
-
     this.Product.append('price', this.nproduct.price);
     this.Product.append('quantity', this.nproduct.quantity);
-
-
     this.Product.append('photo', this.selectedFile);
-    // this.Product.append('category', this.nproduct.category);
-
-
+    this.Product.append('category', this.nproduct.category);
 
     this.ProductService.add(this.Product).subscribe(
       a => {

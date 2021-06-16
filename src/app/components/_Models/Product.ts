@@ -6,7 +6,7 @@ export class Product {
         public price:string,
         public photo:string,
         public quantity:string,
-        // public category:string,
+        public category:string,
         public isActive?:Boolean,
         public createdAt?:Date,
         public token ?: Date,

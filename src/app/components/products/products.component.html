@@ -37,18 +37,19 @@
                 </div>
               </div>
 
-<!--              <div class="col-12 col-sm-12 col-md-12 col-lg-12">-->
-<!--                <div class="form-group">-->
-<!--                  <label for="CustomerCaegory">Ctegory</label>-->
-<!--                    <select [(ngModel)]="nproduct">-->
-<!--                      <option *ngFor="let cat of categories" [ngValue]="cat" >{{cat.name}}</option>-->
-<!--                  </select>-->
-<!--                </div>-->
-<!--              </div>-->
-
-
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerCategory">Category</label>
+                  <select [(ngModel)]="nproduct.category" name="category">
+                    <option *ngFor="let cat of categories" [value]="cat._id">{{cat.name}}</option>
+                  </select>
+                </div>
+              </div>
 
 <!--              Try Number 1-->
+<!--              <select [(ngModel)]="nproduct.category">-->
+<!--                <option *ngFor="let cat of categories" [ngValue]="cat" >{{cat.name}}</option>-->
+<!--              </select>-->
 <!--              <div class="col-12 col-sm-12 col-md-12 col-lg-12">-->
 <!--                <div class="form-group">-->
 <!--                  <label for="CustomerCaegory">Ctegory</label>-->
