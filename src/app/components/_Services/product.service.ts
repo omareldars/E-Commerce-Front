@@ -13,7 +13,7 @@ export class ProductService {
   baseUrl = "http://localhost:3000/api/products";
 
   add(nproduct: FormData) {
-    return this.http.post<Product>(this.baseUrl, nproduct, { headers: { authorization: this.token } });
+    return this.http.post<Product>(this.baseUrl+"/add", nproduct, { headers: { authorization: this.token } });
 
   }
 
@@ -34,7 +34,7 @@ export class ProductService {
     return this.http.get<Product[]>("http://localhost:3000/api/products/search/" + search, { headers: { authorization: this.token } });
   }
 
-  // omar logic
+
   addToCart(payload: any){
     return this.http.post(`baseUrl/orders`,payload);
   }
