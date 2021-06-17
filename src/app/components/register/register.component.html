@@ -117,7 +117,7 @@
 
                 <div class="col-md-6 mb-20">
                     <label>Password</label>
-                    <input class="mb-0" type="password" placeholder="Password" formControlName="password"  #Password>
+                    <input class="mb-0" type="password" placeholder="Password" formControlName="password" name="password" #Password>
                     <div *ngIf="
                     password?.invalid &&
                     (password?.dirty || password?.touched)
@@ -132,7 +132,8 @@
                 </div>
                 <div class="col-md-6 mb-20">
                     <label>Confirm Password</label>
-                    <input class="mb-0" type="password" placeholder="Confirm Password">
+                    <input class="mb-0" type="password" name="confirmpassword" #Confirmpassword  placeholder="Confirm Password">
+                   <!-- <div  class="alert alert-danger" *ngif="confirmpassword">passwords are not equal</div> -->
                 </div>
                
                 <div class="col-12">

@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'edit-category/:id', component:EditCategoryComponent},
   {path: 'merchant-requests', component:MerchantRequestsComponent},
   {path: 'create-product', component:ProductsComponent},
-  {path: 'edit-product', component:EditProductComponent},
+  {path: 'edit-product/:id', component:EditProductComponent},
   {path: 'admin-product', component:AdminDashboardProductComponent},
   {path: 'addcart', component:CartComponent},
 

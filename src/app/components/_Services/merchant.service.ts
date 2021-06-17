@@ -16,11 +16,11 @@ export class MerchantService {
 
 
 approveSeller(merchantId:string){
-  return this.http.put<Merchant>(this.baseUrl+"/approve/"+merchantId,{ headers: { authorization: this.token } });
+  return this.http.put<Merchant>(this.baseUrl+"/approve/"+merchantId,{},{ headers: { authorization: this.token } });
 }
 
 rejectSeller(merchantId:string){
-  return this.http.put<Merchant>(this.baseUrl+"/reject/"+merchantId,{});
+  return this.http.put<Merchant>(this.baseUrl+"/reject/"+merchantId,{},{ headers: { authorization: this.token } });
 }
 
 // getAllMechants() {
