@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class ProductService {
   public token: any = localStorage.getItem('access_token');
   constructor(private http: HttpClient) { }
-  baseUrl = "http://localhost:3000/api/products";
+  baseUrl = "http://localhost:3000/products";
 
   add(nproduct: FormData) {
     return this.http.post<Product>(this.baseUrl+"/add", nproduct, { headers: { authorization: this.token } });
@@ -31,7 +31,7 @@ export class ProductService {
   }
 
    searchby(search: string) {
-    return this.http.get<Product[]>("http://localhost:3000/api/products/search/" + search, { headers: { authorization: this.token } });
+    return this.http.get<Product[]>("http://localhost:3000/products/search/" + search, { headers: { authorization: this.token } });
   }
 
 

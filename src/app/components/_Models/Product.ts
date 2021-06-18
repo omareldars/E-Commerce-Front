@@ -9,7 +9,7 @@ export class Product {
         public category:string,
         public isActive?:Boolean,
         public createdAt?:Date,
-        public token ?: Date,
+        public token ?: string,
         public _id?:string,
         )
 

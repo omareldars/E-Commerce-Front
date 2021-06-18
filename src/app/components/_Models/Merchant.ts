@@ -7,7 +7,6 @@ export class Merchant {
         public created?: Date,
         public updated? : Date,
         public status? : string,
-
         public token?:string,
         )
 
