@@ -7,6 +7,7 @@ export class User {
         public phone :number,
         public city :string,
         public country :string,
+        public confirmpassword:string,
         public dob ?: Date,
         public _id?:string,
         public  googleId?:string,

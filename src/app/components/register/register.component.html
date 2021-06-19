@@ -132,12 +132,25 @@
                 </div>
                 <div class="col-md-6 mb-20">
                     <label>Confirm Password</label>
-                    <input class="mb-0" type="password" name="confirmpassword" #Confirmpassword  placeholder="Confirm Password">
-                   <!-- <div  class="alert alert-danger" *ngif="confirmpassword">passwords are not equal</div> -->
+                    <input class="mb-0" type="password" name="confirmpassword" formControlName="confirmpassword" #Confirmpassword  placeholder="Confirm Password">
+                 
+                   <div *ngIf="
+                   confirmpassword?.invalid &&
+                   (confirmpassword?.dirty || confirmpassword?.touched)
+                 " class="alert alert-danger">
+                 <div *ngIf="confirmpassword?.errors?.required">
+                   confirmpassword is required.
+                 </div>
+                 <!-- <div *ngIf="confirmpassword?.errors?.minlength">
+                   confirmpassword must be at least 8 characters long.
+                 </div> -->
+                 <div  *ngIf="confirmpassword.value !== password.value && confirmpassword.touched">passwords are not equal</div> 
+               </div>
+
                 </div>
                
                 <div class="col-12">
-                    <button  class="register-button mt-0" type="submit" (click)="Submit()" [disabled]="!profileForm.valid" > Register</button>
+                    <button  class="register-button mt-0" type="submit" (click)="Submit()" > Register</button>
                   <div *ngIf="errors" class="alert alert-danger">
                         Enter Valid data.
                       </div> 

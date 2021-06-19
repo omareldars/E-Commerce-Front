@@ -35,6 +35,10 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
     ]),
+    confirmpassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
     email: new FormControl('', [
       Validators.required,
       Validators.email,
@@ -57,6 +61,9 @@ export class RegisterComponent implements OnInit {
   get password() {
     return this.profileForm.get('password');
   }
+  get confirmpassword() {
+    return this.profileForm.get('confirmpassword');
+  }
   get email() {
     return this.profileForm.get('email');
   }
@@ -72,7 +79,7 @@ export class RegisterComponent implements OnInit {
   constructor(private UserService: UserService,private formBuilder:FormBuilder, private router: Router) { }
 
 
-  nUser: User = new User(this.firstname?.value, this.lastname?.value, this.username?.value, this.password?.value,this.email?.value,this.phone?.value,this.city?.value,this.country?.value);
+  nUser: User = new User(this.firstname?.value, this.lastname?.value, this.username?.value, this.password?.value,this.email?.value,this.phone?.value,this.city?.value,this.country?.value,this.confirmpassword?.value);
   Submit() {
     this.nUser.fname = this.firstname?.value;
     this.nUser.lname = this.lastname?.value;
@@ -82,6 +89,7 @@ export class RegisterComponent implements OnInit {
     this.nUser.phone = this.phone?.value;
     this.nUser.city = this.city?.value;
     this.nUser.country = this.country?.value;
+    this.nUser.confirmpassword = this.confirmpassword?.value;
     console.log(this.nUser)
     this.UserService.register(this.nUser).subscribe(
       d => {
