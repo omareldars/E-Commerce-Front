@@ -62,7 +62,7 @@ get product() {
   return this.profileForm.get('product');
 }
 
-  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService, private snackBar: MatSnackBar) { }
+  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService) { }
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
   // @Input('product') products: Product;
   categories:any[];
@@ -80,9 +80,17 @@ get product() {
     );
   }
 
-  addToCart(product: any)
+  cartExist()
   {
 
+  }
+
+
+  addToCart(product: any)
+  {
+    console.log("this is product ---->", product._id);
+      // console.log("my Cart ----->",this.myCart);
+    this.myCart.addToCart(product._id);
   }
   // returnStar(i: number) {
   //       if (this.index >= i + 1) {

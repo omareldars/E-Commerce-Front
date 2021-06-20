@@ -30,7 +30,7 @@ export class CartService {
   }
 
   addToCart(id: string){
-    return this.http.post<Cart>(this.baseUrl+"/add"+id,{},{ headers: { authorization: this.token } });
+    return this.http.post<Cart>(this.baseUrl+"/add"+id,{}, { headers: { authorization: this.token } });
   }
 
   removeFromCart(cart_id: string, product_id: string){

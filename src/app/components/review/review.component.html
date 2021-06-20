@@ -34,7 +34,7 @@
   <div
     class="d-flex container justify-content-center text-center table-content"
   >
-    <table class="table table-warning">
+    <table class="table ">
       <thead>
         <tr>
           <!-- <th scope="col">#</th> -->
@@ -71,10 +71,11 @@
             
             <button
             (click)="delete(review._id)"
-            class="btn btn-primary p-1"
+            class="btn p-1"
             style="color: azure"
           >
-            Delete
+        <i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i>
+
           </button>
           </td>
         </tr>

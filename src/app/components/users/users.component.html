@@ -1,4 +1,5 @@
-
+  
+  <app-admin-dashboard-header></app-admin-dashboard-header>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -20,56 +21,39 @@
     <!-- /.content-header -->
 
 <div class="container text-center">
-    <br /><br />
-    <button class="btn btn-success">
-      <a style="color: white" href="/register">Add New User</a>
-    </button>
-  </div>
-  <br /><br />
+    <br><br>
+  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/register">Add New User</a></button>
+</div>
+<br><br>
 
-  <div class="container">
-    <table class="table table-dark">
+<div class="d-flex container justify-content-center text-center table-content">
+<table class="table table-warning">
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
       <th>Username</th>
       <th>Email</th>
-      <th>Join Date</th>
-      <th>Last Login</th>
-      <th span="6">Actions</th>
-  
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-
+      <th>Phone</th>
+      <th>Joining Date</th>
+      <th>Role</th>
+      <th colspan="6" class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+        <td  routerLink="{{user.username}}">{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.created}}</td>
+        <td>{{user.role}}</td>
         <td>
-          <a class="btn btn-primary" href="#">Edit</a>
+          <a class="btn p-1" routerLink="/edit-user/{{user._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> 
+          <button class="btn p-1 ml-4" (click)="delete(user._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
         </td>
-        <td>
-          <a
-            class="btn btn-danger"
-            href=""
-            onclick="return confirm('are you sure ?');"
-            >Delete</a
-          >
-        </td>
-        <td>
-          <a href=""
-            ><button
-              type="button"
-              class="btn btn-danger"
-              onclick="return confirm('are you sure ?');"
-            >
-              lock
-            </button></a
-          >
-        </td>
- 
-        <td>
-          <a href=""
-            ><button type="button" class="btn btn-primary"  onclick="return confirm('are you sure ?');">Unlock</button></a
-          >
-        </td>
-      </tr>
-    
-    </table>
+    </tr>
+</tbody>
+   
+</table>
 </div>
+  </div>
+<app-admin-dashboard-footer></app-admin-dashboard-footer>
