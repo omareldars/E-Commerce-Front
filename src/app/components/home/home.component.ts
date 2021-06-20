@@ -7,6 +7,7 @@ import { ReviewService } from '../_Services/review.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from '../_Models/Review';
 import { Product } from './../_Models/Product';
+import { Cart } from './../_Models/Cart';
  
 
 @Component({
@@ -57,9 +58,12 @@ get review() {
 get product() {
   return this.profileForm.get('product');
 }
-
+get productss(){
+  return this.profileForm.get('productss');
+}
   constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService) { }
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
+  nitem: Cart = new Cart(this.productss?.value)
   // @Input('product') products: Product;
   categories:any[];
   products:any[];
@@ -75,19 +79,29 @@ get product() {
 
     );
   }
-
+  mycart;
   addToCart(product: any)
   {
-
-  }
-  // returnStar(i: number) {
-  //       if (this.index >= i + 1) {
-  //         return 'star';
-  //       } else {
-  //         return 'star_border';
-  //       }
-  //     }
+    this.nitem.productss.push(product._id)
+    console.log(product._id);
+    this.myCart.mycart().subscribe(
+      d => {
+        // this.mycart = d["cartID"];
+        //  console.log(d["cartID"]);
+         this.myCart.addToCart(d["cartID"], this.nitem).subscribe(
+           p => {console.log(p);},
+           err => this.errors = 'Error in adding to cart'
+         )
+        // console.log(d[0]);
+        this.router.navigateByUrl('/home')
+      },
+      err => this.errors = 'Could not authenticate'
     
+    );
+    // console.log("jk",this.mycart);
+    // console.log(this.mycart.user);
+  }
+ 
    
     
 Rate(rating:number,Productid){

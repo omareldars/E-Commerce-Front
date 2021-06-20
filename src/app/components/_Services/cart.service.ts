@@ -29,11 +29,14 @@ export class CartService {
     return this.http.get<Cart>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
   }
 
-  addToCart(id: string){
-    return this.http.post<Cart>(this.baseUrl+"/add"+id,{},{ headers: { authorization: this.token } });
+  addToCart(id: string, nitem:Cart){
+    return this.http.post<Cart>(this.baseUrl+"/add/"+id, nitem ,{ headers: { authorization: this.token } });
   }
 
   removeFromCart(cart_id: string, product_id: string){
     return this.http.delete<Cart>(this.baseUrl+"/delete/"+cart_id+"/"+product_id, { headers: { authorization: this.token } } );
+  }
+  mycart(){
+    return this.http.get(this.baseUrl+"/mycart", { headers: { authorization: this.token } } );
   }
 }
