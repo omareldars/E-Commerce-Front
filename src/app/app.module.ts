@@ -37,7 +37,6 @@ import { MerchantRequestsComponent } from './components/merchant-requests/mercha
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
 import { ProductService } from './components/_Services/product.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReviewComponent } from './components/review/review.component';
 // import { ProductComponent } from './components/product/product.component';
 
@@ -82,7 +81,7 @@ export function tokenGetter() {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatSnackBarModule,
+    // MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,

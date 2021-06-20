@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from '../_Services/category.service';
 import { ProductService } from '../_Services/product.service';
 import {CartService} from "../_Services/cart.service";
@@ -8,10 +7,7 @@ import { ReviewService } from '../_Services/review.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from '../_Models/Review';
 import { Product } from './../_Models/Product';
-  
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+ 
 
 @Component({
   selector: 'app-home',
@@ -62,7 +58,7 @@ get product() {
   return this.profileForm.get('product');
 }
 
-  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService, private snackBar: MatSnackBar) { }
+  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService) { }
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
   // @Input('product') products: Product;
   categories:any[];
