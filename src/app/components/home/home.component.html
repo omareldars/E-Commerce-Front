@@ -257,12 +257,13 @@
                         <a routerLink="/product-details/{{product._id}}">{{product.title}}</a>
                       </h5>
                       <div class="rating-box">
-                        <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
+                        <ul class="rating"  >
+                          <li (click)="Rate(1 ,product._id,i)"class="no-star" ><i class="fa fa-star-o"></i></li> 
+                          <li (click)="Rate(2,product._id,i)" class="no-star" ><i class="fa fa-star-o"></i></li>
+                          <li  (click)="Rate(3,product._id,i)" class="no-star"><i class="fa fa-star-o"></i></li>
+                          <li  (click)="Rate(4,product._id,i)" class="no-star"><i class="fa fa-star-o"></i></li>
+                          <li   (click)="Rate(5,product._id,i)" class="no-star"><i class="fa fa-star-o"></i></li>
+                         
                         </ul>
                       </div>
                     </div>
