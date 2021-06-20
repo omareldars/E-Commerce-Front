@@ -45,7 +45,7 @@
         <td>{{category.created}}</td>
 
         <td>
-          <a class="btn btn-primary p-1" routerLink="/edit-category/{{category._id}}">Edit</a> <button class="btn btn-danger p-1 ml-4" (click)="delete(category._id)">Delete</button>
+          <a class="btn p-1" routerLink="/edit-category/{{category._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> <button class="btn p-1 ml-4" (click)="delete(category._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
         </td>
     </tr>
 </tbody>

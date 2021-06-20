@@ -22,7 +22,7 @@
 
 <div class="container text-center">
     <br><br>
-  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/add-category">Add New Category</a></button>
+  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/add-category">Add New Product</a></button>
 </div>
 <br><br>
 
@@ -44,9 +44,10 @@
         <td>{{product.description}}</td>
         <td>{{product.createdAt}}</td>
 
+        <!-- <i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i> -->
         <td>
-          <a class="btn btn-primary p-1" routerLink="/edit-product/{{product._id}}">Edit</a> 
-          <button class="btn btn-danger p-1 ml-4" (click)="delete(product._id)">Delete</button>
+          <a class="btn p-1" routerLink="/edit-product/{{product._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> 
+          <button class="btn p-1 ml-4" (click)="delete(product._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
         </td>
     </tr>
 </tbody>

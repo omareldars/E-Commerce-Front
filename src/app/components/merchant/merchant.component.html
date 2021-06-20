@@ -58,12 +58,12 @@
 
           <td>{{ merchant.created }}</td>
           <td>
-            <a class="btn btn-primary p-1" routerLink="/edit">Edit</a>
+            <a class="btn p-1" routerLink="/edit"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a>
             <button
-              class="btn btn-danger p-1 ml-4"
+              class="btn p-1 ml-4"
               (click)="delete(merchant._id)"
             >
-              Delete
+            <i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i>
             </button>
           </td>
         </tr>

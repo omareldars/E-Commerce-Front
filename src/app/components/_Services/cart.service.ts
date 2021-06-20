@@ -28,7 +28,6 @@ export class CartService {
   getCartById(id: string){
     return this.http.get<Cart>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
   }
-
   addToCart(id: string, nitem:Cart){
     return this.http.post<Cart>(this.baseUrl+"/add/"+id, nitem ,{ headers: { authorization: this.token } });
   }
