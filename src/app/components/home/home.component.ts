@@ -94,7 +94,7 @@ get product() {
     
    
     
-Rate(rating:number,Productid,i:number){
+Rate(rating:number,Productid){
   this.nreview.rating=rating;
   this.nreview.product=Productid;
   // this.index = i + 1;
