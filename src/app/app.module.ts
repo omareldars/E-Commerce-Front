@@ -37,7 +37,10 @@ import { MerchantRequestsComponent } from './components/merchant-requests/mercha
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
 import { ProductService } from './components/_Services/product.service';
+<<<<<<< HEAD
 import { MatSnackBar } from '@angular/material/snack-bar';
+=======
+>>>>>>> ac6c0109966a065bcc397d9d6d2f1cd3435d107e
 import { ReviewComponent } from './components/review/review.component';
 // import { ProductComponent } from './components/product/product.component';
 
@@ -82,6 +85,10 @@ export function tokenGetter() {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+<<<<<<< HEAD
+=======
+    // MatSnackBarModule,
+>>>>>>> ac6c0109966a065bcc397d9d6d2f1cd3435d107e
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
