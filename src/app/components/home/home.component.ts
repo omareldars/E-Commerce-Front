@@ -8,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from '../_Models/Review';
 import { Product } from './../_Models/Product';
 import { Cart } from './../_Models/Cart';
+import { Cartitem } from './../_Models/Cartitem';
  
 
 @Component({
@@ -58,15 +59,16 @@ get review() {
 get product() {
   return this.profileForm.get('product');
 }
-get productss(){
-  return this.profileForm.get('productss');
-}
+
+ cartarr:any[]=[];
   constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService) { }
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
-  nitem: Cart = new Cart(this.productss?.value)
+  nitem: Cartitem = new Cartitem(this.product?.value)
+ 
+
   // @Input('product') products: Product;
   categories:any[];
-  products:any[];
+  productss:any[];
   ngOnInit(): void {
     this.mycategory.getAllCategories().subscribe(
       (res)=>{this.categories = res['categories'];},
@@ -74,21 +76,28 @@ get productss(){
     );
 
     this.myproduct.getAllProducts().subscribe(
-      (res)=>{this.products = res;},
+      (res)=>{this.productss = res;},
       (err)=>{console.log(err);}
 
     );
   }
   mycart;
+  ncart:Cart;
   addToCart(product: any)
   {
-    this.nitem.productss.push(product._id)
+    this.cartarr.push(this.nitem);
+    console.log("cartarr",this.cartarr);
+  this.ncart=new Cart(this.cartarr);
+    // this.c.push(this.nitem);
+    // console.log("cart",this.nitem);
+    //  this.productss.push(product._id)
+    this.nitem.product=product._id;
     console.log(product._id);
     this.myCart.mycart().subscribe(
       d => {
-        // this.mycart = d["cartID"];
-        //  console.log(d["cartID"]);
-         this.myCart.addToCart(d["cartID"], this.nitem).subscribe(
+        this.mycart = d["cartID"];
+         console.log(d["cartID"]);
+         this.myCart.addToCart(d["cartID"], this.ncart).subscribe(
            p => {console.log(p);},
            err => this.errors = 'Error in adding to cart'
          )

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Cart } from '../_Models/Cart';
 import {Category} from "../_Models/Category";
 import {Product} from "../_Models/Product";
+import { Cartitem } from './../_Models/Cartitem';
 
 
 @Injectable({
@@ -28,8 +29,8 @@ export class CartService {
   getCartById(id: string){
     return this.http.get<Cart>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
   }
-  addToCart(id: string, nitem:Cart){
-    return this.http.post<Cart>(this.baseUrl+"/add/"+id, nitem ,{ headers: { authorization: this.token } });
+  addToCart(id: string, ncart:Cart){
+    return this.http.post<Cart>(this.baseUrl+"/add/"+id, ncart ,{ headers: { authorization: this.token } });
   }
 
   removeFromCart(cart_id: string, product_id: string){
