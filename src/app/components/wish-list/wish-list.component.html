@@ -1,5 +1,5 @@
 <!-- Begin Li's Breadcrumb Area -->
-<div class="breadcrumb-area">
+<!-- <div class="breadcrumb-area">
   <div class="container">
     <div class="breadcrumb-content">
       <ul>
@@ -8,10 +8,10 @@
       </ul>
     </div>
   </div>
-</div>
+</div> -->
 <!-- Li's Breadcrumb Area End Here -->
 <!--Wishlist Area Strat-->
-<div class="wishlist-area pt-60 pb-60">
+<!-- <div class="wishlist-area pt-60 pb-60">
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -60,5 +60,48 @@
       </div>
     </div>
   </div>
+</div> -->
+<!--Wishlist Area End -->
+
+
+<div class="container offset-5 mt-4">
+  <div class="card" style="width: 18rem">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a routerLink="products/{{ currentProduct.id }}"> </a>
+      </li>
+      <li class="list-group-item">
+        <img
+          class="img-fluid w-100"
+          [src]="'http://localhost:3000/' + currentProduct.photo"
+          alt="..."
+        />
+      </li>
+      <li class="list-group-item">Price :{{ currentProduct.title }}</li>
+      <li class="list-group-item">Product :{{ currentProduct.description }}</li>
+      <li class="list-group-item">Price :{{ currentProduct.price }}</li>
+      <li class="list-group-item">
+        <div class="product-overlay">
+          <ul class="mb-0 list-inline">
+            <li class="list-inline-item m-0 p-0">
+              <a class="btn btn-sm btn-outline-dark" href="#"
+                ><i class="far fa-heart"></i
+              ></a>
+            </li>
+            <li class="list-inline-item m-0 p-0">
+              <a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
+            </li>
+            <li class="list-inline-item mr-0">
+              <a
+                class="btn btn-sm btn-outline-dark"
+                href="#productView"
+                data-toggle="modal"
+                ><i class="fas fa-expand"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
-<!--Wishlist Area End-->

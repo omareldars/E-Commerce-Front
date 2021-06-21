@@ -235,76 +235,92 @@
           </h2>
         </div>
         <div class="row">
-<!--          class="col-3"-->
-<!--          <div class="special-product-active owl-carousel">-->
+          <!--          class="col-3"-->
+          <!--          <div class="special-product-active owl-carousel">-->
 
-            <div *ngFor="let product of productss" class="col-md-3">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a routerLink="/product-details/{{product._id}}">
-                    <img
-                      [src]="'http://localhost:3000/' + product.photo"
-                      alt="Li's Product Image"
-                    />
-                  </a>
-                  <span class="sticker">New</span>
+          <div *ngFor="let product of productss" class="col-md-3">
+            <!-- single-product-wrap start -->
+            <div class="single-product-wrap">
+              <div class="product-image">
+                <a routerLink="/product-details/{{ product._id }}">
+                  <img
+                    [src]="'http://localhost:3000/' + product.photo"
+                    alt="Li's Product Image"
+                  />
+                </a>
+                <span class="sticker">New</span>
+              </div>
+              <div class="product_desc">
+                <div class="product_desc_info">
+                  <div class="product-review">
+                    <h5 class="manufacturer">
+                      <a routerLink="/product-details/{{ product._id }}">{{
+                        product.title
+                      }}</a>
+                    </h5>
+                    <div class="rating-box">
+                      <ul class="rating">
+                        <li (click)="Rate(1, product._id)" class="no-star">
+                          <i class="fa fa-star-o"></i>
+                        </li>
+                        <li (click)="Rate(2, product._id)" class="no-star">
+                          <i class="fa fa-star-o"></i>
+                        </li>
+                        <li (click)="Rate(3, product._id)" class="no-star">
+                          <i class="fa fa-star-o"></i>
+                        </li>
+                        <li (click)="Rate(4, product._id)" class="no-star">
+                          <i class="fa fa-star-o"></i>
+                        </li>
+                        <li (click)="Rate(5, product._id)" class="no-star">
+                          <i class="fa fa-star-o"></i>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h4>
+                    <a
+                      class="product_name"
+                      routerLink="/product-details/{{ product._id }}"
+                      >{{ product.name }}</a
+                    >
+                  </h4>
+                  <div class="price-box">
+                    <span class="new-price">{{ product.price }}</span>
+                  </div>
+                  <div class="countersection">
+                    <div class="li-countdown"></div>
+                  </div>
                 </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a routerLink="/product-details/{{product._id}}">{{product.title}}</a>
-                      </h5>
-                      <div class="rating-box">
-                        <ul class="rating"  >
-                          <li (click)="Rate(1 ,product._id)"class="no-star" ><i class="fa fa-star-o"></i></li> 
-                          <li (click)="Rate(2,product._id)" class="no-star" ><i class="fa fa-star-o"></i></li>
-                          <li  (click)="Rate(3,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li  (click)="Rate(4,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li   (click)="Rate(5,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
-                         
-                        </ul>
-                      </div>
-                    </div>
-                    <h4>
-                      <a class="product_name" routerLink="/product-details/{{product._id}}"
-                        >{{product.name}}</a
+                <div class="add-actions">
+                  <ul class="add-actions-link">
+                    <li class="add-cart active">
+                      <a (click)="addToCart(product)">Add to cart</a>
+                    </li>
+                    <li>
+                      <a
+                        class="links-details"
+                        (click)="addtoWishlist(product._id)"
                       >
-                    </h4>
-                    <div class="price-box">
-                      <span class="new-price">{{product.price}}</span>
-                    </div>
-                    <div class="countersection">
-                      <div class="li-countdown"></div>
-                    </div>
-                  </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active">
-                        <a (click)="addToCart(product)">Add to cart</a>
-                      </li>
-                      <li>
-                        <a class="links-details" href="wishlist.html"
-                          ><i class="fa fa-heart-o"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          title="quick view"
-                          class="quick-view-btn"
-                          data-toggle="modal"
-                          data-target="#exampleModalCenter"
-                          ><i class="fa fa-eye"></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
+                        <i class="fa fa-heart-o"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        title="quick view"
+                        class="quick-view-btn"
+                        data-toggle="modal"
+                        data-target="#exampleModalCenter"
+                        ><i class="fa fa-eye"></i
+                      ></a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <!-- single-product-wrap end -->
-<!--            </div>-->
+            </div>
+            <!-- single-product-wrap end -->
+            <!--            </div>-->
           </div>
         </div>
       </div>

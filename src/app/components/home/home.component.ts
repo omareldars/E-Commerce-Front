@@ -9,6 +9,8 @@ import { Review } from '../_Models/Review';
 import { Product } from './../_Models/Product';
 import { Cart } from './../_Models/Cart';
 import { Cartitem } from './../_Models/Cartitem';
+import { WishlistService } from '../_Services/wishlist.service';
+import { Wishlist } from '../_Models/Wishlist';
  
 
 @Component({
@@ -60,9 +62,11 @@ get product() {
   return this.profileForm.get('product');
 }
 
+
  cartarr:any[]=[];
-  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService) { }
+  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService) { }
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
+  nwishlist: Wishlist = new Wishlist(this.product?.value);
   nitem: Cartitem = new Cartitem(this.product?.value)
  
 
@@ -133,6 +137,19 @@ Rate(rating:number,Productid){
   );
  }
 
+ addtoWishlist(Productid){
+  this.nwishlist.product=Productid;
+  this.mywishlist.addWishlist(this.nwishlist).subscribe(
+    d => {
+      console.log(d)
+      this.router.navigateByUrl('/home')
+    },
+    err => this.errors = 'Could not authenticate'
+  
+  // console.log(rating,Productid);
+  // console.log(this.nreview);
+  );
+ }
 
 }
 
