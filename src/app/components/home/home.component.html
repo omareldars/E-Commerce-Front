@@ -12,7 +12,7 @@
           <div id="cate-toggle" class="category-menu-list">
             <ul *ngFor="let category of categories">
               <li class="right-menu">
-                <a routerLink="{{ category.id }}">{{ category.name }}</a>
+                <a routerLink="/category/products/{{category._id}}">{{ category.name }}</a>
               </li>
             </ul>
             <!-- <ul>

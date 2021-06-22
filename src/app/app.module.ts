@@ -39,6 +39,7 @@ import { AdminDashboardProductComponent } from './components/admin-dashboard-pro
 import { ProductService } from './components/_Services/product.service';
 import { ReviewComponent } from './components/review/review.component';
 import { SearchComponent } from './components/search/search.component';
+import { CategoryProductsComponent } from './components/category-products/category-products.component';
 // import { ProductComponent } from './components/product/product.component';
 
 export function tokenGetter() {
@@ -76,6 +77,7 @@ export function tokenGetter() {
     AdminDashboardProductComponent,
     ReviewComponent,
     SearchComponent,
+    CategoryProductsComponent,
 
 
   ],
