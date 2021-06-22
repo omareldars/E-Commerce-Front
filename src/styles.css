@@ -1309,11 +1309,11 @@ textarea:focus {
 /*  02. Home Page One
 /*----------------------------------------*/
 /*----------------------------------------*/
-/*  2.1 Header
+/*  2.1 Header #f8f9f9
 /*----------------------------------------*/
 /*Header Top*/
 .header-top {
-	background: #f8f9f9;
+	background: #dadddd;
 	padding: 12px 0;
 	border-bottom: 1px solid #e1e1e1;
 }
@@ -1931,7 +1931,7 @@ textarea:focus {
 }
 /*Sticky*/
 .header-sticky.sticky {
-	background: rgba(254,215,0,.8);
+	background: #dadddd;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -1941,8 +1941,8 @@ textarea:focus {
 	z-index: 1049;
 }
 .sticky {
-		-webkit-animation: 800ms ease-in-out 0s normal none 1 running slideInDown;
-		animation: 800ms ease-in-out 0s normal none 1 running slideInDown;
+		-webkit-animation: 400ms ease-in-out 0s normal none 1 running slideInDown;
+		animation: 400ms ease-in-out 0s normal none 1 running slideInDown;
 }
 /*Header Bottom Dropdown Menu*/
 .hb-menu nav > ul > li > ul.hb-dropdown {
@@ -2901,6 +2901,9 @@ textarea:focus {
 }
 .instagram {
 	background: #c619b8;
+}
+.github{
+	background: #fff;
 }
 /*Footer Newsletter*/
 .footer-newsletter {

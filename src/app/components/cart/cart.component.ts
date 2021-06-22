@@ -12,20 +12,19 @@ export class CartComponent implements OnInit {
 
   cart:any;
   id:any;
-
+  cartId:any;
   constructor(private router: Router, private myCart: CartService) { }
 
   ngOnInit(): void {
-    this.myCart.getCartById(this.id).subscribe(
-      (res)=>{
-        console.log("res---->",res);
-        this.cart = res['cart'];
-        console.log("cart---->",this.cart);
-        },
-      (err)=>{console.log("error--->",err);}
-    );
-  }
-
+    this.myCart.usercart().subscribe(
+      d => {
+        this.cart = d['carts'][0]['products'];
+        this.cartId = d['carts'][0]['_id'];
+        console.log("this is id----->",this.cartId,"\n this is cart ---->",this.cart);
+      },
+      err => console.log('No Cart Found')
+      );
+    }
   removeProduct(cartId:any, productId:any){
     let result = confirm("Are you sure?");
     if(result)
@@ -38,6 +37,8 @@ export class CartComponent implements OnInit {
       this.router.url;
     }
   }
+
+
 
   emptyCart(id: any){
     let result = confirm("Are you sure?");

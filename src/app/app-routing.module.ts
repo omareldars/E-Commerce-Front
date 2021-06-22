@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'wish-list', component:WishListComponent},
   {path: 'product-details/:id', component:ProductDetailsComponent},
   {path: 'profile',component:UsersettingComponent},
-  {path:'sellerrequest',component:SellwithusComponent},
+  {path: 'sellerrequest',component:SellwithusComponent},
   {path: 'search/:title', component:SearchComponent},
   {path: 'category/products/:id', component:CategoryProductsComponent},
 

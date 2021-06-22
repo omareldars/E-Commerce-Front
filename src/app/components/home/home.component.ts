@@ -11,7 +11,8 @@ import { Cart } from './../_Models/Cart';
 import { Cartitem } from './../_Models/Cartitem';
 import { WishlistService } from '../_Services/wishlist.service';
 import { Wishlist } from '../_Models/Wishlist';
- 
+
+
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,7 @@ import { Wishlist } from '../_Models/Wishlist';
   ]
 })
 export class HomeComponent implements OnInit {
- 
+
 
 
 public errors: string = "";
@@ -68,11 +69,13 @@ get product() {
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
   nwishlist: Wishlist = new Wishlist(this.product?.value);
   nitem: Cartitem = new Cartitem(this.product?.value)
- 
+
 
   // @Input('product') products: Product;
   categories:any[];
   productss:any[];
+
+  usercart:any;
   ngOnInit(): void {
     this.mycategory.getAllCategories().subscribe(
       (res)=>{this.categories = res['categories'];},
@@ -84,6 +87,22 @@ get product() {
       (err)=>{console.log(err);}
 
     );
+
+    this.myCart.usercart().subscribe(
+      d => {
+        console.log("this is my cart",d);
+        this.router.navigateByUrl('/home')
+      },
+      err => this.errors = 'Could not authenticate'
+      // (res)=>{
+      //   this.usercart = res;
+      //   console.log("this is my cart", this.usercart);
+      // },
+      // (err)=>{console.log(err);}
+    )
+      // this is to return user cartarr
+
+
   }
   mycart;
   ncart:Cart;
@@ -109,14 +128,14 @@ get product() {
         this.router.navigateByUrl('/home')
       },
       err => this.errors = 'Could not authenticate'
-    
+
     );
     // console.log("jk",this.mycart);
     // console.log(this.mycart.user);
   }
- 
-   
-    
+
+
+
 Rate(rating:number,Productid){
   this.nreview.rating=rating;
   this.nreview.product=Productid;
@@ -131,7 +150,7 @@ Rate(rating:number,Productid){
       this.router.navigateByUrl('/home')
     },
     err => this.errors = 'Could not authenticate'
-  
+
   // console.log(rating,Productid);
   // console.log(this.nreview);
   );
@@ -145,7 +164,7 @@ Rate(rating:number,Productid){
       this.router.navigateByUrl('/home')
     },
     err => this.errors = 'Could not authenticate'
-  
+
   // console.log(rating,Productid);
   // console.log(this.nreview);
   );

@@ -39,4 +39,7 @@ export class CartService {
   mycart(){
     return this.http.get(this.baseUrl+"/mycart", { headers: { authorization: this.token } } );
   }
+  usercart(){
+    return this.http.get(this.baseUrl+"/usercart", { headers: { authorization: this.token } } );
+  }
 }
