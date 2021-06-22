@@ -38,6 +38,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
 import { ProductService } from './components/_Services/product.service';
 import { ReviewComponent } from './components/review/review.component';
+import { SearchComponent } from './components/search/search.component';
 // import { ProductComponent } from './components/product/product.component';
 
 export function tokenGetter() {
@@ -74,6 +75,7 @@ export function tokenGetter() {
     EditProductComponent,
     AdminDashboardProductComponent,
     ReviewComponent,
+    SearchComponent,
 
 
   ],

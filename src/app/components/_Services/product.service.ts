@@ -30,8 +30,8 @@ export class ProductService {
     return this.http.get<Product>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
   }
 
-   searchby(search: string) {
-    return this.http.get<Product[]>("http://localhost:3000/products/search/" + search, { headers: { authorization: this.token } });
+  searchbyTitle(search: string) {
+    return this.http.get<Product[]>("http://localhost:3000/products/title/" + search, { headers: { authorization: this.token } });
   }
 
 
