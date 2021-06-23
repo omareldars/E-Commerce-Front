@@ -20,7 +20,6 @@ import { Cartitem } from './../_Models/Cartitem';
 export class HomeComponent implements OnInit {
  
 
-
 public errors: string = "";
 
 // index = 0;
@@ -69,6 +68,7 @@ get product() {
   // @Input('product') products: Product;
   categories:any[];
   productss:any[];
+  reviews:any[];
   ngOnInit(): void {
     this.mycategory.getAllCategories().subscribe(
       (res)=>{this.categories = res['categories'];},
@@ -76,11 +76,47 @@ get product() {
     );
 
     this.myproduct.getAllProducts().subscribe(
-      (res)=>{this.productss = res;},
-      (err)=>{console.log(err);}
-
+      (res)=>{this.productss = res;
+      },
+       (err)=>{console.log(err);}
     );
+    this.myreview.getAllwaitingReviews().subscribe(
+      (res)=>{this.reviews = res["reviews"]; 
+     
+      },
+       (err)=>{console.log(err);}
+    );
+    setTimeout(() => {
+      this.calculatePrdouctsReviews();
+    },1200);
+
+    // for(let i=0; i<this.productss.length; i++){
+    //   let rating = 0, numOfRaings = 0;
+    //   for(let j=0;j<this.reviews.length;j++){
+    //     if(this.productss[i]._id === this.reviews[j].product){
+    //       rating++; numOfRaings++;
+    //     }
+    //   }
+    //   this.currentRate[i] = rating/numOfRaings;
+    // }
   }
+
+  calculatePrdouctsReviews(){
+    for(let i=0; i<this.productss.length; i++){
+      let rating = 0, numOfRaings = 0;
+      for(let j=0;j<this.reviews.length;j++){
+        if(this.productss[i]._id === this.reviews[j].product){
+          rating +=  this.reviews[j].rating ; numOfRaings++;
+        }
+      }
+      this.currentRate[i] = rating/numOfRaings;
+      console.log('rating => ', rating);
+      console.log('numOfRaings => ', numOfRaings);
+      console.log(`this.currentRate[i] => `,  this.currentRate[i]);
+      console.log(this.currentRate);
+    }
+  }
+  currentRate:any[] = [0];
   mycart;
   ncart:Cart;
   addToCart(product: any)
@@ -92,11 +128,12 @@ get product() {
     // console.log("cart",this.nitem);
     //  this.productss.push(product._id)
     this.nitem.product=product._id;
-    console.log(product._id);
+    console.log("hhhhhhhhhhhh",product._id);
     this.myCart.mycart().subscribe(
       d => {
         this.mycart = d["cartID"];
-         console.log(d["cartID"]);
+         console.log("from cart",d["cartID"]);
+         
          this.myCart.addToCart(d["cartID"], this.ncart).subscribe(
            p => {console.log(p);},
            err => this.errors = 'Error in adding to cart'
@@ -113,24 +150,32 @@ get product() {
  
    
     
-Rate(rating:number,Productid){
-  this.nreview.rating=rating;
-  this.nreview.product=Productid;
+Rate(index:number,  Productid){
+  setTimeout(()=>{
+
+    this.nreview.rating=this.currentRate[index];
+    this.nreview.product=Productid;
   // this.index = i + 1;
   //     this.snackBar.open(this.response[i], '', {
-  //       duration: this.snackBarDuration,
-  //       panelClass: ['snack-bar']
-  //     });
-   this.myreview.add(this.nreview).subscribe(
-    d => {
-      console.log(d)
-      this.router.navigateByUrl('/home')
-    },
-    err => this.errors = 'Could not authenticate'
-  
-  // console.log(rating,Productid);
-  // console.log(this.nreview);
-  );
+    //       duration: this.snackBarDuration,
+    //       panelClass: ['snack-bar']
+    //     });
+    // this.currentRate[index] = rating;
+    console.log(this.currentRate);
+     this.myreview.add(this.nreview).subscribe(
+        d => {
+            console.log(d)
+            this.router.navigateByUrl('/home')
+          },
+          err => this.errors = 'Could not authenticate'
+          
+          
+          
+        // console.log(rating,Productid);
+        // console.log(this.nreview);
+        );
+        
+    },300);
  }
 
 

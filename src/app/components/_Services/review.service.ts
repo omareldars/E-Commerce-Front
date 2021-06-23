@@ -21,7 +21,7 @@ import {Review} from "../_Models/Review";
       }
     
     getAllwaitingReviews() {            
-    return this.http.get<Review[]>(this.baseUrl+"/",{} );
+    return this.http.get<Review[]>(this.baseUrl+"/allreviews",{} );
   }
   deleteById(id: string){
        return this.http.delete<Review>(this.baseUrl+"/delete/"+id,{ headers: { authorization: this.token } });

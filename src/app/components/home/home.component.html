@@ -12,7 +12,8 @@
           <div id="cate-toggle" class="category-menu-list">
             <ul *ngFor="let category of categories">
               <li class="right-menu">
-                <a routerLink="{{ category.id }}">{{ category.name }}</a>
+                <!-- <a routerLink="{{ category.id }}">{{ category.name }}</a> -->
+                <a routerLink="/category/products/{{category._id}}">{{ category.name }}</a>
               </li>
             </ul>
             <!-- <ul>
@@ -238,7 +239,7 @@
 <!--          class="col-3"-->
 <!--          <div class="special-product-active owl-carousel">-->
 
-            <div *ngFor="let product of productss" class="col-md-3">
+            <div *ngFor="let product of productss; index as i" class="col-md-3">
               <!-- single-product-wrap start -->
               <div class="single-product-wrap">
                 <div class="product-image">
@@ -257,14 +258,15 @@
                         <a routerLink="/product-details/{{product._id}}">{{product.title}}</a>
                       </h5>
                       <div class="rating-box">
-                        <ul class="rating"  >
+                        <!-- <ul class="rating"  >
                           <li (click)="Rate(1 ,product._id)"class="no-star" ><i class="fa fa-star-o"></i></li> 
                           <li (click)="Rate(2,product._id)" class="no-star" ><i class="fa fa-star-o"></i></li>
                           <li  (click)="Rate(3,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
                           <li  (click)="Rate(4,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
                           <li   (click)="Rate(5,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
                          
-                        </ul>
+                        </ul> -->
+                        <ngb-rating [max]=5 [(rate)]="currentRate[i]" (click)="Rate(i ,product._id)" [readonly]="false"></ngb-rating>
                       </div>
                     </div>
                     <h4>
@@ -273,7 +275,7 @@
                       >
                     </h4>
                     <div class="price-box">
-                      <span class="new-price">{{product.price}}</span>
+                      <span class="new-price">{{product.price}}$</span>
                     </div>
                     <div class="countersection">
                       <div class="li-countdown"></div>

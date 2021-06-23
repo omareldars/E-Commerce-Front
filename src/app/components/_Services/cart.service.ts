@@ -19,7 +19,7 @@ export class CartService {
   baseUrl = "http://localhost:3000/cart";
 
   add(nCart: Cart) {
-    return this.http.post<Cart>(this.baseUrl+"/add", nCart, { headers: { authorization: this.token } });
+    return this.http.post<Cart>(this.baseUrl+"/add/", nCart, { headers: { authorization: this.token } });
   }
 
   deleteById(id: string){
@@ -38,5 +38,8 @@ export class CartService {
   }
   mycart(){
     return this.http.get(this.baseUrl+"/mycart", { headers: { authorization: this.token } } );
+  }
+  usercart(){
+    return this.http.get(this.baseUrl+"/usercart", { headers: { authorization: this.token } } );
   }
 }

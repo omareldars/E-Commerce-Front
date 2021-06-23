@@ -24,6 +24,8 @@ import { MerchantRequestsComponent } from './components/merchant-requests/mercha
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
 import { ReviewComponent } from './components/review/review.component';
+import { SearchComponent } from './components/search/search.component';
+import { CategoryProductsComponent } from './components/category-products/category-products.component';
 
 const routes: Routes = [
 // User Section
@@ -40,6 +42,8 @@ const routes: Routes = [
   {path: 'product-details/:id', component:ProductDetailsComponent},
   {path: 'profile',component:UsersettingComponent},
   {path:'sellerrequest',component:SellwithusComponent},
+  {path: 'search/:title', component:SearchComponent},
+  {path: 'category/products/:id', component:CategoryProductsComponent},
   //  Admin Section
   {path: 'dashboard', component: AdminDashboardComponent},
   {path: 'users', component:UsersComponent},
@@ -54,6 +58,7 @@ const routes: Routes = [
   {path: 'admin-product', component:AdminDashboardProductComponent},
   {path: 'addcart', component:CartComponent},
   {path: 'review', component:ReviewComponent},
+  
 
 
 
