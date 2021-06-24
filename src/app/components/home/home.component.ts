@@ -59,6 +59,8 @@ get product() {
   return this.profileForm.get('product');
 }
 
+
+
  cartarr:any[]=[];
   constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService) { }
   nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
@@ -128,6 +130,10 @@ get product() {
     // console.log("cart",this.nitem);
     //  this.productss.push(product._id)
     this.nitem.product=product._id;
+    console.log("this is product from home =>>>",product);
+
+    // this.nitem.productObject=product;
+    // this.nitem.status="Not Processed";
     console.log("hhhhhhhhhhhh",product._id);
     this.myCart.mycart().subscribe(
       d => {

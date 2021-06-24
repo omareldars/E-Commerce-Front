@@ -5,6 +5,7 @@ export class Cart {
   // public Pid: string,
   // public Pid: string,
     public  products: Array<Cartitem>,
+    // public  status : string,
     public created?:Date,
     public token ?: string,
     public _id?:string,
