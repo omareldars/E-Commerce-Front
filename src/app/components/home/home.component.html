@@ -13,7 +13,9 @@
             <ul *ngFor="let category of categories">
               <li class="right-menu">
                 <!-- <a routerLink="{{ category.id }}">{{ category.name }}</a> -->
-                <a routerLink="/category/products/{{category._id}}">{{ category.name }}</a>
+                <a routerLink="/category/products/{{ category._id }}">{{
+                  category.name
+                }}</a>
               </li>
             </ul>
             <!-- <ul>
@@ -236,29 +238,31 @@
           </h2>
         </div>
         <div class="row">
-<!--          class="col-3"-->
-<!--          <div class="special-product-active owl-carousel">-->
+          <!--          class="col-3"-->
+          <!--          <div class="special-product-active owl-carousel">-->
 
-            <div *ngFor="let product of productss; index as i" class="col-md-3">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a routerLink="/product-details/{{product._id}}">
-                    <img
-                      [src]="'http://localhost:3000/' + product.photo"
-                      alt="Li's Product Image"
-                    />
-                  </a>
-                  <span class="sticker">New</span>
-                </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a routerLink="/product-details/{{product._id}}">{{product.title}}</a>
-                      </h5>
-                      <div class="rating-box">
-                        <!-- <ul class="rating"  >
+          <div *ngFor="let product of productss; index as i" class="col-md-3">
+            <!-- single-product-wrap start -->
+            <div class="single-product-wrap">
+              <div class="product-image">
+                <a routerLink="/product-details/{{ product._id }}">
+                  <img
+                    [src]="'http://localhost:3000/' + product.photo"
+                    alt="Li's Product Image"
+                  />
+                </a>
+                <span class="sticker">New</span>
+              </div>
+              <div class="product_desc">
+                <div class="product_desc_info">
+                  <div class="product-review">
+                    <h5 class="manufacturer">
+                      <a routerLink="/product-details/{{ product._id }}">{{
+                        product.title
+                      }}</a>
+                    </h5>
+                    <div class="rating-box">
+                      <!-- <ul class="rating"  >
                           <li (click)="Rate(1 ,product._id)"class="no-star" ><i class="fa fa-star-o"></i></li> 
                           <li (click)="Rate(2,product._id)" class="no-star" ><i class="fa fa-star-o"></i></li>
                           <li  (click)="Rate(3,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
@@ -266,47 +270,67 @@
                           <li   (click)="Rate(5,product._id)" class="no-star"><i class="fa fa-star-o"></i></li>
                          
                         </ul> -->
-                        <ngb-rating [max]=5 [(rate)]="currentRate[i]" (click)="Rate(i ,product._id)" [readonly]="false"></ngb-rating>
-                      </div>
-                    </div>
-                    <h4>
-                      <a class="product_name" routerLink="/product-details/{{product._id}}"
-                        >{{product.name}}</a
-                      >
-                    </h4>
-                    <div class="price-box">
-                      <span class="new-price">{{product.price}}$</span>
-                    </div>
-                    <div class="countersection">
-                      <div class="li-countdown"></div>
+                      <ngb-rating
+                        [max]="5"
+                        [(rate)]="currentRate[i]"
+                        (click)="Rate(i, product._id)"
+                        [readonly]="false"
+                      ></ngb-rating>
                     </div>
                   </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active">
-                        <a (click)="addToCart(product)">Add to cart</a>
-                      </li>
-                      <li>
-                        <a class="links-details" href="wishlist.html"
-                          ><i class="fa fa-heart-o"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          title="quick view"
-                          class="quick-view-btn"
-                          data-toggle="modal"
-                          data-target="#exampleModalCenter"
-                          ><i class="fa fa-eye"></i
-                        ></a>
-                      </li>
-                    </ul>
+                  <h4>
+                    <a
+                      class="product_name"
+                      routerLink="/product-details/{{ product._id }}"
+                      >{{ product.name }}</a
+                    >
+                  </h4>
+                  <div class="price-box">
+                    <span class="new-price">{{ product.price }}$</span>
+                  </div>
+                  <div class="countersection">
+                    <div class="li-countdown"></div>
                   </div>
                 </div>
+                <div class="add-actions">
+                  <ul class="add-actions-link">
+                    <li class="add-cart active">
+                      <a (click)="addToCart(product)">Add to cart</a>
+                    </li>
+                    <li>
+                      <a
+                        (click)="addtoWishlist(product._id)"
+                        style="color: darkred"
+                      >
+                        <!-- <i  *ngIf="nwishlist.isLiked" style="color: cyan;" class="fa fa-heart-o"></i> -->
+
+                        <i style="color: darkred" class="fa fa-heart-o"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a (click)="UnlikeProduct(product._id)">
+                        <i
+                          style="color: darkblue"
+                          class="fas fa-thumbs-down"
+                        ></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        title="quick view"
+                        class="quick-view-btn"
+                        data-toggle="modal"
+                        data-target="#exampleModalCenter"
+                        ><i class="fa fa-eye"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <!-- single-product-wrap end -->
-<!--            </div>-->
+            </div>
+            <!-- single-product-wrap end -->
+            <!--            </div>-->
           </div>
         </div>
       </div>

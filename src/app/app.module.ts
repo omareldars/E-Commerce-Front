@@ -79,6 +79,7 @@ export function tokenGetter() {
     ReviewComponent,
     SearchComponent,
     CategoryProductsComponent,
+    WishListComponent
 
 
   ],

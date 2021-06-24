@@ -1,77 +1,130 @@
-        <!-- Begin Body Wrapper -->
-        <div class="body-wrapper">
-            <!-- Begin Header Area -->
-            <header>
-                <!-- Begin Header Top Area -->
-                <div class="header-top">
-                    <div class="container">
-                        <div class="row">
-                            <!-- Begin Header Top Left Area -->
-                            <div class="col-lg-3 col-md-4">
-                                <div class="header-top-left">
-                                    <ul class="phone-wrap">
-                                        <li *ngIf="u.loggedIn">
-                                            <span><a routerLink="/profile"><img [src]="'http://localhost:3000/' + roleuser.avatar" class="img-rounded" style="border-radius: 50%;" width="30px" height="30px" border-radius="50%"></a></span>
-                                            &nbsp;<span><a routerLink="/profile" style="color:#363f4d;"><strong>Hi, {{roleuser.fname}}!</strong></a></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Header Top Left Area End Here -->
-                            <!-- Begin Header Top Right Area -->
-                            <div class="col-lg-9 col-md-8">
-                                <div class="header-top-right">
-                                    <ul class="ht-menu">
-                                        <!-- Begin Setting Area -->
-                                        <li>
-                                            <span class="currency-selector-wrapper"><a style="color:#363f4d;" routerLink="/dashboard"  *ngIf="u.loggedIn && roleuser.role === 'ROLE_ADMIN'" >Dashboard</a></span>
-                                        </li>
-                                        <!---------- -->
-                                        <li *ngIf="u.loggedIn">
-                                            <div class="ht-setting-trigger"><span>Setting</span></div>
-                                            <div class="setting ht-setting">
-                                                <ul class="ht-setting-list">
-                                                    <li><a routerLink="/profile">My Account</a></li>
-                                                    <li><a routerLink="/checkout" >Checkout</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <span class="currency-selector-wrapper"><a style="color:#363f4d;" routerLink="/login"  *ngIf="!u.loggedIn" >Login</a> 
-                                            <a (click)="logout()"  style="color:#363f4d;cursor: pointer;" *ngIf="u.loggedIn">Logut</a></span>
-                                        </li>
-                                        <li *ngIf="!u.loggedIn"> 
-                                            <span class="currency-selector-wrapper"><a style="color:#363f4d;"  routerLink="/register">Register</a> </span>
-                                        </li>
-                                        <li *ngIf="!u.loggedIn"> 
-                                            <span class="currency-selector-wrapper"><a style="color:#363f4d;"  routerLink="/sellerrequest">Sell With Us</a> </span>
-                                        </li>             
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Header Top Right Area End Here -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Header Top Area End Here -->
-                <!-- Begin Header Middle Area -->
-                <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
-                    <div class="container">
-                        <div class="row">
-                            <!-- Begin Header Logo Area -->
-                            <div class="col-lg-3">
-                                <div class="logo pb-sm-30 pb-xs-30">
-                                    <a href="index.html">
-                                        <img src="../assets/images/menu/logo/1.svg" alt="" width="250" height="50">
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Header Logo Area End Here -->
-                            <!-- Begin Header Middle Right Area -->
-                            <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                                <!-- Begin Header Middle Searchbox Area -->
-                                <form action="#" class="hm-searchbox">
-                                    <!-- <select class="nice-select select-search-category">
+<!-- Begin Body Wrapper -->
+<div class="body-wrapper">
+  <!-- Begin Header Area -->
+  <header>
+    <!-- Begin Header Top Area -->
+    <div class="header-top">
+      <div class="container">
+        <div class="row">
+          <!-- Begin Header Top Left Area -->
+          <div class="col-lg-3 col-md-4">
+            <div class="header-top-left">
+              <ul class="phone-wrap">
+                <li *ngIf="u.loggedIn">
+                  <span
+                    ><a routerLink="/profile"
+                      ><img
+                        [src]="'http://localhost:3000/' + roleuser.avatar"
+                        class="img-rounded"
+                        style="border-radius: 50%"
+                        width="30px"
+                        height="30px"
+                        border-radius="50%" /></a
+                  ></span>
+                  &nbsp;<span
+                    ><a routerLink="/profile" style="color: #363f4d"
+                      ><strong>Hi, {{ roleuser.fname }}!</strong></a
+                    ></span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Header Top Left Area End Here -->
+          <!-- Begin Header Top Right Area -->
+          <div class="col-lg-9 col-md-8">
+            <div class="header-top-right">
+              <ul class="ht-menu">
+                <!-- Begin Setting Area -->
+                <li>
+                  <span class="currency-selector-wrapper"
+                    ><a
+                      style="color: #363f4d"
+                      routerLink="/dashboard"
+                      *ngIf="u.loggedIn && roleuser.role === 'ROLE_ADMIN'"
+                      >Dashboard</a
+                    ></span
+                  >
+                </li>
+                <!---------- -->
+                <li>
+                  <div class="ht-setting-trigger"><span>Setting</span></div>
+                  <div class="setting ht-setting">
+                    <ul class="ht-setting-list">
+                      <li>
+                        <a *ngIf="u.loggedIn" routerLink="/profile"
+                          >My Account</a
+                        >
+                      </li>
+                      <li>
+                        <a *ngIf="u.loggedIn" routerLink="/checkout"
+                          >Checkout</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <span class="currency-selector-wrapper"
+                    ><a
+                      style="color: #363f4d"
+                      routerLink="/login"
+                      *ngIf="!u.loggedIn"
+                      >Login</a
+                    >
+                    <a
+                      (click)="logout()"
+                      style="color: #363f4d; cursor: pointer"
+                      *ngIf="u.loggedIn"
+                      >Logut</a
+                    ></span
+                  >
+                </li>
+                <li *ngIf="!u.loggedIn">
+                  <span class="currency-selector-wrapper"
+                    ><a style="color: #363f4d" routerLink="/register"
+                      >Register</a
+                    >
+                  </span>
+                </li>
+                <li *ngIf="!u.loggedIn">
+                  <span class="currency-selector-wrapper"
+                    ><a style="color: #363f4d" routerLink="/sellerrequest"
+                      >Sell With Us</a
+                    >
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Header Top Right Area End Here -->
+        </div>
+      </div>
+    </div>
+    <!-- Header Top Area End Here -->
+    <!-- Begin Header Middle Area -->
+    <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
+      <div class="container">
+        <div class="row">
+          <!-- Begin Header Logo Area -->
+          <div class="col-lg-3">
+            <div class="logo pb-sm-30 pb-xs-30">
+              <a href="index.html">
+                <img
+                  src="../assets/images/menu/logo/1.svg"
+                  alt=""
+                  width="250"
+                  height="50"
+                />
+              </a>
+            </div>
+          </div>
+          <!-- Header Logo Area End Here -->
+          <!-- Begin Header Middle Right Area -->
+          <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
+            <!-- Begin Header Middle Searchbox Area -->
+            <form action="#" class="hm-searchbox">
+              <!-- <select class="nice-select select-search-category">
                                         <option value="0">All</option>
                                         <option value="10">Laptops</option>
                                         <option value="17">- -  Prime Video</option>
@@ -143,120 +196,155 @@
                                         <option value="15">Smartwatch</option>
                                         <option value="16">Accessories</option>
                                     </select> -->
-                                    <!-- <input type="text" placeholder="Enter your search key ...">
+              <!-- <input type="text" placeholder="Enter your search key ...">
                                     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button> -->
-                                    <input type="search"  aria-label="Search" name="search"
-                                    [(ngModel)]="search" (keyup)="done()" placeholder="Enter your search key ...">
-                                    <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                                <!-- Header Middle Searchbox Area End Here -->
-                                <!-- Begin Header Middle Right Area -->
-                                <div class="header-middle-right">
-                                    <ul class="hm-menu">
-                                        <!-- Begin Header Middle Wishlist Area -->
-                                        <li class="hm-wishlist">
-                                            <a href="/wish-list">
-                                                <span class="cart-item-count wishlist-item-count">0</span>
-                                                <i class="fa fa-heart-o"></i>
-                                            </a>
-                                        </li>
-                                        <!-- Header Middle Wishlist Area End Here -->
-                                        <!-- Begin Header Mini Cart Area -->
-                                        <li class="hm-minicart">
-                                            <div class="hm-minicart-trigger">
-                                                <span class="item-icon"></span>
-                                                <span class="item-text">£160
-                                                    <span class="cart-item-count">2</span>
-                                                </span>
-                                            </div>
-                                            <span></span>
-                                            <div class="minicart">
-                                                <ul class="minicart-product-list">
-                                                    <li>
-                                                        <a href="single-product.html" class="minicart-product-image">
-                                                            <img src="../assets/images/product/small-size/3.jpg" alt="cart products">
-                                                        </a>
-                                                        <div class="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                            <span>£80 x 1</span>
-                                                        </div>
-                                                        <button class="close">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html" class="minicart-product-image">
-                                                            <img src="../assets/images/product/small-size/4.jpg" alt="cart products">
-                                                        </a>
-                                                        <div class="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                            <span>£80 x 1</span>
-                                                        </div>
-                                                        <button class="close">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                                <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
-                                                <div class="minicart-button">
-                                                    <a href="/cart" class="li-button li-button-dark li-button-fullwidth li-button-sm">
-                                                        <span>View Full Cart</span>
-                                                    </a>
-                                                    <a href="/checkout" class="li-button li-button-fullwidth li-button-sm">
-                                                        <span>Checkout</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- Header Mini Cart Area End Here -->
-                                    </ul>
-                                </div>
-                                <!-- Header Middle Right Area End Here -->
-                            </div>
-                            <!-- Header Middle Right Area End Here -->
+              <input
+                type="search"
+                aria-label="Search"
+                name="search"
+                [(ngModel)]="search"
+                (keyup)="done()"
+                placeholder="Enter your search key ..."
+              />
+              <button class="li-btn" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+            <!-- Header Middle Searchbox Area End Here -->
+            <!-- Begin Header Middle Right Area -->
+            <div class="header-middle-right">
+              <ul class="hm-menu">
+                <!-- Begin Header Middle Wishlist Area -->
+                <li class="hm-wishlist">
+                  <a routerLink="wishlist">
+                    <span class="cart-item-count wishlist-item-count">0</span>
+                    <i class="fa fa-heart-o"></i>
+                  </a>
+                </li>
+                <!-- Header Middle Wishlist Area End Here -->
+                <!-- Begin Header Mini Cart Area -->
+                <li class="hm-minicart">
+                  <div class="hm-minicart-trigger">
+                    <span class="item-icon"></span>
+                    <span class="item-text"
+                      >£160
+                      <span class="cart-item-count">2</span>
+                    </span>
+                  </div>
+                  <span></span>
+                  <div class="minicart">
+                    <ul class="minicart-product-list">
+                      <li>
+                        <a
+                          href="single-product.html"
+                          class="minicart-product-image"
+                        >
+                          <img
+                            src="../assets/images/product/small-size/3.jpg"
+                            alt="cart products"
+                          />
+                        </a>
+                        <div class="minicart-product-details">
+                          <h6>
+                            <a href="single-product.html"
+                              >Aenean eu tristique</a
+                            >
+                          </h6>
+                          <span>£80 x 1</span>
                         </div>
+                        <button class="close">
+                          <i class="fa fa-close"></i>
+                        </button>
+                      </li>
+                      <li>
+                        <a
+                          href="single-product.html"
+                          class="minicart-product-image"
+                        >
+                          <img
+                            src="../assets/images/product/small-size/4.jpg"
+                            alt="cart products"
+                          />
+                        </a>
+                        <div class="minicart-product-details">
+                          <h6>
+                            <a href="single-product.html"
+                              >Aenean eu tristique</a
+                            >
+                          </h6>
+                          <span>£80 x 1</span>
+                        </div>
+                        <button class="close">
+                          <i class="fa fa-close"></i>
+                        </button>
+                      </li>
+                    </ul>
+                    <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
+                    <div class="minicart-button">
+                      <a
+                        href="/cart"
+                        class="li-button li-button-dark li-button-fullwidth li-button-sm"
+                      >
+                        <span>View Full Cart</span>
+                      </a>
+                      <a
+                        href="/checkout"
+                        class="li-button li-button-fullwidth li-button-sm"
+                      >
+                        <span>Checkout</span>
+                      </a>
                     </div>
-                </div>
-                <!-- Header Middle Area End Here -->
-                <!-- Begin Header Bottom Area -->
-                <div class="header-bottom header-sticky d-none d-lg-block">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <!-- Begin Header Bottom Menu Area -->
-                                <div class="hb-menu hb-menu-2 d-xl-block">
-                                    <nav>
-                                        <ul>
-                                            <li class=""><a href="/home">Home</a>
-                                            </li>
+                  </div>
+                </li>
+                <!-- Header Mini Cart Area End Here -->
+              </ul>
+            </div>
+            <!-- Header Middle Right Area End Here -->
+          </div>
+          <!-- Header Middle Right Area End Here -->
+        </div>
+      </div>
+    </div>
+    <!-- Header Middle Area End Here -->
+    <!-- Begin Header Bottom Area -->
+    <div class="header-bottom header-sticky d-none d-lg-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Begin Header Bottom Menu Area -->
+            <div class="hb-menu hb-menu-2 d-xl-block">
+              <nav>
+                <ul>
+                  <li class=""><a href="/home">Home</a></li>
 
-                                               
-                              
-                                            <li><a routerLink="/about">About Us</a></li>
-                                            <li><a routerLink="/contact">Contact</a></li>
-                                            <!-- Begin Header Bottom Menu Information Area -->
-                                            <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                                <span><strong>Crafts-Maker</strong> Intake:41, OS-Track. ITI, MU Branch.</span>
-                                            </li>
-                                            <!-- Header Bottom Menu Information Area End Here -->
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- Header Bottom Menu Area End Here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Header Bottom Area End Here -->
-                <!-- Begin Mobile Menu Area -->
-                <div class="mobile-menu-area d-lg-none d-xl-none col-12">
-                    <div class="container">
-                        <div class="row">
-                            <div class="mobile-menu">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Mobile Menu Area End Here -->
-            </header>
-            <!-- Header Area End Here -->
+                  <li><a routerLink="/about">About Us</a></li>
+                  <li><a routerLink="/contact">Contact</a></li>
+                  <!-- Begin Header Bottom Menu Information Area -->
+                  <li class="hb-info f-right p-0 d-sm-none d-lg-block">
+                    <span
+                      ><strong>Crafts-Maker</strong> Intake:41, OS-Track. ITI,
+                      MU Branch.</span
+                    >
+                  </li>
+                  <!-- Header Bottom Menu Information Area End Here -->
+                </ul>
+              </nav>
+            </div>
+            <!-- Header Bottom Menu Area End Here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header Bottom Area End Here -->
+    <!-- Begin Mobile Menu Area -->
+    <div class="mobile-menu-area d-lg-none d-xl-none col-12">
+      <div class="container">
+        <div class="row">
+          <div class="mobile-menu"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu Area End Here -->
+  </header>
+  <!-- Header Area End Here -->
+</div>

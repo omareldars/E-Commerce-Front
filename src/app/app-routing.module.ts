@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: 'cart', component:CartComponent},
   {path: 'checkout', component:CheckOutComponent},
   {path: 'shop-list', component:ShopListComponent},
-  {path: 'wish-list', component:WishListComponent},
+  {path: 'wishlist', component:WishListComponent},
   {path: 'product-details/:id', component:ProductDetailsComponent},
   {path: 'profile',component:UsersettingComponent},
   {path:'sellerrequest',component:SellwithusComponent},

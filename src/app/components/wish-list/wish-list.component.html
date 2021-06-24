@@ -19,40 +19,39 @@
           <div class="table-content table-responsive">
             <table class="table">
               <thead>
-              <tr>
-                <th class="li-product-remove">remove</th>
-                <th class="li-product-thumbnail">images</th>
-                <th class="cart-product-name">Product</th>
-                <th class="li-product-price">Unit Price</th>
-                <th class="li-product-stock-status">Stock Status</th>
-                <th class="li-product-add-cart">add to cart</th>
-              </tr>
+                <tr>
+                  <th class="li-product-remove">remove</th>
+                  <th class="li-product-thumbnail">images</th>
+                  <th class="cart-product-name">Product</th>
+                  <th class="li-product-price">Unit Price</th>
+                  <th class="li-product-add-cart">add to cart</th>
+                </tr>
               </thead>
-              <tbody>
-              <tr>
-                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                <td class="li-product-thumbnail"><a href="#"><img src="../assets/images/wishlist-thumb/1.jpg" alt=""></a></td>
-                <td class="li-product-name"><a href="#">Giro Civilia</a></td>
-                <td class="li-product-price"><span class="amount">$23.39</span></td>
-                <td class="li-product-stock-status"><span class="in-stock">in stock</span></td>
-                <td class="li-product-add-cart"><a href="#">add to cart</a></td>
-              </tr>
-              <tr>
-                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                <td class="li-product-thumbnail"><a href="#"><img src="../assets/images/wishlist-thumb/2.jpg" alt=""></a></td>
-                <td class="li-product-name"><a href="#">Pro Bike Shoes</a></td>
-                <td class="li-product-price"><span class="amount">$30.50</span></td>
-                <td class="li-product-stock-status"><span class="in-stock">in stock</span></td>
-                <td class="li-product-add-cart"><a href="#">add to cart</a></td>
-              </tr>
-              <tr>
-                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                <td class="li-product-thumbnail"><a href="#"><img src="../assets/images/wishlist-thumb/3.jpg" alt=""></a></td>
-                <td class="li-product-name"><a href="#">Nero Urban Shoes</a></td>
-                <td class="li-product-price"><span class="amount">$40.19</span></td>
-                <td class="li-product-stock-status"><span class="out-stock">out stock</span></td>
-                <td class="li-product-add-cart"><a href="#">add to cart</a></td>
-              </tr>
+              <tbody *ngFor="let wish of wishlists">
+                <tr>
+                  <td class="li-product-remove">
+                    <a (click)="UnlikeProduct(wish.product._id)"
+                      ><i class="fa fa-times"></i
+                    ></a>
+                  </td>
+                  <td class="li-product-thumbnail">
+                    <a href="#"
+                      ><img
+                        style="width: 60px"
+                        [src]="'http://localhost:3000/' + wish.product.photo"
+                        alt=""
+                    /></a>
+                  </td>
+                  <td class="li-product-name">
+                    <a href="#">{{ wish.product.title }}</a>
+                  </td>
+                  <td class="li-product-price">
+                    <span class="amount">{{ wish.product.price }} $ </span>
+                  </td>
+                  <td class="li-product-add-cart">
+                    <a href="#">add to cart</a>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -61,4 +60,23 @@
     </div>
   </div>
 </div>
-<!--Wishlist Area End-->
+
+<!-- for demo -->
+<!-- <h1 style="color: cadetblue">Wishlist</h1>
+
+<div *ngFor="let wish of wishlists">
+  <ul>
+    <li>
+    
+<!-- {{wish.}}       -->
+
+<!-- {{wish.product.photo}} -->
+<!-- {{wish.}}       -->
+
+<!-- {{wish.product.description}} -->
+<!-- {{wish.}}       -->
+
+<!-- {{wish.}}       -->
+
+<!-- </div> -->
+<!-- <h1 style="color: cadetblue">Wish2list</h1> -->
