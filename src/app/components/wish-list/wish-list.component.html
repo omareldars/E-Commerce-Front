@@ -3,7 +3,7 @@
   <div class="container">
     <div class="breadcrumb-content">
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="/home">Home</a></li>
         <li class="active">Wishlist</li>
       </ul>
     </div>
@@ -49,7 +49,7 @@
                     <span class="amount">{{ wish.product.price }} $ </span>
                   </td>
                   <td class="li-product-add-cart">
-                    <a href="#">add to cart</a>
+                    <a (click)="addToCart(product)">add to cart</a>
                   </td>
                 </tr>
               </tbody>

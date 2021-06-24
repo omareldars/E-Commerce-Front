@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cart } from '../_Models/Cart';
+import { Cartitem } from '../_Models/Cartitem';
+import { CartService } from '../_Services/cart.service';
 import { ProductService } from '../_Services/product.service';
 import { WishlistService } from './../_Services/wishlist.service';
 
@@ -13,7 +16,7 @@ import { WishlistService } from './../_Services/wishlist.service';
 export class WishListComponent implements OnInit {
 
 
-
+  public errors: string = "";
 
   wishlistForm = new FormGroup({
     title: new FormControl('', [
@@ -47,15 +50,17 @@ export class WishListComponent implements OnInit {
   get title() {
     return this.wishlistForm.get('title');
   }
-
-
-  get product(){
-    let productid:any =  this.wishlistForm.get('product');
-    let product_name = this.mproduct.getProductById(productid);
-    return product_name
+  get product() {
+    return this.wishlistForm.get('title');
   }
-  
-  constructor(private wishlist:WishlistService, private mproduct:ProductService, private router: Router) { }
+
+  // get product(){
+  //   let productid:any =  this.wishlistForm.get('product');
+  //   let product_name = this.mproduct.getProductById(productid);
+  //   return product_name
+  // }
+  nitem: Cartitem = new Cartitem(this.product?.value);
+  constructor(private wishlist:WishlistService, private mproduct:ProductService, private router: Router,private myCart:CartService) { }
   wishlists:any=[];
   products:any=null;
   id:any;
@@ -63,7 +68,7 @@ export class WishListComponent implements OnInit {
   // isLiked:boolean=false
 
 
-
+  cartarr:any[]=[];
   
   ngOnInit(): void {
 
@@ -142,5 +147,37 @@ this.getAllProduct()
 
     }
   }
-
+  mycart;
+  ncart:Cart;
+  // addToCart(product: any)
+  // {
+  //   this.cartarr.push(this.nitem);
+  //   console.log("cartarr",this.cartarr);
+  // this.ncart=new Cart(this.cartarr);
+  //   // this.c.push(this.nitem);
+  //   // console.log("cart",this.nitem);
+  //   //  this.productss.push(product._id)
+  //   console.log("yyyyyyyyyyyyyyyyy",this.wishlists);
+  //   console.log("dddddddddddddddddddddddddd",this.wishlist);
+  //   this.nitem.product=product._id;
+  //   // console.log("hhhhhhhhhhhh",product);
+  //   this.myCart.mycart().subscribe(
+  //     d => {
+  //       this.mycart = d["cartID"];
+  //        console.log("from cart",d["cartID"]);
+         
+  //        this.myCart.addToCart(d["cartID"], this.ncart).subscribe(
+  //          p => {console.log(p);},
+  //          err => this.errors = 'Error in adding to cart'
+  //        )
+  //       // console.log(d[0]);
+  //       this.router.navigateByUrl('/home')
+  //     },
+  //     err => this.errors = 'Could not authenticate'
+    
+  //   );
+  //   // console.log("jk",this.mycart);
+  //   // console.log(this.mycart.user);
+  // }
+ 
 }

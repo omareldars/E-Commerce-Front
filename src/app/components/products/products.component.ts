@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_Models/Product';
 import { CategoryService } from '../_Services/category.service';
@@ -18,7 +18,53 @@ export class ProductsComponent implements OnInit {
   getproducts:any;
   // products:any[];
   // ProductToUpdate;
-
+  public errors: string = "";
+  editproduct = new FormGroup({
+    title: new FormControl('', [
+      Validators.required,
+    ]),
+    description: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10)
+    ])
+    ,
+    price: new FormControl('', [
+      Validators.required,
+      Validators.min(1)
+    ])
+    ,
+    quantity: new FormControl('', [
+      Validators.required,
+      Validators.min(1)
+    ])
+    ,
+    photo: new FormControl('', [
+      Validators.required,
+    ])
+    ,
+    category: new FormControl('',[
+      Validators.required,
+    ])
+  });
+get title() {
+  return this.editproduct.get('title');
+}
+get description() {
+  return this.editproduct.get('description');
+}
+get photo() {
+  return this.editproduct.get('photo');
+}
+get price() {
+  return this.editproduct.get('price');
+}
+get quantity() {
+  return this.editproduct.get('quantity');
+}
+get category(){
+  return  this.editproduct.get('category');
+ 
+}
   nproduct: Product = new Product(" ", " "," "," "," ", " ");
   selectedFile!: File;
   addForm!: FormGroup;

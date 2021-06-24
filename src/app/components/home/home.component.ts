@@ -85,6 +85,11 @@ get isLiked() {
 
 
 
+
+    // const resultwishlist=this.myproduct.getProductById(id:any){
+
+    // }
+
     this.mywishlist.getAllProductsWishlist().subscribe(
       (res)=>{this.wishlists=res['wishlist'];
     //  this.isLiked=true;
@@ -108,7 +113,7 @@ get isLiked() {
     );
 
 
-    this.myreview.getAllwaitingReviews().subscribe(
+    this.myreview.getAllApprovedReviews().subscribe(
       (res)=>{this.reviews = res["reviews"]; 
      
       },
@@ -221,6 +226,7 @@ Rate(index:number,  Productid){
 
   }
 }
+
 
  addtoWishlist(Productid){
   this.nwishlist.product=Productid;
