@@ -42,4 +42,10 @@ export class CartService {
   usercart(){
     return this.http.get(this.baseUrl+"/usercart", { headers: { authorization: this.token } } );
   }
+  increase(cartId: any, productId: any, qty:any){
+    return this.http.put(this.baseUrl + "/increase/" +  cartId + "/" + productId + "/" + qty,{});
+  }
+  decrease(cartId: any, productId: any, qty:any){
+    return this.http.put(this.baseUrl + "/decrease/" +  cartId + "/" + productId + "/" + qty,{});
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../_Services/cart.service';
 import { ProductService } from '../_Services/product.service';
@@ -43,29 +43,34 @@ export class CartComponent implements OnInit {
             {continue;}
             this.cartProduct = this.cart[i]?.['quantity'];
             this.cartProductstatus = this.cart[i]?.['status'];
-
             this.currentProductId = this.cart[i]['product'];
             this.myproduct.getProductById(this.currentProductId).subscribe(
               d=>{
-                d.quantity = this.cartProduct;
+                d.quantity = this.cart.filter(s=>s.product == d._id)[0].quantity
+                // d.quantity = this.cartProduct;
                 this.productsArray.push(d);
+
+                debugger;
+                const index = this.productsArray.indexOf(d);
+                if(index > -1){
+                  this.productsArray.splice(index,1)
+                }
+                this.calcTotalPrice();
+                console.log("product array--->",this.productsArray);
+                // debugger;
+                // this.productsArray.forEach(element => {
+                //   element.qty = this.cart.filter(s=>s.product == element._id)[0].quantity
+                // });
               }
             )
         }
-      
-      this.myCart.getCartById(this.id).subscribe(
-        (res)=>{
-          console.log("res---->",res);
-          this.cart = res['cart'];
-          console.log("cart---->",this.cart);
-          },
-        (err)=>{console.log("error--->",err);}
-      );
 
-    }, 
-    err=>{console.log('no cart found')}
-  )
+        console.log("product array out for loop--->",this.productsArray);
 
+        
+      }, 
+      err=>{console.log('no cart found')}
+    );
   }
 
   removeProduct(cartId:any, productId:any){
@@ -94,34 +99,57 @@ export class CartComponent implements OnInit {
   }
 
   calcTotalPrice(){
+    // debugger;
     let sub = 0;
-    for(let i = 0 ; i < this.cart.length; i++)
+    console.log("from calc--->",  this.productsArray.length);
+    console.log("from calc arr--->",  this.productsArray);
+    for(let i = 0 ; i < this.productsArray.length; i++)
     {
-      sub +=  this.cart[i].price * this.cart[i].quantity;
-      console.log("sub price", this.subPrice);
+      sub +=  this.productsArray[i].price * this.productsArray[i].quantity;
+      console.log("sub--->",sub);
     }
     this.subPrice = sub;
+    console.log("sub price", this.subPrice);
     this.tax = this.subPrice * 0.14;
+    console.log("sub price", this.tax);
     this.totalPrice = this.tax + this.subPrice;
+    console.log("sub price", this.totalPrice);
   }
 
-  increaseQty(item:any) : void {
-    item.quantity++;
+  increaseQty(cartId:any, item:any) : void {
+    // item.quantity++;
+    this.myCart.increase(cartId, item._id, 1).subscribe(
+      (res)=>{console.log(res);},
+      (err)=>{console.log(err);}
+    );
     alert('Product Increased by One');
     console.log("---->item-in-->", item);
     this.calcTotalPrice()
   }
 
-  decreaseQty(item:any): void{
-    item.quantity--;
-
-    alert('Product Decreased by One');
-    if(item.quantity == 0){
-      // this.myCart.removeFromCart(this.cartId, item._id); //omar logic
-      this.cart = this.cart.filter((cartItem:any)=> cartItem._id !== item._id)
-    }
-    console.log("---->item-in-->", item);
-    this.calcTotalPrice()
+  decreaseQty(cartId:any,item:any): void{
+    // item.quantity--;
+    this.myCart.decrease(cartId, item._id, 1).subscribe(
+      (res)=>{
+        debugger;
+        console.log(res);
+        alert('Product Decreased by One');
+        if(item.quantity === 0){
+          this.myCart.removeFromCart(cartId, item._id).subscribe(
+            (res2)=>{console.log(res2); alert('Product Was Removed From Cart');},
+            (err2)=>{console.log(err2);}
+          );
+        }
+        console.log("---->item-in-->", item);
+        this.calcTotalPrice();
+        setTimeout(()=> {
+          window.location.reload();
+        },0);
+      },
+      (err)=>{console.log(err);}
+    );
+    
+    
   }
 
 }

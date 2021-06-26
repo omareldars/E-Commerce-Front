@@ -39,11 +39,11 @@
                   <label>Quantity</label>
                   <div class="cart-plus-minus">
                     <input class="cart-plus-minus-box" value="{{product.quantity}}" type="number">
-                    <div class="dec qtybutton"><button (click)="decreaseQty(product)"><i class="fa fa-angle-down"></i></button></div>
-                    <div class="inc qtybutton"><button (click)="increaseQty(product)"><i class="fa fa-angle-up"></i></button></div>
+                    <div class="dec qtybutton"><button (click)="decreaseQty(cartId,product)"><i class="fa fa-angle-down"></i></button></div>
+                    <div class="inc qtybutton"><button (click)="increaseQty(cartId,product)"><i class="fa fa-angle-up"></i></button></div>
                   </div>
                 </td>
-                <td class="li-product-status"><span class="status">{{product.status}}</span></td>
+                <td class="li-product-status"><span class="status">{{cartProductstatus}}</span></td>
                 <td class="product-subtotal"><span class="amount">${{ product.quantity * product.price }}</span></td>
               </tr>
               </tbody>
@@ -63,8 +63,9 @@
               <div class="cart-page-total">
                 <h2>Cart totals</h2>
                 <ul>
-                  <li>Subtotal <span>${{subPrice}}</span></li>
-                  <li>Total <span>${{totalPrice}}</span></li>
+                  <li>Subtotal: <span>${{subPrice}}</span></li>
+                  <li>Tax: <span>${{tax}}</span></li>
+                  <li>Total: <span>${{totalPrice}}</span></li>
                 </ul>
                 <a href="#">Proceed to checkout</a>
               </div>

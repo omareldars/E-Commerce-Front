@@ -11,6 +11,7 @@ import { Cart } from './../_Models/Cart';
 import { Cartitem } from './../_Models/Cartitem';
 import { WishlistService } from '../_Services/wishlist.service';
 import { Wishlist } from '../_Models/Wishlist';
+import { AfterViewInit } from '@angular/core';
  
 
 
@@ -20,7 +21,7 @@ import { Wishlist } from '../_Models/Wishlist';
   styles: [
   ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
  
 
 public errors: string = "";
@@ -70,59 +71,70 @@ get isLiked() {
 }
 
  cartarr:any[]=[];
-  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService) { }
-  nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
-  nwishlist: Wishlist = new Wishlist(this.isLiked?.value,this.product?.value);
-  nitem: Cartitem = new Cartitem(this.product?.value);
-  wishlists:any=[];
+nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
+nwishlist: Wishlist = new Wishlist(this.isLiked?.value,this.product?.value);
+nitem: Cartitem = new Cartitem(this.product?.value);
+wishlists:any=[];
 
   // @Input('product') products: Product;
-  categories:any[];
-  productss:any[];
-  reviews:any[];
-  ngOnInit(): void {
+categories:any[];
+productss:any[];
+reviews:any[];
 
 
+  constructor(private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService) { 
+    // debugger;
+  }
 
 
-
-    // const resultwishlist=this.myproduct.getProductById(id:any){
-
-    // }
-
+  ngAfterViewInit(): void {
     this.mywishlist.getAllProductsWishlist().subscribe(
       (res)=>{this.wishlists=res['wishlist'];
     //  this.isLiked=true;
-    console.log(res)
+    console.log("wishlist--->",JSON.stringify(this.wishlists))
+    // console.log(res)
     },
       (err)=>{console.log(err)}
     );
 
     this.mycategory.getAllCategories().subscribe(
-      (res)=>{this.categories = res['categories'];},
+      (res)=>{this.categories = res['categories'];
+      console.log("cats--->",JSON.stringify(this.categories))},
       (err)=>{console.log(err);}
     );
 
-
-
-
     this.myproduct.getAllProducts().subscribe(
       (res)=>{this.productss = res;
+        console.log("products--->",JSON.stringify(res))
       },
        (err)=>{console.log(err);}
     );
 
-
     this.myreview.getAllApprovedReviews().subscribe(
       (res)=>{this.reviews = res["reviews"]; 
-     
+      console.log("reviews--->",JSON.stringify(this.reviews))
       },
        (err)=>{console.log(err);}
     );
     setTimeout(() => {
       this.calculatePrdouctsReviews();
     },1200);
+    // throw new Error('Method not implemented.');
+  }
+ 
 
+  ngOnInit(): void {
+    if(localStorage.getItem('refresh') === "0" )
+    {
+      localStorage.setItem('refresh', "1"); 
+      setTimeout(()=> {
+        window.location.reload();
+      },0);
+    }
+    // debugger;
+    // const resultwishlist=this.myproduct.getProductById(id:any){
+
+    // }
     // for(let i=0; i<this.productss.length; i++){
     //   let rating = 0, numOfRaings = 0;
     //   for(let j=0;j<this.reviews.length;j++){
@@ -132,11 +144,15 @@ get isLiked() {
     //   }
     //   this.currentRate[i] = rating/numOfRaings;
     // }
+    // debugger;
+    // this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate(['home']);
+    // });
      
   }
 
   calculatePrdouctsReviews(){
-    for(let i=0; i<this.productss.length; i++){
+    for(let i=0; i<this.productss?.length; i++){
       let rating = 0, numOfRaings = 0;
       for(let j=0;j<this.reviews.length;j++){
         if(this.productss[i]._id === this.reviews[j].product){
@@ -151,35 +167,38 @@ get isLiked() {
     }
   }
   currentRate:any[] = [0];
-  mycart;
+  mycart=[];
   ncart:Cart;
+
   addToCart(product: any)
   {
-    this.cartarr.push(this.nitem);
-    console.log("cartarr",this.cartarr);
-  this.ncart=new Cart(this.cartarr);
-    // this.c.push(this.nitem);
-    // console.log("cart",this.nitem);
-    //  this.productss.push(product._id)
-    this.nitem.product=product._id;
-    console.log("hhhhhhhhhhhh",product._id);
+    
     this.myCart.mycart().subscribe(
-      d => {
-        this.mycart = d["cartID"];
-         console.log("from cart",d["cartID"]);
-         
-         this.myCart.addToCart(d["cartID"], this.ncart).subscribe(
+      data => {
+        this.mycart = data["cartID"];
+         console.log("from cart",data["cartID"]);
+         debugger;
+         let exists = this.cartarr.filter(s =>s.product == product._id)
+         if(exists.length == 0 ){
+          this.cartarr.push(this.nitem);
+          this.ncart=new Cart(this.cartarr);
+          this.nitem.product=product._id;
+         this.myCart.addToCart(data["cartID"], this.ncart).subscribe(
            p => {console.log(p);},
            err => this.errors = 'Error in adding to cart'
-         )
+         )} else{
+          this.myCart.increase(data["cartID"],product._id,1).subscribe(
+            dd => {
+              console.log(dd)
+              this.router.navigateByUrl('/home')
+            },
+            err => this.errors = 'Could not authenticate');
+         }
         // console.log(d[0]);
         this.router.navigateByUrl('/home')
       },
       err => this.errors = 'Could not authenticate'
-    
     );
-    // console.log("jk",this.mycart);
-    // console.log(this.mycart.user);
   }
  
    
@@ -244,6 +263,14 @@ Rate(index:number,  Productid){
   // console.log(this.nreview);
   );
  }
+
+
+
+//  exist(id:any){
+//   debugger;
+//   let exists = this.mycart.filter(s =>s._id == id)
+//   return exists
+//  }
 
 
 }

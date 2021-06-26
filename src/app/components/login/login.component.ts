@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('access_token', result.token!)
           localStorage.setItem('access_id', result._id!);
           localStorage.setItem('access_name', result.email)
+          localStorage.setItem('refresh', "0");
           this.router.navigateByUrl('/home')
           console.log(result)
         },
