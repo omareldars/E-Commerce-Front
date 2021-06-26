@@ -177,7 +177,7 @@ reviews:any[];
       data => {
         this.mycart = data["cartID"];
          console.log("from cart",data["cartID"]);
-         debugger;
+        //  debugger;
          let exists = this.cartarr.filter(s =>s.product == product._id)
          if(exists.length == 0 ){
           this.cartarr.push(this.nitem);

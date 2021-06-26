@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   d:any;
   cartProduct:any;
   currentProductId:any;
-  productsArray:any[]=[];
+  productsArray=[];
   cartProductstatus:any;
 
   totalPrice:number = 0;
@@ -36,7 +36,6 @@ export class CartComponent implements OnInit {
         this.cartId = d['carts'][0]['_id'];
         console.log("my cart=>",d);
         console.log("cart products=>",this.cart);
-
         for(let i = 0; i < this.cart.length; i++ )
         {
           if(!this.cart[i]) 
@@ -49,12 +48,11 @@ export class CartComponent implements OnInit {
                 d.quantity = this.cart.filter(s=>s.product == d._id)[0].quantity
                 // d.quantity = this.cartProduct;
                 this.productsArray.push(d);
-
-                debugger;
-                const index = this.productsArray.indexOf(d);
-                if(index > -1){
-                  this.productsArray.splice(index,1)
-                }
+                // debugger;
+                // const index = this.productsArray.indexOf(d);
+                // if(index > -1){
+                //   this.productsArray.splice(index,1)
+                // }
                 this.calcTotalPrice();
                 console.log("product array--->",this.productsArray);
                 // debugger;
@@ -64,10 +62,7 @@ export class CartComponent implements OnInit {
               }
             )
         }
-
         console.log("product array out for loop--->",this.productsArray);
-
-        
       }, 
       err=>{console.log('no cart found')}
     );
@@ -131,7 +126,7 @@ export class CartComponent implements OnInit {
     // item.quantity--;
     this.myCart.decrease(cartId, item._id, 1).subscribe(
       (res)=>{
-        debugger;
+        // debugger;
         console.log(res);
         alert('Product Decreased by One');
         if(item.quantity === 0){
