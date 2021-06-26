@@ -37,7 +37,7 @@
               <ul class="ht-menu">
                 <!-- Begin Setting Area -->
                 <li>
-                  <span class="currency-selector-wrapper"
+                  <span class="currency-selector-wrapper" style="cursor: pointer;"
                     ><a
                       style="color: #363f4d"
                       routerLink="/dashboard"
@@ -47,24 +47,24 @@
                   >
                 </li>
                 <!---------- -->
-                <li>
+                <li *ngIf="u.loggedIn" style="cursor: pointer;">
                   <div class="ht-setting-trigger"><span>Setting</span></div>
                   <div class="setting ht-setting">
                     <ul class="ht-setting-list">
                       <li>
-                        <a *ngIf="u.loggedIn" routerLink="/profile"
+                        <a routerLink="/profile"
                           >My Account</a
                         >
                       </li>
                       <li>
-                        <a *ngIf="u.loggedIn" routerLink="/checkout"
+                        <a routerLink="/checkout"
                           >Checkout</a
                         >
                       </li>
                     </ul>
                   </div>
                 </li>
-                <li>
+                <li style="cursor: pointer;">
                   <span class="currency-selector-wrapper"
                     ><a
                       style="color: #363f4d"
@@ -81,14 +81,14 @@
                   >
                 </li>
                 <li *ngIf="!u.loggedIn">
-                  <span class="currency-selector-wrapper"
+                  <span class="currency-selector-wrapper" style="cursor: pointer;"
                     ><a style="color: #363f4d" routerLink="/register"
                       >Register</a
                     >
                   </span>
                 </li>
-                <li *ngIf="!u.loggedIn">
-                  <span class="currency-selector-wrapper"
+                <li>
+                  <span class="currency-selector-wrapper" style="cursor: pointer;"
                     ><a style="color: #363f4d" routerLink="/sellerrequest"
                       >Sell With Us</a
                     >
@@ -235,77 +235,15 @@
                       routerLink="/cart"
                       style="color: white; text-decoration: none"
                       >Cart
-                      <span class="cart-item-count">2</span>
+                      <span class="cart-item-count">{{usercart.length}}</span>
                     </a>
                   </div>
                   ‏
                   <span></span>
-                  <!-- <div class="minicart">
-                    <ul class="minicart-product-list">
-                      <li>
-                        <a
-                          href="single-product.html"
-                          class="minicart-product-image"
-                        >
-                          <img
-                            src="../assets/images/product/small-size/3.jpg"
-                            alt="cart products"
-                          />
-                        </a>
-                        <div class="minicart-product-details">
-                          <h6>
-                            <a href="single-product.html"
-                              >Aenean eu tristique</a
-                            >
-                          </h6>
-                          <span>£80 x 1</span>
-                        </div>
-                        <button class="close">
-                          <i class="fa fa-close"></i>
-                        </button>
-                      </li>
-                      <li>
-                        <a
-                          href="single-product.html"
-                          class="minicart-product-image"
-                        >
-                          <img
-                            src="../assets/images/product/small-size/4.jpg"
-                            alt="cart products"
-                          />
-                        </a>
-                        <div class="minicart-product-details">
-                          <h6>
-                            <a href="single-product.html"
-                              >Aenean eu tristique</a
-                            >
-                          </h6>
-                          <span>£80 x 1</span>
-                        </div>
-                        <button class="close">
-                          <i class="fa fa-close"></i>
-                        </button>
-                      </li>
-                    </ul>
-                    <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
-                    <div class="minicart-button">
-                      <a
-                        href="/cart"
-                        class="li-button li-button-dark li-button-fullwidth li-button-sm"
-                      >
-                        <span>View Full Cart</span>
-                      </a>
-                      <a
-                        href="/checkout"
-                        class="li-button li-button-fullwidth li-button-sm"
-                      >
-                        <span>Checkout</span>
-                      </a>
-                    </div>
-                  </div> -->
                 </li>
                 <!-- Header Mini Cart Area End Here -->
               </ul>
+              
             </div>
             <!-- Header Middle Right Area End Here -->
           </div>

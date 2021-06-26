@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../_Services/cart.service';
 import { UserService } from '../_Services/user.service';
+import { WishlistService } from '../_Services/wishlist.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { UserService } from '../_Services/user.service';
 export class HeaderComponent implements OnInit {
 
   search!:string ;
-  constructor(public u: UserService,private router:Router, private myCart: CartService) { }
+  constructor(public u: UserService,private router:Router, private myCart: CartService, private myWishlist: WishlistService) { }
   
   logout(){
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -28,20 +29,31 @@ export class HeaderComponent implements OnInit {
 
   roleuser; 
   errors;
-  cartarr;
-
+  usercart:any[]=[];
+  wishlistarr;
   ngOnInit(): void {
-      this.u.getme().subscribe(
-        (res)=>{this.roleuser = res;
+    this.u.getme().subscribe(
+      (res)=>{this.roleuser = res;
       },
-        (err)=>{console.log("Not Logged In");}
+      (err)=>{console.log("Not Logged In");}
     );
 
     this.myCart.usercart().subscribe(
       d => {
-        this.cartarr = d['carts'][0]['products'];
+        let uc = d['carts'][0]['products'];
+        if(uc.isUndefined)
+        {
+          this.usercart = [];
+        }
+        else{
+          this.usercart = uc;
+        }
+        console.log("usercart-->",this.usercart);
       },
-      err => this.errors = 'Could not authenticate');
+      err => this.errors = 'Could not authenticate'
+    );
+    // this.myWishlist.
+
   }
 
 }
