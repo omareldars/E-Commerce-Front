@@ -63,17 +63,84 @@
             <span class="product-details-ref"></span>
             <div class="rating-box pt-20">
               <ul class="rating rating-with-review-item">
-                <li><i class="fa fa-star-o"></i></li>
+                <!-- <li><i class="fa fa-star-o"></i></li>
                 <li><i class="fa fa-star-o"></i></li>
                 <li><i class="fa fa-star-o"></i></li>
                 <li class="no-star"><i class="fa fa-star-o"></i></li>
-                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                <li class="review-item"><a href="#">Read Review</a></li>
-                 <li class="review-item"><a  href="#"  >Write Review</a></li> 
+                <li class="no-star"><i class="fa fa-star-o"></i></li> -->
+                <!-- <li class="review-item"><a href="#">Read Review</a></li> -->
+                 <li class="review-item"><a  href="#" data-toggle="modal" data-target="#mymodal" >Write Review</a></li> 
 
               </ul>
             </div>
-            
+            <div class="modal fade modal-wrapper" id="mymodal" >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <h3 class="review-page-title">Write Your Review</h3>
+                    <div class="modal-inner-area row">
+                      <div class="col-lg-6">
+                        <div class="li-review-product">
+                          <img [src]="'http://localhost:3000/' + product.photo" alt="product image" width="350" height="400">
+                          <div class="li-review-product-desc">
+                            <p class="li-product-name">{{product.title}}</p>
+                            <p>
+                              <span> {{product.description}} </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="li-review-content"> 
+                          <!-- Begin Feedback Area -->
+                          <div class="feedback-area">
+                            <div class="feedback">
+                              <h3 class="feedback-title">Our Feedback</h3>
+                              <form action="#" [formGroup]="profileForm" method="post">
+                                <p class="your-opinion">
+                                  <label>Your Rating</label>
+                                  <span>
+                                    <select formControlName="rating" #Rating name="rating">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                    </select>
+                                  </span>
+                                </p>
+                                <p class="feedback-form">
+                                  <label for="feedback">Your Review</label>
+                                  <textarea id="feedback" formControlName="review" #Review name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                </p>
+                                <div class="feedback-input">
+                                  <!-- <p class="feedback-form-author">
+                                    <label for="author">Name<span class="required">*</span>
+                                    </label>
+                                    <input id="author" name="author" value="" size="30" aria-required="true" type="text">
+                                  </p> -->
+                                  <!-- <p class="feedback-form-author feedback-form-email">
+                                    <label for="email">Email<span class="required">*</span>
+                                    </label>
+                                    <input id="email" name="email" value="" size="30" aria-required="true" type="text">
+                                    <span class="required"><sub>*</sub> Required fields</span>
+                                  </p> -->
+                                  <div class="feedback-btn pb-15">
+                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">Close</a>
+                                    <a (click)="rateProduct(product._id)">Submit</a>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                          <!-- Feedback Area End Here -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> 
             <div class="price-box pt-20">
               <span class="new-price new-price-2">{{product.price}} EGP</span>
             </div>
@@ -82,7 +149,7 @@
                 <span>{{product.description}}</span>
               </p>
             </div>
-            <div class="product-variants">
+            <!-- <div class="product-variants">
               <div class="produt-variants-size">
                 <label>Dimension</label>
                 <select class="nice-select">
@@ -91,7 +158,7 @@
                   <option value="3" title="L">80x120cm</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="single-add-to-cart">
               <form action="#" class="cart-quantity">
                 <div class="quantity">
@@ -102,11 +169,11 @@
                     <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                   </div>
                 </div>
-                <button routerLink="/addcart" class="add-to-cart" type="submit">Add to cart</button>
+                <button (click)="addToCart(product)" class="add-to-cart" type="submit">Add to cart</button>
               </form>
             </div>
             <div class="product-additional-info pt-25">
-              <a class="wishlist-btn" routerLink="/wish-list"><i class="fa fa-heart-o"></i>Add to wishlist</a>
+              <a class="wishlist-btn"   (click)="addtoWishlist(product._id)"><i class="fa fa-heart-o"></i>Add to wishlist</a>
               <div class="product-social-sharing pt-25">
                 <ul>
                   <li class="facebook"><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i>Facebook</a></li>
@@ -158,9 +225,9 @@
       <div class="col-lg-12">
         <div class="li-product-tab">
           <ul class="nav li-product-menu">
-            <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
-            <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li>
-            <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
+            <!-- <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
+            <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li> -->
+            <li><a data-toggle="tab" href="#reviews" (click)="getAllReviews(product._id)"><span>Reviews</span></a></li>
           </ul>
         </div>
         <!-- Begin Li's Tab Menu Content Area -->
@@ -169,7 +236,7 @@
     <div class="tab-content">
       <div id="description" class="tab-pane active show" role="tabpanel">
         <div class="product-description">
-          <span>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</span>
+          <!-- <span>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</span> -->
         </div>
       </div>
       <div id="product-details" class="tab-pane" role="tabpanel">
@@ -181,32 +248,34 @@
           <p><span>Reference</span> demo_7</p>
         </div>
       </div>
-      <div id="reviews" class="tab-pane" role="tabpanel">
-        <div class="product-reviews">
+      <div id="reviews" class="tab-pane" role="tabpanel" >
+        <div class="product-reviews" *ngFor="let review of AllProductReviews">
           <div class="product-details-comment-block">
             <div class="comment-review">
-              <span>Grade</span>
-              <ul class="rating">
+              <!-- <span>{{review.rating}}</span> -->
+              <ngb-rating
+                        [max]="5"[(rate)]="review.rating" [readonly]="true"></ngb-rating>
+              <!-- <ul class="rating">
                 <li><i class="fa fa-star-o"></i></li>
                 <li><i class="fa fa-star-o"></i></li>
                 <li><i class="fa fa-star-o"></i></li>
                 <li class="no-star"><i class="fa fa-star-o"></i></li>
                 <li class="no-star"><i class="fa fa-star-o"></i></li>
-              </ul>
+              </ul> -->
             </div>
             <div class="comment-author-infos pt-25">
-              <span>HTML 5</span>
-              <em>01-12-18</em>
+              <span>{{review.review}}</span>
+              <em>{{review.created}}</em>
             </div>
-            <div class="comment-details">
+            <!-- <div class="comment-details">
               <h4 class="title-block">Demo</h4>
               <p>Plaza</p>
-            </div>
-             <div class="review-btn">
+            </div> -->
+             <!-- <div class="review-btn">
               <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Write Your Review!</a>
-            </div>
+            </div> -->
             <!-- Begin Quick View | Modal Area-->
-             <div class="modal fade modal-wrapper" id="mymodal" >
+             <!-- <div class="modal fade modal-wrapper" id="mymodal" >
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-body">
@@ -224,9 +293,9 @@
                         </div>
                       </div>
                       <div class="col-lg-6">
-                        <div class="li-review-content"> 
+                        <div class="li-review-content">  -->
                           <!-- Begin Feedback Area -->
-                          <div class="feedback-area">
+                          <!-- <div class="feedback-area">
                             <div class="feedback">
                               <h3 class="feedback-title">Our Feedback</h3>
                               <form action="#">
@@ -240,8 +309,8 @@
                                       <option value="4">4</option>
                                       <option value="5">5</option>
                                     </select>
-                                  </span>
-                                </p>
+                                  </span> -->
+                                <!-- </p>
                                 <p class="feedback-form">
                                   <label for="feedback">Your Review</label>
                                   <textarea id="feedback" name="comment" cols="45" rows="8" aria-required="true"></textarea>
@@ -250,8 +319,8 @@
                                   <p class="feedback-form-author">
                                     <label for="author">Name<span class="required">*</span>
                                     </label>
-                                    <input id="author" name="author" value="" size="30" aria-required="true" type="text">
-                                  </p>
+                                    <input id="author" name="author" value="" size="30" aria-required="true" type="text"> -->
+                                  <!-- </p>
                                   <p class="feedback-form-author feedback-form-email">
                                     <label for="email">Email<span class="required">*</span>
                                     </label>
@@ -265,15 +334,15 @@
                                 </div>
                               </form>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- Feedback Area End Here -->
-                        </div>
+                        <!-- </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>  -->
             <!-- Quick View | Modal Area End Here -->
           </div>
         </div>
@@ -290,7 +359,7 @@
       <div class="col-lg-12">
         <div class="li-section-title">
           <h2>
-            <span>15 other products in the same category:</span>
+            <!-- <span>15 other products in the same category:</span> -->
           </h2>
         </div>
         <div class="row">

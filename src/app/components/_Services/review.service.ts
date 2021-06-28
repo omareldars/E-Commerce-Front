@@ -19,6 +19,9 @@ import {Review} from "../_Models/Review";
     getReviewById(id: string){
         return this.http.get<Review>(this.baseUrl+"/"+id, { headers: { authorization: this.token } })
       }
+      getProductReviews(id: string){
+        return this.http.get<Review>(this.baseUrl+"/product/"+id, { headers: { authorization: this.token } })
+      }
     
     getAllwaitingReviews() {            
     return this.http.get<Review[]>(this.baseUrl+"/allreviews",{ headers: { authorization: this.token } });

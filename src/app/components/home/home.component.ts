@@ -26,18 +26,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 public errors: string = "";
 
-// index = 0;
-//   starCount = 5;
-//   ratingArr: boolean[] = []; // true = solid star; false = empty star
-
-//   snackBarDuration = 1000;
-//   response = [
-//     'You broke my heart!',
-//     'Really?',
-//     'We will do better next time.',
-//     'Glad you like it!',
-//     'Thank you so much!'
-//   ]
 profileForm = new FormGroup({
   title: new FormControl('', [
     Validators.required,

@@ -139,69 +139,7 @@ export class CategoryProductsComponent implements OnInit {
   }
  
 
-  // addToCart(product: any)
-  // {
-    
-  //   this.myCart.mycart().subscribe(
-  //     data => {
-  //       this.mycart = data["cartID"];
-  //        console.log("from cart",data["cartID"]);
-  //       //  debugger;
-  //        let exists = this.cartarr.filter(s =>s.product == product._id)
-  //        if(exists.length == 0 ){
-  //         this.cartarr.push(this.nitem);
-  //         this.ncart=new Cart(this.cartarr);
-  //         this.nitem.product=product._id;
-  //        this.myCart.addToCart(data["cartID"], this.ncart).subscribe(
-  //          p => {console.log(p);},
-  //          err => this.errors = 'Error in adding to cart'
-  //        )} else{
-  //         this.myCart.increase(data["cartID"],product._id,1).subscribe(
-  //           dd => {
-  //             console.log(dd)
-  //             this.router.navigateByUrl('/home')
-  //           },
-  //           err => this.errors = 'Could not authenticate');
-  //        }
-  //       // console.log(d[0]);
-  //       this.router.navigateByUrl('/home')
-  //     },
-  //     err => this.errors = 'Could not authenticate'
-  //   );
-  // }
- 
-  // addToCart(product: any)
-  // {
-    
-  //   this.myCart.usercart().subscribe(
-  //     data => {
-  //       this.mycart = data["carts"][0]._id;
-  //        console.log("from cart",data["carts"][0]._id);
-  //       //  debugger;
-  //       let cartProducts = data["carts"][0].products;
-  //        let exists = cartProducts.filter(s => s.product == product["product"]._id)
-  //        this.cartarr = [];
-  //        if(exists.length == 0 ){
-  //         this.cartarr.push(this.nitem);
-  //         this.ncart=new Cart(this.cartarr);
-  //         this.nitem.product=product["product"]._id;
-  //        this.myCart.addToCart( data["carts"][0]._id, this.ncart).subscribe(
-  //          p => {console.log(p);},
-  //          err => this.errors = 'Error in adding to cart'
-  //        )} else{
-  //         this.myCart.increase(data["carts"][0]._id,product["product"]._id,1).subscribe(
-  //           dd => {
-  //             console.log(dd)
-  //             this.router.navigateByUrl('/home')
-  //           },
-  //           err => this.errors = 'Could not authenticate');
-  //        }
-  //       // console.log(d[0]);
-  //       this.router.navigateByUrl('/home')
-  //     },
-  //     err => this.errors = 'Could not authenticate'
-  //   );
-  // }
+  
   addToCart(product: any)
   {
     

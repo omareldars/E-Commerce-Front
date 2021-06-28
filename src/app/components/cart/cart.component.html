@@ -44,7 +44,7 @@
                   </div>
                 </td>
                 <td class="li-product-status"><span class="status">{{cartProductstatus}}</span></td>
-                <td class="product-subtotal"><span class="amount">${{ product.quantity * product.price }}</span></td>
+                <td class="product-subtotal"><span class="amount">{{ product.quantity * product.price }} EGP</span></td>
               </tr>
               </tbody>
             </table>
@@ -63,9 +63,9 @@
               <div class="cart-page-total">
                 <h2>Cart totals</h2>
                 <ul>
-                  <li>Subtotal: <span>${{subPrice}}</span></li>
-                  <li>Tax: <span>${{tax}}</span></li>
-                  <li>Total: <span>${{totalPrice}}</span></li>
+                  <li>Subtotal: <span>{{subPrice}} EGP</span></li>
+                  <li>Tax: <span>{{tax}} EGP</span></li>
+                  <li>Total: <span>{{totalPrice}} EGP</span></li>
                 </ul>
                 <a href="#">Proceed to checkout</a>
               </div>
