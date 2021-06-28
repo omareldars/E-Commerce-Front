@@ -34,7 +34,7 @@
                 <td class="li-product-remove"><a (click)="removeProduct(cartId, product._id)"><i class="fa fa-times"></i></a></td>
                 <td class="li-product-thumbnail"><a routerLink="/product-details/{{ product._id }}"><img [src]="'http://localhost:3000/' + product.photo" alt="Li's Product Image" height="100" width="100"></a></td>
                 <td class="li-product-name"><a routerLink="/product-details/{{ product._id }}">{{product.title}}</a></td>
-                <td class="li-product-price"><span class="amount">${{product.price}}</span></td>
+                <td class="li-product-price"><span class="amount">{{product.price}} EGP</span></td>
                 <td class="quantity">
                   <label>Quantity</label>
                   <div class="cart-plus-minus">

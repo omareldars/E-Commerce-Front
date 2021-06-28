@@ -149,35 +149,70 @@ this.getAllProduct()
   }
   mycart;
   ncart:Cart;
+  // addToCart(product: any)
+  // {
+  //   this.cartarr.push(this.nitem);
+  //   console.log("cartarr",this.cartarr);
+  //   this.ncart=new Cart(this.cartarr);
+  //   // this.c.push(this.nitem);
+  //   // console.log("cart",this.nitem);
+  //   //  this.productss.push(product._id)
+  //   console.log("yyyyyyyyyyyyyyyyy",this.wishlists);
+  //   console.log("dddddddddddddddddddddddddd",this.wishlist);
+  //   this.nitem.product=product["product"]._id;
+  //   // console.log("hhhhhhhhhhhh",product);
+  //   this.myCart.mycart().subscribe(
+  //     d => {
+  //       this.mycart = d["cartID"];
+  //        console.log("from cart",d["cartID"]);
+         
+  //        this.myCart.addToCart(d["cartID"], this.ncart).subscribe(
+  //          p => {console.log(p);},
+  //          err => this.errors = 'Error in adding to cart'
+  //        )
+  //       // console.log(d[0]);
+  //       this.router.navigateByUrl('/home')
+  //     },
+  //     err => this.errors = 'Could not authenticate'
+    
+  //   );
+  //   // console.log("jk",this.mycart);
+  //   // console.log(this.mycart.user);
+  // }
   addToCart(product: any)
   {
-    this.cartarr.push(this.nitem);
-    console.log("cartarr",this.cartarr);
-  this.ncart=new Cart(this.cartarr);
-    // this.c.push(this.nitem);
-    // console.log("cart",this.nitem);
-    //  this.productss.push(product._id)
-    console.log("yyyyyyyyyyyyyyyyy",this.wishlists);
-    console.log("dddddddddddddddddddddddddd",this.wishlist);
-    this.nitem.product=product._id;
-    // console.log("hhhhhhhhhhhh",product);
-    this.myCart.mycart().subscribe(
-      d => {
-        this.mycart = d["cartID"];
-         console.log("from cart",d["cartID"]);
-         
-         this.myCart.addToCart(d["cartID"], this.ncart).subscribe(
+    
+    this.myCart.usercart().subscribe(
+      data => {
+        this.mycart = data["carts"][0]._id;
+         console.log("from cart",data["carts"][0]._id);
+        //  debugger;
+        let cartProducts = data["carts"][0].products;
+         let exists = cartProducts.filter(s => s.product == product["product"]._id)
+         this.cartarr = [];
+         if(exists.length == 0 ){
+          this.cartarr.push(this.nitem);
+          this.ncart=new Cart(this.cartarr);
+          this.nitem.product=product["product"]._id;
+         this.myCart.addToCart( data["carts"][0]._id, this.ncart).subscribe(
            p => {console.log(p);},
            err => this.errors = 'Error in adding to cart'
-         )
+         )} else{
+          this.myCart.increase(data["carts"][0]._id,product["product"]._id,1).subscribe(
+            dd => {
+              console.log(dd)
+              this.router.navigateByUrl('/home')
+            },
+            err => this.errors = 'Could not authenticate');
+         }
         // console.log(d[0]);
         this.router.navigateByUrl('/home')
       },
       err => this.errors = 'Could not authenticate'
-    
     );
-    // console.log("jk",this.mycart);
-    // console.log(this.mycart.user);
   }
  
+
+
+
 }

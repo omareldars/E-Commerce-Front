@@ -44,7 +44,7 @@ export class CartComponent implements OnInit {
             this.cartProductstatus = this.cart[i]?.['status'];
             this.currentProductId = this.cart[i]['product'];
             this.myproduct.getProductById(this.currentProductId).subscribe(
-              d=>{
+              d=>{console.log("hhhhhhhhhhhhhhhhhhhhhhhhhh",this.currentProductId);
                 d.quantity = this.cart.filter(s=>s.product == d._id)[0].quantity
                 // d.quantity = this.cartProduct;
                 this.productsArray.push(d);
@@ -127,9 +127,10 @@ export class CartComponent implements OnInit {
     this.myCart.decrease(cartId, item._id, 1).subscribe(
       (res)=>{
         // debugger;
+        console.log("quantity= ", item.quantity)
         console.log(res);
         alert('Product Decreased by One');
-        if(item.quantity === 0){
+        if(item.quantity === 1){
           this.myCart.removeFromCart(cartId, item._id).subscribe(
             (res2)=>{console.log(res2); alert('Product Was Removed From Cart');},
             (err2)=>{console.log(err2);}
