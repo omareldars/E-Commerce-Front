@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from '../_Models/User';
 import { UserService } from '../_Services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,15 @@ export class LoginComponent implements OnInit {
     return this.profileForm.get('password') ;
   }
   public onSubmit() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Logged In',
+      text: "WELCOME",
+      showConfirmButton: false,
+      iconColor:'#fed700',
+      timer: 1500
+    })
     console.log(this.profileForm.value);
     console.log(this.profileForm.get('email'))
     console.log(this.email?.value)

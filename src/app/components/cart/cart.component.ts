@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../_Services/cart.service';
 import { ProductService } from '../_Services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -68,30 +69,133 @@ export class CartComponent implements OnInit {
     );
   }
 
+  // removeProduct(cartId:any, productId:any){
+  //   let result = confirm("Are you sure?");
+  //   if(result)
+  //   {
+  //     this.myCart.removeFromCart(cartId, productId).subscribe(
+  //     (res)=>{console.log(res);},
+  //     (err)=>{console.log(err);}
+  //     );
+  //     this.cart = this.cart.filter((products: { productId: any; }) => products.productId != productId);
+  //     this.router.url;
+  //   }
+  // }
+
+
   removeProduct(cartId:any, productId:any){
-    let result = confirm("Are you sure?");
-    if(result)
-    {
-      this.myCart.removeFromCart(cartId, productId).subscribe(
-      (res)=>{console.log(res);},
-      (err)=>{console.log(err);}
-      );
-      this.cart = this.cart.filter((products: { productId: any; }) => products.productId != productId);
-      this.router.url;
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: 'btn btn-danger',
+        confirmButton: 'btn btn-success'
+        
+      },
+      buttonsStyling: true
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+  
+  
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Product has been removed',
+          'success'
+        )
+        this.myCart.removeFromCart(cartId, productId).subscribe(
+          (res)=>{console.log(res);},
+          (err)=>{console.log(err);}
+          );
+          this.cart = this.cart.filter((products: { productId: any; }) => products.productId != productId);
+          this.router.url;
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your Data is safe :)',
+          'error'
+        )
+      }
+    })
   }
+  
+
+
+
+
+  // emptyCart(id: any){
+  //   let result = confirm("Are you sure?");
+  //   if(result){
+  //     this.myCart.deleteById(id).subscribe(
+  //       (res)=>{console.log(res);},
+  //       (err)=>{console.log(err);}
+  //     );
+  //     this.cart = '';
+  //     this.router.url;
+  //   }
+  // }
+
+
 
   emptyCart(id: any){
-    let result = confirm("Are you sure?");
-    if(result){
-      this.myCart.deleteById(id).subscribe(
-        (res)=>{console.log(res);},
-        (err)=>{console.log(err);}
-      );
-      this.cart = '';
-      this.router.url;
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: 'btn btn-danger',
+        confirmButton: 'btn btn-success'
+        
+      },
+      buttonsStyling: true
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+  
+  
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Cart has been deleted.',
+          'success'
+        )
+        this.myCart.deleteById(id).subscribe(
+          (res)=>{console.log(res);},
+          (err)=>{console.log(err);}
+        );
+        this.cart = '';
+        this.router.url;
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your Data is safe :)',
+          'error'
+        )
+      }
+    })
   }
+
+
 
   calcTotalPrice(){
     // debugger;
@@ -117,7 +221,6 @@ export class CartComponent implements OnInit {
       (res)=>{console.log(res);},
       (err)=>{console.log(err);}
     );
-    alert('Product Increased by One');
     console.log("---->item-in-->", item);
     this.calcTotalPrice()
   }
@@ -128,7 +231,6 @@ export class CartComponent implements OnInit {
       (res)=>{
         // debugger;
         console.log(res);
-        alert('Product Decreased by One');
         if(item.quantity === 0){
           this.myCart.removeFromCart(cartId, item._id).subscribe(
             (res2)=>{console.log(res2); alert('Product Was Removed From Cart');},

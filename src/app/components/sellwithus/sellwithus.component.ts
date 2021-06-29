@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MerchantService } from '../_Services/merchant.service';
 import { Merchant } from './../_Models/Merchant';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-sellwithus',
   templateUrl: './sellwithus.component.html',
@@ -48,6 +50,13 @@ export class SellwithusComponent implements OnInit {
 
   nUser: Merchant = new Merchant(this.name?.value, this.email?.value, this.business?.value, this.phoneNumber?.value);
   Submit() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Request Sent',
+      showConfirmButton: false,
+      timer: 1700
+    })
     this.nUser.name = this.name?.value;
     this.nUser.email = this.email?.value;
     this.nUser.phoneNumber = this.phoneNumber?.value;

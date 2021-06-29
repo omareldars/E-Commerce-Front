@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../_Models/User';
 import { UserService } from '../_Services/user.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -81,6 +82,13 @@ export class RegisterComponent implements OnInit {
 
   nUser: User = new User(this.firstname?.value, this.lastname?.value, this.username?.value, this.password?.value,this.email?.value,this.phone?.value,this.city?.value,this.country?.value,this.confirmpassword?.value);
   Submit() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Successfully Registered',
+      showConfirmButton: false,
+      timer: 1700
+    })
     this.nUser.fname = this.firstname?.value;
     this.nUser.lname = this.lastname?.value;
     this.nUser.username = this.username?.value;

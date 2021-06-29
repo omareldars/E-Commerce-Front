@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_Models/Product';
 import { CategoryService } from '../_Services/category.service';
 import { ProductService } from '../_Services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -107,27 +108,53 @@ get category(){
 
   }
 
-  save() {
+  // save() {
+  //   this.Product.append('title', this.nproduct.title)
+  //   this.Product.append('description', this.nproduct.description)
+  //   this.Product.append('price', this.nproduct.price);
+  //   this.Product.append('quantity', this.nproduct.quantity);
+  //   this.Product.append('photo', this.selectedFile);
+  //   this.Product.append('category', this.nproduct.category);
+
+  //   this.ProductService.add(this.Product).subscribe(
+  //     a => {
+  //       console.log(this.selectedFile)
+  //       console.log(a)
+  //       console.log(a.photo)
+
+  //       console.log("hello"+this.Product)
+  //     }
+  //   )
+  //   this.route.navigateByUrl('/home');
+  // }
+
+  save(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Product Created',
+      showConfirmButton: false,
+      timer: 1700
+    })
     this.Product.append('title', this.nproduct.title)
-    this.Product.append('description', this.nproduct.description)
-    this.Product.append('price', this.nproduct.price);
-    this.Product.append('quantity', this.nproduct.quantity);
-    this.Product.append('photo', this.selectedFile);
-    this.Product.append('category', this.nproduct.category);
+      this.Product.append('description', this.nproduct.description)
+      this.Product.append('price', this.nproduct.price);
+      this.Product.append('quantity', this.nproduct.quantity);
+      this.Product.append('photo', this.selectedFile);
+      this.Product.append('category', this.nproduct.category);
+  
+      this.ProductService.add(this.Product).subscribe(
+        a => {
+          console.log(this.selectedFile)
+          console.log(a)
+          console.log(a.photo)
+  
+          console.log("hello"+this.Product)
+        }
+      )
+      this.route.navigateByUrl('/home');
 
-    this.ProductService.add(this.Product).subscribe(
-      a => {
-        console.log(this.selectedFile)
-        console.log(a)
-        console.log(a.photo)
-
-        console.log("hello"+this.Product)
-      }
-    )
-    this.route.navigateByUrl('/home');
   }
-
-
 
 
 

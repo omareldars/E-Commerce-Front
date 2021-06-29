@@ -12,6 +12,7 @@ import { Cartitem } from './../_Models/Cartitem';
 import { WishlistService } from '../_Services/wishlist.service';
 import { Wishlist } from '../_Models/Wishlist';
 import { AfterViewInit } from '@angular/core';
+import Swal from 'sweetalert2';
  
 
 
@@ -172,7 +173,13 @@ reviews:any[];
 
   addToCart(product: any)
   {
-    
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Added Successfully',
+      showConfirmButton: false,
+      timer: 1700
+    })
     this.myCart.mycart().subscribe(
       data => {
         this.mycart = data["cartID"];

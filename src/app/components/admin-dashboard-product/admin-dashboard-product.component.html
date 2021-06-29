@@ -22,7 +22,7 @@
 
 <div class="container text-center">
     <br><br>
-  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/add-category">Add New Product</a></button>
+  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/products">Add New Product</a></button>
 </div>
 <br><br>
 
@@ -49,7 +49,7 @@
         <!-- <i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i> -->
         <td>
           <a class="btn p-1" routerLink="/edit-product/{{product._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> 
-          <button class="btn p-1 ml-4" (click)="delete(product._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
+          <button class="btn p-1 ml-4" (click)="sweetalert(product._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
         </td>
     </tr>
 </tbody>
