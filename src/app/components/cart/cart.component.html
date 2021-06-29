@@ -34,7 +34,7 @@
                 <td class="li-product-remove"><a (click)="removeProduct(cartId, product._id)"><i class="fa fa-times"></i></a></td>
                 <td class="li-product-thumbnail"><a routerLink="/product-details/{{ product._id }}"><img [src]="'http://localhost:3000/' + product.photo" alt="Li's Product Image" height="100" width="100"></a></td>
                 <td class="li-product-name"><a routerLink="/product-details/{{ product._id }}">{{product.title}}</a></td>
-                <td class="li-product-price"><span class="amount">${{product.price}}</span></td>
+                <td class="li-product-price"><span class="amount">{{product.price}} EGP</span></td>
                 <td class="quantity">
                   <label>Quantity</label>
                   <div class="cart-plus-minus">
@@ -44,7 +44,7 @@
                   </div>
                 </td>
                 <td class="li-product-status"><span class="status">{{cartProductstatus}}</span></td>
-                <td class="product-subtotal"><span class="amount">${{ product.quantity * product.price }}</span></td>
+                <td class="product-subtotal"><span class="amount">{{ product.quantity * product.price }} EGP</span></td>
               </tr>
               </tbody>
             </table>
@@ -63,9 +63,9 @@
               <div class="cart-page-total">
                 <h2>Cart totals</h2>
                 <ul>
-                  <li>Subtotal: <span>${{subPrice}}</span></li>
-                  <li>Tax: <span>${{tax}}</span></li>
-                  <li>Total: <span>${{totalPrice}}</span></li>
+                  <li>Subtotal: <span>{{subPrice}} EGP</span></li>
+                  <li>Tax: <span>{{tax}} EGP</span></li>
+                  <li>Total: <span>{{totalPrice}} EGP</span></li>
                 </ul>
                 <a href="#">Proceed to checkout</a>
               </div>

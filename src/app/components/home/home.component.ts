@@ -27,18 +27,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 public errors: string = "";
 
-// index = 0;
-//   starCount = 5;
-//   ratingArr: boolean[] = []; // true = solid star; false = empty star
-
-//   snackBarDuration = 1000;
-//   response = [
-//     'You broke my heart!',
-//     'Really?',
-//     'We will do better next time.',
-//     'Glad you like it!',
-//     'Thank you so much!'
-//   ]
 profileForm = new FormGroup({
   title: new FormControl('', [
     Validators.required,
@@ -71,7 +59,7 @@ get isLiked() {
   return this.profileForm.get('isLiked');
 }
 
- cartarr:any[]=[];
+cartarr:any[]=[];
 nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
 nwishlist: Wishlist = new Wishlist(this.isLiked?.value,this.product?.value);
 nitem: Cartitem = new Cartitem(this.product?.value);
@@ -182,19 +170,21 @@ reviews:any[];
     })
     this.myCart.mycart().subscribe(
       data => {
-        this.mycart = data["cartID"];
-         console.log("from cart",data["cartID"]);
+        this.mycart = data["carts"][0]._id;
+         console.log("from cart",data["carts"][0]._id);
         //  debugger;
-         let exists = this.cartarr.filter(s =>s.product == product._id)
+        let cartProducts = data["carts"][0].products;
+         let exists = cartProducts.filter(s => s.product == product._id)
+         this.cartarr = [];
          if(exists.length == 0 ){
           this.cartarr.push(this.nitem);
           this.ncart=new Cart(this.cartarr);
           this.nitem.product=product._id;
-         this.myCart.addToCart(data["cartID"], this.ncart).subscribe(
+         this.myCart.addToCart( data["carts"][0]._id, this.ncart).subscribe(
            p => {console.log(p);},
            err => this.errors = 'Error in adding to cart'
          )} else{
-          this.myCart.increase(data["cartID"],product._id,1).subscribe(
+          this.myCart.increase(data["carts"][0]._id,product._id,1).subscribe(
             dd => {
               console.log(dd)
               this.router.navigateByUrl('/home')
