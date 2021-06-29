@@ -12,7 +12,8 @@ import { Cartitem } from './../_Models/Cartitem';
 import { WishlistService } from '../_Services/wishlist.service';
 import { Wishlist } from '../_Models/Wishlist';
 import { AfterViewInit } from '@angular/core';
- 
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -148,10 +149,10 @@ reviews:any[];
         }
       }
       this.currentRate[i] = rating/numOfRaings;
-      console.log('rating => ', rating);
-      console.log('numOfRaings => ', numOfRaings);
-      console.log(`this.currentRate[i] => `,  this.currentRate[i]);
-      console.log(this.currentRate);
+      // console.log('rating => ', rating);
+      // console.log('numOfRaings => ', numOfRaings);
+      // console.log(this.currentRate[i] => ,  this.currentRate[i]);
+      // console.log(this.currentRate);
     }
   }
   currentRate:any[] = [0];
@@ -160,7 +161,13 @@ reviews:any[];
 
   addToCart(product: any)
   {
-    
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Added Successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }) 
     this.myCart.usercart().subscribe(
       data => {
         this.mycart = data["carts"][0]._id;
@@ -238,6 +245,13 @@ Rate(index:number,  Productid){
 
 
  addtoWishlist(Productid){
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Added To Wish-List',
+    iconColor:'#fed700',
+    timer: 1500
+  })
   this.nwishlist.product=Productid;
   this.nwishlist.isLiked=true;
 
@@ -264,9 +278,3 @@ Rate(index:number,  Productid){
 
 
 }
-
-
-
-
-
-

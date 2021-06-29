@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Category } from '../_Models/Category';
 import { CategoryService } from '../_Services/category.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -37,6 +38,13 @@ export class AddCategoryComponent implements OnInit {
 
   ncategory: Category = new Category(this.name?.value, this.description?.value);
   Submit() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Category Created',
+      showConfirmButton: false,
+      timer: 1700
+    })
     this.ncategory.name = this.name?.value;
     this.ncategory.description = this.description?.value;
 

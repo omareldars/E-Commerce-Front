@@ -105,6 +105,7 @@ button,
 input {
 	outline: medium none;
 	color: #a5a5a5;
+	cursor:pointer;
 }
 button:focus {
 	outline: none;
@@ -5441,9 +5442,6 @@ span.required {
     display: block;
     max-width: 100%;
 }
-
-   
-
 /* dee2e6 */
 
 /*----------------------------------------------------------------------------------------------------*/

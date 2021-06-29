@@ -4,6 +4,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AppComponent } from './app.component';
+
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
@@ -38,7 +39,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { AdminDashboardProductComponent } from './components/admin-dashboard-product/admin-dashboard-product.component';
 import { ProductService } from './components/_Services/product.service';
 import { ReviewComponent } from './components/review/review.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
 // import { ProductComponent } from './components/product/product.component';
@@ -91,7 +92,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-
+  
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
