@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../_Services/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categories',
@@ -21,19 +22,66 @@ export class CategoriesComponent implements OnInit {
   }
 
 
-  delete(id: any){
-    let result = confirm("Are you sure?");
+  // delete(id: any){
+  //   let result = confirm("Are you sure?");
 
-    if(result){
-      this.mycategory.deleteById(id).subscribe(
-        (res)=>{console.log(res);},
-        (err)=>{console.log(err);}
-      );
-      this.categories = this.categories.filter((item: { id: any; }) => item.id != id);
-      this.router.navigateByUrl('/categories');
+  //   if(result){
+  //     this.mycategory.deleteById(id).subscribe(
+  //       (res)=>{console.log(res);},
+  //       (err)=>{console.log(err);}
+  //     );
+  //     this.categories = this.categories.filter((item: { id: any; }) => item.id != id);
+  //     this.router.navigateByUrl('/categories');
 
-    }
+  //   }
     
+  // }
+
+  delete(id:any){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: 'btn btn-danger',
+        confirmButton: 'btn btn-success'
+        
+      },
+      buttonsStyling: true
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Category has been deleted.',
+          'success'
+        )
+        this.mycategory.deleteById(id).subscribe(
+          (res)=>{console.log(res);},
+          (err)=>{console.log(err);}
+        );
+        this.categories = this.categories.filter((item: { id: any; }) => item.id != id);
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your Data is safe :)',
+          'error'
+        )
+      }
+    })
   }
+
 
 }
