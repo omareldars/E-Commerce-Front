@@ -130,12 +130,15 @@
 
 // }
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_Models/Product';
 import { ProductService } from '../_Services/product.service';
 import { ReviewService } from './../_Services/review.service';
 import { Review } from '../_Models/Review';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from '../_Services/category.service';
+import { CartService } from '../_Services/cart.service';
+import { WishlistService } from '../_Services/wishlist.service';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -143,6 +146,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   ]
 })
 export class ProductDetailsComponent implements OnInit {
+  
   product:any=null;
   modalRate;
   modalReview;
@@ -162,7 +166,7 @@ profileForm = new FormGroup({
     Validators.required,
   ]),
 });
-  router: any;
+
 get title() {
   return this.profileForm.get('title');
 }
@@ -176,7 +180,8 @@ get review() {
 //   return this.profileForm.get('product');
 // }
 nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
-  constructor(private myproduct:ProductService,private myreview:ReviewService,  public ar:  ActivatedRoute) { }
+  // constructor(private myproduct:ProductService,private myreview:ReviewService,  public ar:  ActivatedRoute) { }
+  constructor(private myproduct:ProductService,public s:CategoryService,public ar:ActivatedRoute,private mycategory:CategoryService,private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService,private router: Router) { }
 
   ngOnInit(): void {
     this.getProduct(this.ar.snapshot.paramMap.get('id'));
