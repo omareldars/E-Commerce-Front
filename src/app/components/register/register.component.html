@@ -87,6 +87,19 @@
 
                 </div>
 
+
+                <div class="col-md-12 mb-20">
+                  <label>ِAddress</label>
+                  <input class="mb-0" type="text" placeholder="Address"  formControlName="address" #Address>
+                  <div *ngIf="
+                  address?.invalid &&
+                  (address?.dirty || address?.touched)
+                " class="alert alert-danger">
+                <div *ngIf="address?.errors?.required">
+                  address input  is required.
+                </div>
+              </div>
+              </div>
                 
                 <div class="col-md-6 mb-20">
                     <label>City</label>
@@ -141,12 +154,28 @@
                  <div *ngIf="confirmpassword?.errors?.required">
                    confirmpassword is required.
                  </div>
-                 <!-- <div *ngIf="confirmpassword?.errors?.minlength">
-                   confirmpassword must be at least 8 characters long.
-                 </div> -->
                  <div  *ngIf="confirmpassword.value !== password.value && confirmpassword.touched">passwords are not equal</div> 
                </div>
+                </div>
 
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="form-group">
+                    <label>Avatar</label>
+                    <input
+                      type="file"
+                      (input)="onselect($event)"
+                      class=""
+                      name="avatar"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autofocus=""
+                      formControlName="avatar"
+                      #Avatar
+                    />
+                    <div *ngIf="avatar?.invalid && (avatar?.dirty || avatar?.touched)" class="alert alert-danger">
+                        <div *ngIf="avatar?.errors?.required">Avatar is required.</div>
+                    </div>
+                  </div>
                 </div>
                
                 <div class="col-12">

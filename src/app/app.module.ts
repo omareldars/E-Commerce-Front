@@ -43,6 +43,7 @@ import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
 // import { ProductComponent } from './components/product/product.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -92,6 +93,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    NgxStripeModule.forRoot('pk_test_51J5s3JGD6Ss3xWkUTDhEZoRF6kce36HvIKc2mr53VBaDjrYZosfvMH4ygo4WlpCELJwxMfTBoKfuDSSOZ0b88naI00MhjQqYpG'),
   
     JwtModule.forRoot({
       config: {

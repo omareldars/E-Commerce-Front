@@ -23,7 +23,10 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
     ]),
+    address: new FormControl('', [
+      Validators.required,
 
+    ]),
     city: new FormControl('', [
       Validators.required,
 
@@ -48,6 +51,9 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.pattern("^[0-9]*$"),
       Validators.minLength(11), Validators.maxLength(11),
+    ]),
+    photo: new FormControl('', [
+      Validators.required,
     ]),
   });
   get firstname() {
@@ -74,13 +80,19 @@ export class RegisterComponent implements OnInit {
   get city() {
     return this.profileForm.get('city');
   }
+  get address() {
+    return this.profileForm.get('address');
+  }
   get country() {
     return this.profileForm.get('country');
+  }
+  get avatar() {
+    return this.profileForm.get('avatar');
   }
   constructor(private UserService: UserService,private formBuilder:FormBuilder, private router: Router) { }
 
 
-  nUser: User = new User(this.firstname?.value, this.lastname?.value, this.username?.value, this.password?.value,this.email?.value,this.phone?.value,this.city?.value,this.country?.value,this.confirmpassword?.value);
+  nUser: User = new User(this.firstname?.value, this.lastname?.value, this.username?.value, this.password?.value,this.email?.value,this.phone?.value,this.address?.value,this.city?.value,this.country?.value,this.confirmpassword?.value, this.avatar?.value);
   Submit() {
     Swal.fire({
       position: 'center',
@@ -95,9 +107,11 @@ export class RegisterComponent implements OnInit {
     this.nUser.password = this.password?.value;
     this.nUser.email = this.email?.value;
     this.nUser.phone = this.phone?.value;
+    this.nUser.address = this.address?.value;
     this.nUser.city = this.city?.value;
     this.nUser.country = this.country?.value;
     this.nUser.confirmpassword = this.confirmpassword?.value;
+    this.nUser.avatar = this.avatar?.value;
     console.log(this.nUser)
     this.UserService.register(this.nUser).subscribe(
       d => {

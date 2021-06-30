@@ -60,10 +60,10 @@ nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.
       .subscribe(
         data => {
         this.product= data;
-          console.log(data);
+          console.log("from data ",data);
         },
         error => {
-          console.log(error);
+          console.log("ok ok ok");
         });
   }
 

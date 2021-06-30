@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../_Services/cart.service';
 import { ProductService } from '../_Services/product.service';
 import Swal from 'sweetalert2';
+import { OrderService } from '../_Services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -28,7 +29,7 @@ export class CartComponent implements OnInit {
   tax:number = 0;
 
 
-  constructor(private router: Router, private myCart: CartService, private myproduct: ProductService) { }
+  constructor(private router: Router, private myCart: CartService, private myproduct: ProductService, private orderservice:OrderService) { }
 
   ngOnInit(): void {
     this.myCart.usercart().subscribe(
@@ -45,7 +46,7 @@ export class CartComponent implements OnInit {
             this.cartProductstatus = this.cart[i]?.['status'];
             this.currentProductId = this.cart[i]['product'];
             this.myproduct.getProductById(this.currentProductId).subscribe(
-              d=>{console.log("hhhhhhhhhhhhhhhhhhhhhhhhhh",this.currentProductId);
+              d=>{console.log("cart-prouduct-Id-->",this.currentProductId);
                 d.quantity = this.cart.filter(s=>s.product == d._id)[0].quantity
                 // d.quantity = this.cartProduct;
                 this.productsArray.push(d);
@@ -88,11 +89,9 @@ export class CartComponent implements OnInit {
       customClass: {
         cancelButton: 'btn btn-danger',
         confirmButton: 'btn btn-success'
-        
       },
       buttonsStyling: true
     })
-    
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -102,8 +101,6 @@ export class CartComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
-  
-  
     }).then((result) => {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire(
@@ -130,23 +127,6 @@ export class CartComponent implements OnInit {
     })
   }
   
-
-
-
-
-  // emptyCart(id: any){
-  //   let result = confirm("Are you sure?");
-  //   if(result){
-  //     this.myCart.deleteById(id).subscribe(
-  //       (res)=>{console.log(res);},
-  //       (err)=>{console.log(err);}
-  //     );
-  //     this.cart = '';
-  //     this.router.url;
-  //   }
-  // }
-
-
 
   emptyCart(id: any){
     const swalWithBootstrapButtons = Swal.mixin({
@@ -245,9 +225,19 @@ export class CartComponent implements OnInit {
         },0);
       },
       (err)=>{console.log(err);}
-    );
-    
-    
+    );    
+  }
+
+  PlaceOrder(Productarr:any, subPrice:any, tax:any, totalPrice:any ){
+    console.log("From PlaceOrder arr--->",Productarr);
+    console.log("From PlaceOrder sub--->",subPrice);
+    console.log("From PlaceOrder tax--->",tax);
+    console.log("From PlaceOrder total--->",totalPrice);
+    let ob = [Productarr, subPrice, tax, totalPrice];
+    this.orderservice.addData(ob);
+    console.log(ob);
+    setTimeout(()=> {},1000);
+    window.location.replace('/checkout');
   }
 
 }

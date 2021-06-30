@@ -14,10 +14,15 @@ export class OrderService {
     cardDetails$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     constructor(private http: HttpClient){}
+    // addData(foo:any):void{
+    //     // I'm using concat here to avoid using an intermediate array (push doesn't return the result array, concat does).
+    //     this.cardDetails$.next(this.cardDetails$.getValue().concat([foo]));
+    //   }
+
     addData(foo:any):void{
-        // I'm using concat here to avoid using an intermediate array (push doesn't return the result array, concat does).
         this.cardDetails$.next(this.cardDetails$.getValue().concat([foo]));
       }
+
     public token: any = localStorage.getItem('access_token');
     baseUrl = "http://localhost:3000/orders";
 

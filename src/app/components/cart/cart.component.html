@@ -67,7 +67,7 @@
                   <li>Tax: <span>{{tax}} EGP</span></li>
                   <li>Total: <span>{{totalPrice}} EGP</span></li>
                 </ul>
-                <a href="#">Proceed to checkout</a>
+                <a (click)="PlaceOrder(productsArray,subPrice,tax,totalPrice)">Proceed to checkout</a>
               </div>
             </div>
           </div>
