@@ -139,6 +139,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../_Services/category.service';
 import { CartService } from '../_Services/cart.service';
 import { WishlistService } from '../_Services/wishlist.service';
+import { Wishlist } from '../_Models/Wishlist';
+import { Cartitem } from '../_Models/Cartitem';
+import { Cart } from '../_Models/Cart';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -176,11 +179,28 @@ get rating() {
 get review() {
   return this.profileForm.get('review');
 }
-// get product() {
-//   return this.profileForm.get('product');
-// }
-nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
-  // constructor(private myproduct:ProductService,private myreview:ReviewService,  public ar:  ActivatedRoute) { }
+get isLiked() {
+  return this.profileForm.get('isLiked');
+}
+   cartarr:any[]=[];
+  nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.value,this.product?.value);
+  nwishlist: Wishlist = new Wishlist(this.isLiked?.value,this.product?.value);
+  nitem: Cartitem = new Cartitem(this.product?.value);
+  wishlists:any=[];
+  
+    // @Input('product') products: Product;
+  categories:any[];
+  productss:any[];
+  reviews:any[];
+  id:any;
+ 
+
+  cat:any;
+  currentRate:any[] = [0];
+  mycart=[];
+  ncart:Cart;
+
+
   constructor(private myproduct:ProductService,public s:CategoryService,public ar:ActivatedRoute,private mycategory:CategoryService,private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService,private router: Router) { }
 
   ngOnInit(): void {
@@ -233,6 +253,59 @@ nreview: Review = new Review(this.title?.value, this.rating?.value,this.review?.
       // console.log(rating,Productid);
       // console.log(this.nreview);
       );
+   }
+
+     
+  addToCart(product: any)
+  {
+    
+    this.myCart.usercart().subscribe(
+      data => {
+        this.mycart = data["carts"][0]._id;
+         console.log("from cart",data["carts"][0]._id);
+        //  debugger;
+        let cartProducts = data["carts"][0].products;
+         let exists = cartProducts.filter(s => s.product == product._id)
+         this.cartarr = [];
+         if(exists.length == 0 ){
+          this.cartarr.push(this.nitem);
+          this.ncart=new Cart(this.cartarr);
+          this.nitem.product=product._id;
+         this.myCart.addToCart( data["carts"][0]._id, this.ncart).subscribe(
+           p => {console.log(p);},
+           err => this.errors = 'Error in adding to cart'
+         )} else{
+          this.myCart.increase(data["carts"][0]._id,product._id,1).subscribe(
+            dd => {
+              console.log(dd)
+              this.router.navigateByUrl('/home')
+            },
+            err => this.errors = 'Could not authenticate');
+         }
+        // console.log(d[0]);
+        this.router.navigateByUrl('/home')
+      },
+      err => this.errors = 'Could not authenticate'
+    );
+  }
+
+
+
+  addtoWishlist(Productid){
+    this.nwishlist.product=Productid;
+    this.nwishlist.isLiked=true;
+  
+    this.mywishlist.addWishlist(this.nwishlist).subscribe(
+      d => {
+        this.nwishlist.isLiked=true;
+        console.log(d)
+        this.router.navigateByUrl('/home')
+      },
+      err => this.errors = 'Could not authenticate'
+    
+    // console.log(rating,Productid);
+    // console.log(this.nreview);
+    );
    }
 
   }
