@@ -119,6 +119,7 @@ reviews:any[];
       setTimeout(()=> {
         window.location.reload();
       },0);
+      
     }
     // debugger;
     // const resultwishlist=this.myproduct.getProductById(id:any){

@@ -18,7 +18,7 @@
       <!--          class="col-3"-->
       <!--          <div class="special-product-active owl-carousel">-->
   
-      <div *ngFor="let product of categories" class="col-md-3">
+      <div *ngFor="let product of categories; index as i"class="col-md-3">
         <!-- single-product-wrap start -->
         <div class="single-product-wrap">
           <div class="product-image">
@@ -39,23 +39,13 @@
                   }}</a>
                 </h5>
                 <div class="rating-box">
-                  <ul class="rating">
-                    <li (click)="Rate(1, product._id)" class="no-star">
-                      <i class="fa fa-star-o"></i>
-                    </li>
-                    <li (click)="Rate(2, product._id)" class="no-star">
-                      <i class="fa fa-star-o"></i>
-                    </li>
-                    <li (click)="Rate(3, product._id)" class="no-star">
-                      <i class="fa fa-star-o"></i>
-                    </li>
-                    <li (click)="Rate(4, product._id)" class="no-star">
-                      <i class="fa fa-star-o"></i>
-                    </li>
-                    <li (click)="Rate(5, product._id)" class="no-star">
-                      <i class="fa fa-star-o"></i>
-                    </li>
-                  </ul>
+                     
+                  <ngb-rating
+                    [max]="5"
+                    [(rate)]="currentRate[i]"
+                    (click)="Rate(i, product._id)"
+                    [readonly]="false"
+                  ></ngb-rating>
                 </div>
               </div>
               <h4>

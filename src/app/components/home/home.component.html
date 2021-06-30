@@ -143,7 +143,7 @@
                 <!-- <h2>Chamcham Galaxy S9 | S9+</h2> -->
                 <!-- <h3>Starting at <span>$589.00</span></h3> -->
                 <div class="default-btn slide-btn">
-                  <a class="links" href="/shop-list">Shopping Now</a>
+                  <a class="links" href="/shop-list">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -156,7 +156,7 @@
                 <!-- <h2>Work Desk Surface Studio 2018</h2> -->
                 <!-- <h3>Starting at <span>$1599.00</span></h3> -->
                 <div class="default-btn slide-btn">
-                  <a class="links" href="/shop-list">Shopping Now</a>
+                  <a class="links" href="/shop-list">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
                 <!-- <h2>Phantom 4 Pro+ Obsidian</h2> -->
                 <!-- <h3>Starting at <span>$809.00</span></h3> -->
                 <div class="default-btn slide-btn">
-                  <a class="links" href="/shop-list">Shopping Now</a>
+                  <a class="links" href="/shop-list">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -316,7 +316,7 @@
                     </li>
                     <li>
                       <a
-                        href="#"
+                      
                         title="quick view"
                         class="quick-view-btn"
                         data-toggle="modal"
@@ -328,11 +328,117 @@
                 </div>
               </div>
             </div>
+             <!-- Begin Quick View | Modal Area -->
+             <div class="modal fade modal-wrapper" id="exampleModalCenter" >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-body">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          <div class="modal-inner-area row">
+                              <div class="col-lg-5 col-md-6 col-sm-6">
+                                 <!-- Product Details Left -->
+                                  <div class="product-details-left">
+                                    <img [src]="'http://localhost:3000/' + product.photo" alt="product image" width="300" height="300"/>
+                                      <!-- <div class="product-details-images slider-navigation-1">
+                                          <div class="lg-image">
+                                              <img src="../assets/images/product/large-size/1.jpg" alt="product image">
+                                          </div>
+                                          <div class="lg-image">
+                                              <img src="../assets/images/product/large-size/2.jpg" alt="product image">
+                                          </div>
+                                          <div class="lg-image">
+                                              <img src="../assets/images/product/large-size/3.jpg" alt="product image">
+                                          </div>
+                                          <div class="lg-image">
+                                              <img src="../assets/images/product/large-size/4.jpg" alt="product image">
+                                          </div>
+                                          <div class="lg-image">
+                                              <img src="../assets/images/product/large-size/5.jpg" alt="product image">
+                                          </div>
+                                          <div class="lg-image">
+                                              <img src="../assets/images/product/large-size/6.jpg" alt="product image">
+                                          </div>
+                                      </div> -->
+                                      <!-- <div class="product-details-thumbs slider-thumbs-1">                                        
+                                          <div class="sm-image"><img src="../assets/images/product/small-size/1.jpg" alt="product image thumb"></div>
+                                          <div class="sm-image"><img src="../assets/images/product/small-size/2.jpg" alt="product image thumb"></div>
+                                          <div class="sm-image"><img src="../assets/images/product/small-size/3.jpg" alt="product image thumb"></div>
+                                          <div class="sm-image"><img src="../assets/images/product/small-size/4.jpg" alt="product image thumb"></div>
+                                          <div class="sm-image"><img src="../assets/images/product/small-size/5.jpg" alt="product image thumb"></div>
+                                          <div class="sm-image"><img src="../assets/images/product/small-size/6.jpg" alt="product image thumb"></div>
+                                      </div> -->
+                                  </div>
+                                  <!--// Product Details Left -->
+                              </div>
+
+                              <div class="col-lg-7 col-md-6 col-sm-6">
+                                  <div class="product-details-view-content pt-60">
+                                      <div class="product-info">
+                                          <h2>{{product.title}}</h2>
+                                          <span class="product-details-ref"> {{product.description}}</span>
+                                          <!-- <div class="rating-box pt-20">
+                                              <ul class="rating rating-with-review-item">
+                                                  <li><i class="fa fa-star-o"></i></li>
+                                                  <li><i class="fa fa-star-o"></i></li>
+                                                  <li><i class="fa fa-star-o"></i></li>
+                                                  <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                  <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                  <li class="review-item"><a href="#">Read Review</a></li>
+                                                  <li class="review-item"><a href="#">Write Review</a></li>
+                                              </ul>
+                                          </div> -->
+                                          <div class="rating-box">
+                     
+                                            <ngb-rating
+                                              [max]="5"
+                                              [(rate)]="currentRate[i]"
+                                              (click)="Rate(i, product._id)"
+                                              [readonly]="false"
+                                            ></ngb-rating>
+                                          </div>
+                                          <div class="price-box pt-20">
+                                              <span class="new-price new-price-2">{{product.price}} EGP</span>
+                                          </div>
+                                          <div class="product-desc">
+                                              <p>
+                                                  
+                                              </p>
+                                          </div>
+                                          <div class="product-variants">
+                                              <div class="produt-variants-size">
+                                                 
+                                              </div>
+                                          </div>
+                                          <div class="single-add-to-cart">
+                                              <form action="#" class="cart-quantity">
+                                                 
+                                                  <button class="add-to-cart"  (click)="addToCart(product)"type="submit">Add to cart</button>
+                                              </form>
+                                          </div>
+                                          <div class="product-additional-info pt-25">
+                                              <a class="wishlist-btn"  (click)="addtoWishlist(product._id)"><i class="fa fa-heart-o"></i>Add to wishlist</a>
+                                              <div class="product-social-sharing pt-25">
+                                                 
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>  
+          </div>
+              
+          <!-- Quick View | Modal Area End Here -->
             <!-- single-product-wrap end -->
             <!--            </div>-->
           </div>
         </div>
-      </div>
+      
       <!-- Li's Section Area End Here -->
     </div>
   </div>

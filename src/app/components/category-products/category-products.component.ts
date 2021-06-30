@@ -136,6 +136,22 @@ export class CategoryProductsComponent implements OnInit {
       (res)=>{this.cat = res['category'];console.log("this cat",this.cat)},
       (err)=>{console.log(err);}
     );
+    this.myproduct.getAllProducts().subscribe(
+      (res)=>{this.productss = res;
+        console.log("products--->",JSON.stringify(res))
+      },
+       (err)=>{console.log(err);}
+    );
+    this.myreview.getAllApprovedReviews().subscribe(
+      (res)=>{this.reviews = res["reviews"]; 
+      console.log("reviews--->",JSON.stringify(this.reviews))
+      },
+       (err)=>{console.log(err);}
+    );
+    setTimeout(() => {
+      this.calculatePrdouctsReviews();
+    },1200);
+    // throw new Error('Method not implemented.');
   }
  
 
@@ -235,6 +251,18 @@ Rate(index:number,  Productid){
   // console.log(this.nreview);
   );
  }
+ calculatePrdouctsReviews(){
+  for(let i=0; i<this.productss?.length; i++){
+    let rating = 0, numOfRaings = 0;
+    for(let j=0;j<this.reviews.length;j++){
+      if(this.productss[i]._id === this.reviews[j].product){
+        rating +=  this.reviews[j].rating ; numOfRaings++;
+      }
+    }
+    this.currentRate[i] = rating/numOfRaings;
+   
+  }
+}
 
 
 
