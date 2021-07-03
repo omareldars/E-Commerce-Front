@@ -1,0 +1,31 @@
+.hidenInput{
+    opacity: 0;
+    width: 0 !important;
+    height: 0 !important;
+}
+.UploadImg {
+    width: fit-content;
+    position: relative;
+    margin-top: -35px;
+}
+.UploadImg img{
+    border-radius: 20px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.UploadImg  .fa{
+    position: absolute;
+    bottom: 0;
+    background-color: #cccccc;
+    width: 35px;
+    height: 35px;
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    padding-top: 9px;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px 0 hsl(0deg 0% 44% / 16%);
+    right: -3%;
+}

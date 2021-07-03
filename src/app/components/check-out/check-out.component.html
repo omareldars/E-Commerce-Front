@@ -1,0 +1,159 @@
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Checkout</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Checkout Area Strat-->
+<div class="checkout-area pt-60 pb-30">
+  <div class="container">
+    <div class="row" *ngIf="Euser">
+      <div class="col-lg-6 col-12">
+        <form action="#">
+          <div class="checkbox-form">
+            <h3>Billing Details</h3>
+            <div class="row">
+              <div class="col-md-12">
+              </div>
+              <div class="col-md-6">
+                <div class="checkout-form-list">
+                  <label>First Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="fname" [(ngModel)]="Euser.fname" disabled />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="checkout-form-list">
+                  <label>Last Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="lname" [(ngModel)]="Euser.lname" disabled />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkout-form-list">
+                  <label>Address <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="address" [(ngModel)]="Euser.address" disabled />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkout-form-list">
+                  <label>Town / City <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="city" [(ngModel)]="Euser.city" disabled />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="checkout-form-list">
+                  <label>Country <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="country" [(ngModel)]="Euser.country" disabled />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="checkout-form-list">
+                  <label>Email Address <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="email" [(ngModel)]="Euser.email" disabled />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="checkout-form-list">
+                  <label>Phone <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="phone" [(ngModel)]="Euser.phone" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div *ngIf="productsArray.length !=0" class="your-order">
+          <h3>Your order</h3>
+          <div class="your-order-table table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="cart-product-name">Product</th>
+                  <th class="cart-product-quantity">Quantity</th>
+                  <th class="cart-product-total">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of productsArray" class="cart_item">
+                  <td class="cart-product-name">
+                    {{product.title}}
+                  </td>
+                  <td class="cart-product-quantity">
+                    <span class="product-quantity">{{product.quantity}}</span>
+                  </td>
+                  <td class="cart-product-total">
+                    <span class="amount">{{ product.quantity * product.price }} EGP</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="cart-subtotal">
+                  <th>Cart Subtotal</th>
+                  <td></td>
+                  <td><span class="amount">{{subPrice}} EGP</span></td>
+                </tr>
+                <tr class="cart-subtotal">
+                  <th>Tax</th>
+                  <td></td>
+                  <td><span class="amount">{{tax  | number : '1.2-2'}} EGP</span></td>
+                </tr>
+                <tr class="order-total">
+                  <th>Order Total</th>
+                  <td></td>
+                  <td>
+                    <strong><span class="amount">{{totalPrice}} EGP</span></strong>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+         <!-- start -->
+      <div class="payment-method">
+        <div class="payment-accordion">
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="#payment-3">
+                <h5 class="panel-title">
+                </h5>
+                <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest" >
+                  <input type="text" formControlName="name" placeholder="Jane Doe"/>
+                  <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                  <div class="order-button-payment">
+                    <button type="submit"> Place Order </button>
+                  </div>
+                  <!-- test number <b>4242 4242 4242 4242</b>, -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--Checkout Area End-->
+
+<!-- for demo -->
+<!-- <h1 style="color: blueviolet">Demo</h1>
+<form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+  <input type="text" formControlName="name" placeholder="Jane Doe" /> -->
+  <!-- <input type="text" formControlName="address" placeholder="Address" />
+  <input type="email" formControlName="email" placeholder="email" /> -->
+  <!-- <input type="email" formControlName="email" placeholder="email" /> -->
+
+  <!-- <ngx-stripe-card
+    [options]="cardOptions"
+    [elementsOptions]="elementsOptions"
+  ></ngx-stripe-card>
+  <button type="submit">Pay</button> -->
+  <!-- test number <b>4242 4242 4242 4242</b>, -->
+<!-- </form> -->

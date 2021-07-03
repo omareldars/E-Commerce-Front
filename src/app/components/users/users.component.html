@@ -1,0 +1,61 @@
+  
+  <app-admin-dashboard-header></app-admin-dashboard-header>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+      
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+<div class="container text-center">
+    <br><br>
+  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/register">Add New User</a></button>
+</div>
+<br><br>
+
+<div class="d-flex container justify-content-center text-center table-content">
+<table class="table table-warning">
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Joining Date</th>
+      <th>Role</th>
+      <th colspan="6" class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users  | paginate: { itemsPerPage: 3, currentPage: p }">
+        <td  routerLink="{{user.username}}">{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.created}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <a class="btn p-1" routerLink="/edit-user/{{user._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> 
+          <button class="btn p-1 ml-4" (click)="delete(user._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
+        </td>
+    </tr>
+</tbody>
+   
+</table>
+</div>
+<div class="container mt-4 text-center" >
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  </div>
+<app-admin-dashboard-footer></app-admin-dashboard-footer>

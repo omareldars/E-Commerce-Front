@@ -1,0 +1,89 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Starter Page</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Starter Page</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <div class="container text-center">
+    <br /><br />
+    <button class="register-button mt-0 mb-2" style="margin-left: 38%">
+      <a style="color: white" routerLink="/seller-requests">Reviews</a>
+    </button>
+  </div>
+  <br /><br />
+
+  <div
+    class="d-flex container justify-content-center text-center table-content"
+  >
+    <table class="table ">
+      <thead>
+        <tr>
+          <!-- <th scope="col">#</th> -->
+         
+          
+          <th>Review</th>
+          <th>Rating</th>
+          <th>Status</th>
+          <th>Created at</th>
+          <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews | paginate: { itemsPerPage: 3, currentPage: p } ">
+          
+          <td>{{ review.review }}</td>
+          <td>{{ review.rating }}</td>
+          <td>{{ review.status }}</td>
+          <td>{{ review.created }}</td>
+          <td>
+            <button
+              (click)="Approved(review._id)"
+              class="btn btn-primary p-1"
+              style="color: azure"
+            >
+              Approve
+            </button>
+            <button
+              class="btn btn-danger p-1 ml-4"
+              (click)="sweetalert(review._id)"
+            >
+              Reject
+            </button>
+            
+            <!-- <button
+            (click)="sweetalert(review._id)"
+            class="btn p-1"
+            style="color: azure"
+          >
+        <i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i>
+
+          </button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="container mt-4 text-center" >
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>
+<app-admin-dashboard-footer></app-admin-dashboard-footer>

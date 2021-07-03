@@ -1,0 +1,87 @@
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li class="active">Wishlist</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Wishlist Area Strat-->
+<div class="wishlist-area pt-60 pb-60">
+  <div class="container">
+    <div class="row" *ngIf="wishlists.length > 0; else elseBlock">
+      <div class="col-12">
+        <form action="#">
+          <div class="table-content table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="li-product-remove">remove</th>
+                  <th class="li-product-thumbnail">images</th>
+                  <th class="cart-product-name">Product</th>
+                  <th class="li-product-price">Unit Price</th>
+                  <th class="li-product-add-cart">add to cart</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let wish of wishlists">
+                <tr>
+                  <td class="li-product-remove">
+                    <a (click)="UnlikeProduct(wish.product._id)"
+                      ><i class="fa fa-times"></i
+                    ></a>
+                  </td>
+                  <td class="li-product-thumbnail">
+                    <a href="#"
+                      ><img
+                        style="width: 60px"
+                        [src]="'http://localhost:3000/' + wish.product.photo"
+                        alt=""
+                    /></a>
+                  </td>
+                  <td class="li-product-name">
+                    <a href="#">{{ wish.product.title }}</a>
+                  </td>
+                  <td class="li-product-price">
+                    <span class="amount">{{ wish.product.price }} $ </span>
+                  </td>
+                  <td class="li-product-add-cart">
+                    <a (click)="addToCart(wish)">add to cart</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="text-center m-3 ml-4 alert w-100">
+        <h1 style="color:#363f4d;">Your Wishlist is Empty</h1>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- for demo -->
+<!-- <h1 style="color: cadetblue">Wishlist</h1>
+
+<div *ngFor="let wish of wishlists">
+  <ul>
+    <li>
+    
+<!-- {{wish.}}       -->
+
+<!-- {{wish.product.photo}} -->
+<!-- {{wish.}}       -->
+
+<!-- {{wish.product.description}} -->
+<!-- {{wish.}}       -->
+
+<!-- {{wish.}}       -->
+
+<!-- </div> -->
+<!-- <h1 style="color: cadetblue">Wish2list</h1> -->

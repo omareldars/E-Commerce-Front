@@ -1,0 +1,84 @@
+    <!-- Begin Li's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li class="active">Login</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Breadcrumb Area End Here -->
+  <!-- Begin Login Content Area -->
+  <div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-8 mb-30 ml-150">
+                <!-- Login Form s-->
+                <form  [formGroup]="profileForm" action="#" >
+                    <div class="login-form">
+                        <h4 class="login-title">Login</h4>
+                        <div class="row">
+                            <!-- <div class="col-md-12 col-12 mb-20">
+                                <label>Email Address*</label>
+                                <input class="mb-0" type="email" placeholder="Email Address">
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label>Password</label>
+                                <input class="mb-0" type="password" placeholder="Password">
+                            </div> -->
+
+                            <div class="col-md-12 col-12 mb-20">
+                                <label>Email Address*</label>
+                                <input class="mb-0" type="email" placeholder="Email Address" formControlName="email" #Email>
+                                <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+                                    <div *ngIf="email?.errors?.required">
+                                      Email is required.
+                                    </div>
+                                    <div *ngIf="email?.errors?.email">
+                                      Email must be match email format(example@example.com).
+                                    </div>
+                                  </div>
+                            </div> 
+                            
+                            
+
+                    <div class="col-12 mb-20">
+                    <label>Password</label>
+                    <input class="mb-0" type="password" placeholder="Password" formControlName="password"  #Password>
+                    <div *ngIf="
+                    password?.invalid &&
+                    (password?.dirty || password?.touched)
+                  " class="alert alert-danger">
+                  <div *ngIf="password?.errors?.required">
+                    password is required.
+                  </div>
+                  <div *ngIf="password?.errors?.minlength">
+                    password must be at least 8 characters long.
+                  </div>
+                </div>
+                </div>
+                            <div class="col-md-8">
+                                <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                                    <input type="checkbox" id="remember_me">
+                                    <label for="remember_me">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+                                <a href="#"> Forgotten pasward?</a>
+                            </div>
+                            <div class="col-md-12">
+                                <button  class="register-button mt-0" type="submit" (click)=" onSubmit()"  [disabled]="!profileForm.valid">Login</button>
+                                <div *ngIf="errors" class="alert alert-danger dangerAlertReg">
+                                    Email or password not true .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+<!-- Login Content Area End Here -->

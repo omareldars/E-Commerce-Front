@@ -1,0 +1,7 @@
+.orderBox{
+    height: 70vh;
+    overflow: scroll;
+}
+app-my-orders-page{
+    width: 100%;
+}

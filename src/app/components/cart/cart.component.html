@@ -1,0 +1,84 @@
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li class="active">Shopping Cart</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Shopping Cart Area Strat-->
+<div class="Shopping-cart-area pt-60 pb-60">
+  <div class="container">
+    <div class="row" *ngIf="productsArray.length > 0; else elseBlock">
+      <div class="col-12">
+        <form action="#">
+          <div class="table-content table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th class="li-product-remove">remove</th>
+                <th class="li-product-thumbnail">images</th>
+                <th class="cart-product-name">Product</th>
+                <th class="li-product-price">Unit Price</th>
+                <th class="li-product-quantity">Quantity</th>
+                <th class="cart-product-name">Status</th>
+                <th class="li-product-subtotal">Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let product of productsArray;let i=index">
+                <td class="li-product-remove"><a (click)="removeProduct(cartId, product._id)"><i class="fa fa-times"></i></a></td>
+                <td class="li-product-thumbnail"><a routerLink="/product-details/{{ product._id }}"><img [src]="'http://localhost:3000/' + product.photo" alt="Li's Product Image" height="100" width="100"></a></td>
+                <td class="li-product-name"><a routerLink="/product-details/{{ product._id }}">{{product.title}}</a></td>
+                <td class="li-product-price"><span class="amount">{{product.price}} EGP</span></td>
+                <td class="quantity">
+                  <label>Quantity</label>
+                  <div class="cart-plus-minus">
+                    <input class="cart-plus-minus-box" value="{{product.quantity}}" type="number">
+                    <div class="dec qtybutton"><button (click)="decreaseQty(cartId,product,i)"><i class="fa fa-angle-down"></i></button></div>
+                    <div class="inc qtybutton"><button (click)="increaseQty(cartId,product,i)"><i class="fa fa-angle-up"></i></button></div>
+                  </div>
+                </td>
+                <td class="li-product-status"><span class="status">{{cartProductstatus}}</span></td>
+                <td class="product-subtotal"><span class="amount">{{ product.quantity * product.price }} EGP</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="coupon-all">
+                <div>
+                  <button  class="register-button mt-0" type="submit" (click)="emptyCart(cartId)">Empty Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 ml-auto">
+              <div class="cart-page-total">
+                <h2>Cart totals</h2>
+                <ul>
+                  <li>Subtotal: <span>{{subPrice}} EGP</span></li>
+                  <li>Tax: <span>{{tax | number : '1.2-2'}} EGP</span></li>
+                  <li>Total: <span>{{totalPrice}} EGP</span></li>
+                </ul>
+                <a (click)="PlaceOrder(productsArray,subPrice,tax,totalPrice)">Proceed to checkout</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="text-center m-3 ml-4 alert w-100">
+        <h1 style="color:#363f4d;">Your Cart is Empty</h1>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<!--Shopping Cart Area End-->

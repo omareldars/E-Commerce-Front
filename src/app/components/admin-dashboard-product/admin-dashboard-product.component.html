@@ -1,0 +1,63 @@
+  
+  <app-admin-dashboard-header></app-admin-dashboard-header>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1 class="m-0">Starter Page</h1> -->
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+             
+           
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+<div class="container text-center">
+    <br><br>
+  <button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/products">Add New Product</a></button>
+</div>
+<br><br>
+
+<div class="d-flex container justify-content-center text-center table-content">
+<table class="table table-warning">
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th>photo</th>
+      <th>Title</th>
+      <th colspan="1"> Description</th>
+      <th>Created at</th>
+      <th colspan="2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: p }">
+        <!-- <td><a class="text-warning" routerLink="{{category._id}}">{{category._id}}</a></td> -->
+        <td   > <img style="width: 60px" [src]="'http://localhost:3000/' + product.photo"/></td>
+        <td  routerLink="{{product.title}}">{{product.title}}</td>
+        <td>{{product.description.substring(0,50)}}</td>
+        <td>{{product.createdAt}}</td>
+
+        <!-- <i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i> -->
+        <td>
+          <a class="btn p-1" routerLink="/edit-product/{{product._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> 
+          <button class="btn p-1 ml-4" (click)="sweetalert(product._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
+        </td>
+    </tr>
+</tbody>
+   
+</table>
+</div>
+<div class="container mt-4 text-center" >
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  </div>
+<app-admin-dashboard-footer></app-admin-dashboard-footer>

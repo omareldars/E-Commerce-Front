@@ -1,0 +1,239 @@
+<div class="slider-with-banner">
+  <div class="container">
+    <div class="row">
+      <!-- Begin Category Menu Area -->
+      <div class="col-lg-3">
+        <!--Category Menu Start-->
+        <div class="category-menu">
+          <div class="category-heading">
+            <h2 class="categories-toggle"><span>categories</span></h2>
+          </div>
+          <div id="cate-toggle" class="category-menu-list">
+            <ul *ngFor="let category of categories">
+              <li class="right-menu">
+                <!-- <a routerLink="{{ category.id }}">{{ category.name }}</a> -->
+                <a routerLink="/category/products/{{ category._id }}">{{
+                  category.name
+                }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--Category Menu End-->
+      </div>
+      <!-- Category Menu Area End Here -->
+      <!-- Begin Slider Area -->
+      <div class="col-lg-9">
+        <div class="slider-area pt-sm-30 pt-xs-30">
+          <div class="slider-active owl-carousel">
+            <!-- Begin Single Slide Area -->
+            <div class="single-slide align-center-left animation-style-02 bg-4">
+              <div class="slider-progress"></div>
+              <div class="slider-content">
+                <h5>Sale Offer <span>-20% Off</span> This Week</h5>
+                <!-- <h2>Chamcham Galaxy S9 | S9+</h2> -->
+                <!-- <h3>Starting at <span>$589.00</span></h3> -->
+                <div class="default-btn slide-btn">
+                  <a class="links" href="/shop-list">Shopping Now</a>
+                </div>
+              </div>
+            </div>
+            <!-- Single Slide Area End Here -->
+            <!-- Begin Single Slide Area -->
+            <div class="single-slide align-center-left animation-style-01 bg-5">
+              <div class="slider-progress"></div>
+              <div class="slider-content">
+                <h5>Sale Offer <span>Black Friday</span> This Week</h5>
+                <!-- <h2>Work Desk Surface Studio 2018</h2> -->
+                <!-- <h3>Starting at <span>$1599.00</span></h3> -->
+                <div class="default-btn slide-btn">
+                  <a class="links" href="/shop-list">Shopping Now</a>
+                </div>
+              </div>
+            </div>
+            <!-- Single Slide Area End Here -->
+            <!-- Begin Single Slide Area -->
+            <div class="single-slide align-center-left animation-style-02 bg-6">
+              <div class="slider-progress"></div>
+              <div class="slider-content">
+                <h5>Sale Offer <span>-10% Off</span> This Week</h5>
+                <!-- <h2>Phantom 4 Pro+ Obsidian</h2> -->
+                <!-- <h3>Starting at <span>$809.00</span></h3> -->
+                <div class="default-btn slide-btn">
+                  <a class="links" href="/shop-list">Shopping Now</a>
+                </div>
+              </div>
+            </div>
+            <!-- Single Slide Area End Here -->
+          </div>
+        </div>
+      </div>
+      <!-- Slider Area End Here -->
+    </div>
+  </div>
+</div>
+<!-- Slider With Category Menu Area End Here -->
+<!-- Begin Li's Static Banner Area -->
+<div class="li-static-banner pt-20 pt-sm-30 pt-xs-30">
+  <div class="container">
+    <div class="row">
+      <!-- Begin Single Banner Area -->
+      <div class="col-lg-4 col-md-4">
+        <div class="single-banner pb-xs-30">
+          <a href="#">
+            <img
+              src="../assets/images/1.jpg"
+              alt="Li's Static Banner"
+              width="210"
+              height="200"
+            />
+          </a>
+        </div>
+      </div>
+      <!-- Single Banner Area End Here -->
+      <!-- Begin Single Banner Area -->
+      <div class="col-lg-4 col-md-4">
+        <div class="single-banner pb-xs-30">
+          <a href="#">
+            <img
+              src="../assets/images/4.jpeg"
+              alt="Li's Static Banner"
+              width="210"
+              height="200"
+            />
+          </a>
+        </div>
+      </div>
+      <!-- Single Banner Area End Here -->
+      <!-- Begin Single Banner Area -->
+      <div class="col-lg-4 col-md-4">
+        <div class="single-banner">
+          <a href="#">
+            <img
+              src="../assets/images/3.jpeg"
+              alt="Li's Static Banner"
+              width="210"
+              height="200"
+            />
+          </a>
+        </div>
+      </div>
+      <!-- Single Banner Area End Here -->
+    </div>
+  </div>
+</div>
+<!-- Li's Static Banner Area End Here -->
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+  <div class="container">
+    <div *ngFor="let category of categories;let c =index" class="row">
+      <!-- Begin Li's Section Area -->
+      <div *ngIf="getAllProduectsByCategoryId[c]?.length !=0"  class="col-lg-12">
+        <div class="li-section-title">
+          <h2>
+            <span>{{category?.name}}</span>
+          </h2>
+        </div>
+        <div *ngIf="wishlists" class="row">
+          <!--          class="col-3"-->
+          <!--          <div class="special-product-active owl-carousel">-->
+            <ng-container *ngFor="let product of getAllProduectsByCategoryId[c]; index as i">
+            <div *ngIf="i<4" class="col-md-3">
+                      <!-- single-product-wrap start -->
+                      <div class="single-product-wrap">
+                        <div class="product-image">
+                          <a routerLink="/product-details/{{ product._id }}">
+                            <img
+                              [src]="'http://localhost:3000/' + product.photo"
+                              alt="Li's Product Image"
+                            />
+                          </a>
+                          <span class="sticker">New</span>
+                        </div>
+                        <div class="product_desc">
+                          <div class="product_desc_info">
+                            <div class="product-review">
+                              <h5 class="manufacturer">
+                                <a routerLink="/product-details/{{ product._id }}">{{
+                                  product.title
+                                }}</a>
+                              </h5>
+                              <div class="rating-box">
+                              
+                                <ngb-rating *ngIf="userData"
+                                  [max]="5"
+                                  [rate]="getRateOfProductById(product._id)"
+                                  (click)="userData.role=='ROLE_MEMBER'?Rate(i, product._id):null"
+                                  [readonly]="userData.role=='ROLE_MEMBER'?false:true"
+                                ></ngb-rating>
+                                <ngb-rating *ngIf="!authorized"
+                                [max]="5"
+                                [rate]="getRateOfProductById(product._id)"
+                                [readonly]="true"
+                              ></ngb-rating>
+                              </div>
+                            </div>
+                            <h4>
+                              <a
+                                class="product_name"
+                                routerLink="/product-details/{{ product._id }}"
+                                >{{ product.name }}</a
+                              >
+                            </h4>
+                            <div class="price-box">
+                              <span class="new-price">{{ product.price }}  EGP</span>
+                              </div>
+                            <div class="countersection">
+                              <div class="li-countdown"></div>
+                            </div>
+                          </div>
+                          <div class="add-actions">
+                            <ul class="add-actions-link">
+                              <li class="add-cart active">
+                                <a (click)="addToCart(product)" style="cursor: pointer;">Add to cart</a>
+                              </li>
+                              <li>
+                                <a
+                                  (click)="checkIfExistInWhis(product._id)?UnlikeProduct(product._id,product.category):addtoWishlist(product._id,product.category)"
+                                  style="color: darkred"
+                                >
+                                  <!-- <i  *ngIf="nwishlist.isLiked" style="color: cyan;" class="fa fa-heart-o"></i> -->
+                                
+                                  <i *ngIf="!checkIfExistInWhis(product._id)" style="color: darkred" class="fa fa-heart-o"></i>
+                                  <i *ngIf="checkIfExistInWhis(product._id)" style="color: darkred" class="fa fa-heart"></i>
+                                </a>
+                              </li>
+                              <!-- <li>
+                                <a (click)="UnlikeProduct(product._id)">
+                                  <i
+                                    style="color: darkblue"
+                                    class="fas fa-thumbs-down"
+                                  ></i>
+                                </a>
+                              </li> -->
+                              <li>
+                                <a
+                                routerLink="/product-details/{{ product._id }}"
+                                title="quick view"
+                                  class="quick-view-btn"
+                                  data-toggle="modal"
+                                  data-target="#exampleModalCenter"
+                                  ><i class="fa fa-eye"></i
+                                ></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- single-product-wrap end -->
+                      <!--            </div>-->
+                    </div>
+            </ng-container>
+        
+        </div>
+      </div>
+      <!-- Li's Section Area End Here -->
+    </div>
+  </div>
+</section>
+<!-- Li's Special Product Area End Here -->

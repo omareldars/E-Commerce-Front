@@ -1,0 +1,113 @@
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+      <div class="row">
+        <!-- Begin Li's Section Area -->
+        <div class="col-lg-12">
+          <div class="li-section-title">
+            <h2>
+              <span>Products for category : <strong>{{cat.name}} &nbsp;</strong>
+                <span class="fa-stack fa-sm" style="color: #fed700;">
+                 <i class="fa fa-circle fa-stack-2x"></i>
+                 <strong class="fa-stack-1x" style="color: #363f4d;"> {{categories.length}}</strong>
+              </span>
+
+               </span>
+            </h2>
+          </div>
+  <div class="row" *ngIf="categories.length > 0; else elseBlock">
+      <!--          class="col-3"-->
+      <!--          <div class="special-product-active owl-carousel">-->
+  
+      <div *ngFor="let product of categories; index as i"class="col-md-3">
+        <!-- single-product-wrap start -->
+        <div class="single-product-wrap">
+          <div class="product-image">
+            <a routerLink="/product-details/{{ product._id }}">
+              <img
+                [src]="'http://localhost:3000/' + product.photo"
+                alt="Li's Product Image"
+              />
+            </a>
+            <span class="sticker">New</span>
+          </div>
+          <div class="product_desc">
+            <div class="product_desc_info">
+              <div class="product-review">
+                <h5 class="manufacturer">
+                  <a routerLink="/product-details/{{ product._id }}">{{
+                    product.title
+                  }}</a>
+                </h5>
+                <div class="rating-box">
+                     
+                  <ngb-rating
+                    [max]="5"
+                    [(rate)]="currentRate[i]"
+                    (click)="Rate(i, product._id)"
+                    [readonly]="false"
+                  ></ngb-rating>
+                </div>
+              </div>
+              <h4>
+                <a
+                  class="product_name"
+                  routerLink="/product-details/{{ product._id }}"
+                  >{{ product.title }}</a
+                >
+              </h4>
+              <div class="price-box">
+                <span class="new-price">{{ product.price }} EGP</span>
+              </div>
+              <div class="countersection">
+                <div class="li-countdown"></div>
+              </div>
+            </div>
+            <div class="add-actions">
+              <ul class="add-actions-link">
+                <li class="add-cart active">
+                  <a (click)="addToCart(product)">Add to cart</a>
+                </li>
+                <li>
+                  <a
+                    class="links-details"
+                    (click)="addtoWishlist(product._id)"
+                  >
+                    <i class="fa fa-heart-o"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="UnlikeProduct(product._id)">
+                    <i
+                      style="color: darkblue"
+                      class="fas fa-thumbs-down"
+                    ></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                  routerLink="/product-details/{{ product._id }}"
+                    title="quick view"
+                    class="quick-view-btn"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
+                    ><i class="fa fa-eye"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- single-product-wrap end -->
+        <!--            </div>-->
+      </div>
+      
+    </div>
+    <ng-template #elseBlock>
+      <div class="text-center m-3 ml-4 alert w-100">
+        <h1 style="color:#363f4d;">No Products Found</h1>
+      </div>
+    </ng-template>
+        </div>
+      </div>
+    </div>
+  </section>

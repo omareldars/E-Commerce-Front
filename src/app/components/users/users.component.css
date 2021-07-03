@@ -1,0 +1,14 @@
+
+.table thead th {
+	vertical-align: bottom;
+    /* border-bottom: 2px solid #c47c0a; */
+	border:none;
+	background-color: #fed700 !important;
+}
+.table-content table td{
+	/* background-color: #363f4d !important; */
+	color: white;
+	border:none;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 90%;
+}

@@ -1,0 +1,172 @@
+<!--Body Content-->
+<div id="page-content">
+  <!--Page Title-->
+  <div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">Create &nbsp; Product</h1>
+      </div>
+    </div>
+  </div>
+  <!--End Page Title-->
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+        <div class="mb-4">
+          <form
+            method="post"
+            action="/products/store"
+            id="CustomerLoginForm"
+            accept-charset="UTF-8"
+            class="contact-form"
+            [formGroup]="editproduct"
+          >
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Product Title</label>
+                  <input
+                    type="text"
+                    id="CustomerEmail"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    name="product"
+                    [(ngModel)]="nproduct.title"
+                    formControlName="title"
+                    #Title
+                  />
+                  <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="alert alert-danger">
+                      <div *ngIf="title?.errors?.required">title is required.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerCategory">Category</label>
+                  <select [(ngModel)]="nproduct.category"  name="category" formControlName="category">
+                    <option *ngFor="let cat of categories" [value]="cat._id">{{cat.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+<!--              Try Number 1-->
+<!--              <select [(ngModel)]="nproduct.category">-->
+<!--                <option *ngFor="let cat of categories" [ngValue]="cat" >{{cat.name}}</option>-->
+<!--              </select>-->
+<!--              <div class="col-12 col-sm-12 col-md-12 col-lg-12">-->
+<!--                <div class="form-group">-->
+<!--                  <label for="CustomerCaegory">Ctegory</label>-->
+<!--                  <select ng-options="cat.id as cat.name for cat in categories">-->
+<!--                    <option>{{cat.name}}</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerQuantity">Quantity</label>
+                  <input
+                    type="number"
+                    id="CustomerQuantity"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    name="quantity"
+                    formControlName="quantity"
+                    #Quantitiy
+                    [(ngModel)]="nproduct.quantity"
+                  />
+                  <div *ngIf="quantity?.invalid && (quantity?.dirty || quantity?.touched)" class="alert alert-danger">
+                    <div *ngIf="quantity?.errors?.required">quantity is required.</div>
+                </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Total price</label>
+                  <input
+                    type="number"
+                    id="CustomerEmail"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    name="price"
+                    [(ngModel)]="nproduct.price"
+                    formControlName="price"
+                      #Price
+                     
+                    />
+                    <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="alert alert-danger">
+                        <div *ngIf="price?.errors?.required">price is required.</div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label >Image</label>
+                  <input
+                    type="file"
+                    (input)="onselect($event)"
+                    [(ngModel)]="nproduct.photo"
+                    id="CustomerEmail"
+                    class="hidenInput"
+                    name="photo"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    formControlName="photo"
+                    #Photo
+                  />
+                  <div (click)="Photo.click()" class="UploadImg">
+                   <img src="{{url}}" onerror="this.onerror=null;this.src='./../../../assets/images/menu/150.png';" alt="">
+                   <i class="fa fa-camera" aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf="photo?.invalid && (photo?.dirty || photo?.touched)" class="alert alert-danger">
+                      <div *ngIf="photo?.errors?.required">photo is required.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Description</label>
+                  <textarea
+                    [(ngModel)]="nproduct.description"
+                    name="description"
+                    id="CustomerEmail"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    formControlName="description"
+                    #Description
+                  ></textarea>
+                  <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="alert alert-danger">
+                      <div *ngIf="description?.errors?.required">description is required.</div>
+                      <div *ngIf="description?.errors?.minlength">description must be at least 10 characters long.</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="form-group my-4 text-center text-center col-12 col-sm-12 col-md-12 col-lg-12"
+              >
+                <button class="btn btn-secondary" (click)="save()">
+                  Create product
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Body Content-->

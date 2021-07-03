@@ -1,0 +1,90 @@
+<div *ngIf="Euser" class="card">
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                
+                <h6 class="mb-0">First Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" name="fname" [(ngModel)]="Euser.fname" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                
+                <h6 class="mb-0">Last Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" name="lname" [(ngModel)]="Euser.lname" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                
+                <h6 class="mb-0">Username</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" name="username" [(ngModel)]="Euser.username" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control"  name="email" [(ngModel)]="Euser.email"  />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control"  name="phone" [(ngModel)]="Euser.phone"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Address</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" name="address"[(ngModel)]="Euser.address"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <h6 class="mb-0">City</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" name="city"[(ngModel)]="Euser.city"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Country</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control"name="country" [(ngModel)]="Euser.country"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <h6 class="mb-0">password</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <input type="password" class="form-control" name="pass" id="pass" [(ngModel)]="Euser.password"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <!-- <div class="text-secondary">
+                <input type="button" class="btn btn-primary "style="display: inline;" (click)="save()" value="Save Changes">
+                <input type="button" class="btn btn-danger " style="display: inline;"(click)="delete()" value="Delete Account">
+            </div> -->
+            <div class="form-group mt-3">
+                <p style="display: inline;"> <button class="register-button mt-0 ml-5"(click)="save()" style="width: 140px;">Save Changes</button></p>
+                <p style="display: inline;"><button (click)="delete()" class="btn btn-danger ml-3">Delete Account</button></p>
+             </div>
+        </div>
+    </div>
+</div>

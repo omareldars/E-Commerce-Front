@@ -1,0 +1,111 @@
+<div class="card">
+  <div class="card-body">
+      <div class="row">
+          <div *ngIf="isAdmin" class="col-12">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Select Order Status</label>
+                <select class="form-control" [(ngModel)]="currentStatus" (ngModelChange)="changeStatus($event)">
+                    <option value="">All</option>
+                    <ng-container *ngFor="let status of orderStatuses">
+                          <option *ngIf="status !='Not processed'" value="{{status}}">{{status}}</option>
+                    </ng-container>
+                 
+                </select>
+              </div>
+          </div>
+          <div *ngFor="let order of allOrders;let i=index" class="col-12">
+            <div class="singleCard flexedBox">
+                <div class="orderDetails">
+                     <h3 class="orderId">
+                         #{{order._id |slice :20:25}}
+                     </h3>
+                     <div class="userOrders">
+                         <div *ngFor="let prod of order.cart" class="singleOrder">
+                             <h4>
+                                 {{prod.title}}
+                             </h4>
+                             <p class="quantiry">
+                                 Qu : {{prod.quantity}}
+                             </p>
+                             <p class="totalPrice">
+                                {{prod.price}}Egp
+                             </p>
+                         </div>
+                     </div>
+                </div>
+                <div class="otherDetails">
+                    <div class="prices">
+                      <ul>
+                          <li>Subtotal: <span>{{order.totalPrice - order.tax}} EGP</span></li>
+                          <li>Tax: <span>{{order.tax | number : '1.2-2'}} EGP</span></li>
+                          <li>Total: <span>{{order.totalPrice}} EGP</span></li>
+                        </ul>
+                    </div>
+                    <div class="status">
+                          <div *ngIf="order.status==orderStatuses[0]" [ngClass]="{'stat0' : order.status == orderStatuses[0]}" class="orderstatus">
+                             {{orderStatuses[0]}}
+                          </div>
+                          <div *ngIf="order.status==orderStatuses[1]" [ngClass]="{'stat1' : order.status == orderStatuses[1]}" class="orderstatus">
+                            {{orderStatuses[1]}}
+                         </div>
+                         <div *ngIf="order.status==orderStatuses[2]" [ngClass]="{'stat2' : order.status == orderStatuses[2]}" class="orderstatus">
+                            {{orderStatuses[2]}}
+                         </div>
+                         <div *ngIf="order.status==orderStatuses[3]" [ngClass]="{'stat3' : order.status == orderStatuses[3]}" class="orderstatus">
+                            {{orderStatuses[3]}}
+                         </div>
+                         <div *ngIf="order.status==orderStatuses[4]" [ngClass]="{'stat4' : order.status == orderStatuses[4]}" class="orderstatus">
+                            {{orderStatuses[4]}}
+                         </div>
+
+                    </div>
+                    <div *ngIf="isAdmin" class="ordercontrols">
+                        <button (click)="DeleteOrder(order._id,i)" class="delete" type="button">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                        <button class="edit" (click)="currentOrder=i" type="button" data-toggle="modal" data-target="#editOrder">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="allOrders.length==0" class="col-12">
+            <div class="messageNoData">
+                There Are No Results At This Moment
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="allOrders[currentOrder]" class="modal-title" id="exampleModalLabel">Edit Order #{{allOrders[currentOrder]._id |slice :20:25}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group modalSelect">
+                <label for="exampleFormControlSelect1">Change Order Status</label>
+                <select class="form-control" [(ngModel)]="newStatus">
+                    <ng-container *ngFor="let status of orderStatuses">
+                          <option *ngIf="status !='Not processed'" value="{{status}}">{{status}}</option>
+                    </ng-container>
+                 
+                </select>
+              </div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="closeModalBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="changeOrderStatus()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

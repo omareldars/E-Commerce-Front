@@ -1,0 +1,9 @@
+footer.main-footer {
+    position: fixed;
+    bottom: 0;
+}
+.footerSmall{
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+}

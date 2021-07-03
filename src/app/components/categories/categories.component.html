@@ -1,0 +1,61 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+         
+          
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+<div class="container text-center">
+  <br><br>
+<button class="register-button mt-0 mb-2" style="margin-left: 38%;"><a style="color:white;" routerLink="/add-category">Add New Category</a></button>
+</div>
+<br><br>
+
+<div class="d-flex container justify-content-center text-center table-content">
+<table class="table table-warning">
+<thead>
+  <tr>
+    <!-- <th scope="col">#</th> -->
+    <th>Name</th>
+    <th>Description</th>
+    <th>Created at</th>
+    <th colspan="2">Action</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let category of categories | paginate: { itemsPerPage: 4, currentPage: p }">
+      <!-- <td><a class="text-warning" routerLink="{{category._id}}">{{category._id}}</a></td> -->
+      <td  routerLink="{{category.name}}">{{category.name}}</td>
+      <td>{{category.description}}</td>
+      <td>{{category.created}}</td>
+
+      <td>
+        <a class="btn p-1" routerLink="/edit-category/{{category._id}}"><i class="fa fa-pencil-square-o fa-2x" style="color: #fed700;margin-top: 10%;" aria-hidden="true"></i></a> <button class="btn p-1 ml-4" (click)="delete(category._id)"><i class="fa fa-trash-o fa-2x" style="color: red;" aria-hidden="true"></i></button>
+      </td>
+  </tr>
+
+</tbody>
+ 
+</table>
+
+</div>
+<div class="container mt-4 text-center" >
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+</div>
+
+<app-admin-dashboard-footer></app-admin-dashboard-footer>
