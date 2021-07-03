@@ -14,6 +14,7 @@ import { Cartitem } from '../_Models/Cartitem';
 import { Cart } from '../_Models/Cart';
 import Swal from 'sweetalert2';
 import { environment } from './../../../environments/environment';
+import { UserService } from '../_Services/user.service';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -71,9 +72,17 @@ get isLiked() {
   currentRate:any = 0;
   mycart=[];
   ncart:Cart;
-
-
-  constructor(private myproduct:ProductService,public s:CategoryService,public ar:ActivatedRoute,private mycategory:CategoryService,private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService,private router: Router) { }
+  userData: any;
+  authorized = false;
+  constructor(private myproduct:ProductService,public s:CategoryService,public ar:ActivatedRoute,private mycategory:CategoryService,private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService,private router: Router, private authServ: UserService) 
+  {
+    if (!localStorage.getItem("access_token")) {
+      this.authorized = false;
+    } else {
+      this.authorized = true;
+      this.getUserData();
+    }
+  }
 
   ngOnInit(): void {
     this.getProduct(this.ar.snapshot.paramMap.get('id'));
@@ -94,6 +103,14 @@ get isLiked() {
       this.calculatePrdouctsReviews();
     },1200);
   }
+
+
+  getUserData() {
+    this.authServ.getUser().subscribe((res) => {
+      this.userData = res;
+    });
+  }
+
 
   getProduct(id:any): void {
     this.myproduct.getProductById(id)

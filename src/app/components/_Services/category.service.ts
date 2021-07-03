@@ -31,9 +31,7 @@ export class CategoryService {
     });
   }
   getCategoryById(id: string) {
-    return this.http.get<Category>(this.baseUrl + "/" + id, {
-      headers: { authorization: this.token },
-    });
+    return this.http.get<Category>(this.baseUrl + "/" + id,);
   }
   getCategoryProduct(id: string) {
     return this.http.get<Category[]>(this.baseUrl + "/products/" + id);

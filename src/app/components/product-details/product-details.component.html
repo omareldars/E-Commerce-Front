@@ -23,35 +23,7 @@
                 <img [src]="'http://localhost:3000/' + product?.photo" alt="product image">
               </a>
             </div>
-            <!-- <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/2.jpg" data-gall="myGallery">
-                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
-              </a>
-            </div> -->
-            <!-- <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/3.jpg" data-gall="myGallery">
-                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/4.jpg" data-gall="myGallery">
-                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/5.jpg" data-gall="myGallery">
-                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="../assets/images/product/large-size/6.jpg" data-gall="myGallery">
-                <img [src]="'http://localhost:3000/' + product.photo" alt="product image">
-              </a>
-            </div> -->
           </div>
-          <!-- <div class="tab-style-left">
-            <div class="sm-image"><img [src]="'http://localhost:3000/' + product.photo" alt="product image thumb"></div>
-          </div> -->
         </div> 
         <!--// Product Details Left -->
       </div>
@@ -63,19 +35,18 @@
             <span class="product-details-ref"></span>
             <div class="rating-box pt-20">
               <ul class="rating rating-with-review-item">
-                <!-- <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                <li class="no-star"><i class="fa fa-star-o"></i></li> -->
-                <!-- <li class="review-item"><a href="#">Read Review</a></li> -->
                 <div class="rating-box">
-                     
-                  <ngb-rating
+                  <ngb-rating *ngIf="userData"
+                  [max]="5"
+                  [(rate)]="currentRate"
+                  (click)="userData.role=='ROLE_MEMBER'?Rate(product._id):null"
+                  [readonly]="userData.role=='ROLE_MEMBER'?false:true"
+                ></ngb-rating>
+                <ngb-rating *ngIf="!authorized"
                     [max]="5"
                     [(rate)]="currentRate"
                     (click)="Rate(product._id)"
-                    [readonly]="false"
+                    [readonly]="true"
                   ></ngb-rating>
                 </div>
                  <li class="review-item"><a  href="#" data-toggle="modal" data-target="#mymodal" >Write Review</a></li> 

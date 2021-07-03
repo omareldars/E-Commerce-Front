@@ -63,7 +63,7 @@ export class SellwithusComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Please While Waiting admin approval, Do Register',
+          title: 'While Waiting admin approval, Please Do Register',
           showConfirmButton: false,
           timer: 1700
         })

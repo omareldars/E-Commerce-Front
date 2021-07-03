@@ -1,0 +1,9 @@
+.alertnote{
+    margin-left: 8rem;
+    height: 5rem;
+    font-size: 35px;
+    font-variant: all-petite-caps;
+    color: red;
+    background-color: white;
+    border: 0;
+}

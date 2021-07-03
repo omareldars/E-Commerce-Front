@@ -133,6 +133,9 @@
           <h2>
             <span>{{category?.name}}</span>
           </h2>
+          <h2 style="color:blue;">
+            <a routerLink="/category/products/{{ category?._id }}" >Show More >>></a>
+          </h2>
         </div>
         <div *ngIf="wishlists" class="row">
           <!--          class="col-3"-->
