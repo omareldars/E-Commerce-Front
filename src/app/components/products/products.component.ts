@@ -10,6 +10,7 @@ import { Product } from "../_Models/Product";
 import { CategoryService } from "../_Services/category.service";
 import { ProductService } from "../_Services/product.service";
 import Swal from "sweetalert2";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-products",
@@ -148,7 +149,8 @@ export class ProductsComponent implements OnInit {
 
       console.log("hello" + this.Product);
     });
-    this.route.navigateByUrl("/home");
+    // this.route.navigateByUrl("/home");
+    window.location.href = '/home';
   }
 
   getProduct(id: any): void {

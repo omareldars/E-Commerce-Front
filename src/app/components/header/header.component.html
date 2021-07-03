@@ -15,7 +15,7 @@
                   <span
                     ><a routerLink="/profile/userInfo"
                       ><img *ngIf="roleuser?.avatar"
-                        [src]="roleuser?.avatar"
+                        [src]="'http://localhost:3000/' + roleuser.avatar"
                         onerror="this.onerror=null;this.src='./../../../assets/images/menu/userPlaceholder.jpg';" 
                         class="img-rounded"
                         style="border-radius: 50%"

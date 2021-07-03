@@ -60,10 +60,7 @@ export class UserService {
     return localStorage.getItem("access_token") !== null;
   }
 
-  register(newUser: User) {
-    return this.http.post<User>(
-      "http://localhost:3000/users/register",
-      newUser
-    );
+  register(newUser: FormData) {
+    return this.http.post<User>("http://localhost:3000/users/register",newUser);
   }
 }

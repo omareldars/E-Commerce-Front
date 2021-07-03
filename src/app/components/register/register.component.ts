@@ -77,61 +77,102 @@ export class RegisterComponent implements OnInit {
   get avatar() {
     return this.profileForm.get("avatar");
   }
+  
+  nUser = new User(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
   selectedFile!: File;
+  addForm!: FormGroup;
+  User = new FormData();
+  url;
   constructor(
     private UserService: UserService,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) {
+    // Don't Know what is this
+    this.addForm = this.fb.group({
+      user: [""]
+    });
+  }
+
+
+  // product onselect method
   onselect(event: any) {
     const filelist: FileList = event.target.files;
     this.selectedFile = filelist[0];
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      function () {
-        // this.imgSrc=reader.result;
-        localStorage.setItem("profilimg", String(reader.result));
-      },
-      false
-    );
-    if (this.selectedFile) {
-      reader.readAsDataURL(this.selectedFile);
-    }
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      // console.log('result : ', event.target.result);
+      this.url = event.target.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
   }
 
-  nUser: User = new User(
-    this.firstname?.value,
-    this.lastname?.value,
-    this.username?.value,
-    this.password?.value,
-    this.email?.value,
-    this.phone?.value,
-    this.address?.value,
-    this.city?.value,
-    this.country?.value,
-    this.confirmpassword?.value,
-    this.avatar?.value
-  );
+  
+  // main onselect method
+  // onselect(event: any) {
+  //   const filelist: FileList = event.target.files;
+  //   this.selectedFile = filelist[0];
+  //   const reader = new FileReader();
+  //   reader.addEventListener(
+  //     "load",
+  //     function () {
+  //       // this.imgSrc=reader.result;
+  //       localStorage.setItem("profilimg", String(reader.result));
+  //     },
+  //     false
+  //   );
+  //   if (this.selectedFile) {
+  //     reader.readAsDataURL(this.selectedFile);
+  //   }
+  // }
+
+  // nUser: User = new User(
+  //   this.firstname?.value,
+  //   this.lastname?.value,
+  //   this.username?.value,
+  //   this.password?.value,
+  //   this.email?.value,
+  //   this.phone?.value,
+  //   this.address?.value,
+  //   this.city?.value,
+  //   this.country?.value,
+  //   this.confirmpassword?.value,
+  //   this.avatar?.value
+  // );
+
+
   Submit() {
-    this.nUser.fname = this.firstname?.value;
-    this.nUser.lname = this.lastname?.value;
-    this.nUser.username = this.username?.value;
-    this.nUser.password = this.password?.value;
-    this.nUser.email = this.email?.value;
-    this.nUser.phone = this.phone?.value;
-    this.nUser.address = this.address?.value;
-    this.nUser.city = this.city?.value;
-    this.nUser.country = this.country?.value;
-    this.nUser.confirmpassword = this.confirmpassword?.value;
-    this.nUser.avatar = localStorage.getItem("profilimg");
+    // this.nUser.fname = this.firstname?.value;
+    // this.nUser.lname = this.lastname?.value;
+    // this.nUser.username = this.username?.value;
+    // this.nUser.password = this.password?.value;
+    // this.nUser.email = this.email?.value;
+    // this.nUser.phone = this.phone?.value;
+    // this.nUser.address = this.address?.value;
+    // this.nUser.city = this.city?.value;
+    // this.nUser.country = this.country?.value;
+    // this.nUser.confirmpassword = this.confirmpassword?.value;
+    // this.nUser.avatar = localStorage.getItem("profilimg");
+    this.User.append("fname", this.nUser.fname);
+    this.User.append("lname", this.nUser.lname);
+    this.User.append("username", this.nUser.username);
+    this.User.append("password", this.nUser.password);
+    this.User.append("email", this.nUser.email);
+    this.User.append("phone", this.nUser.phone);
+    this.User.append("address", this.nUser.address);
+    this.User.append("city", this.nUser.city);
+    this.User.append("country", this.nUser.country);
+    this.User.append("confirmpassword", this.nUser.confirmpassword);
+    this.User.append("avatar", this.selectedFile);
 
     // this.Product.append('photo', this.selectedFile);
     // console.log(this.nUser);
-    this.UserService.register(this.nUser).subscribe(
+    this.UserService.register(this.User).subscribe(
       (d) => {
-        // console.log(d);
-        localStorage.removeItem("profilimg");
+        console.log("nUser  :  ",this.User);
+        console.log("d :  ",d);
+        console.log("SelectedFile  :  ",this.selectedFile);
+        // localStorage.removeItem("profilimg");
         Swal.fire({
           position: "center",
           icon: "success",

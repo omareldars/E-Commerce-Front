@@ -4,7 +4,7 @@ export class User {
         public username: string,
         public password : string,
         public email :string,
-        public phone :number,
+        public phone :string,
         public address: string,
         public city :string,
         public country :string,

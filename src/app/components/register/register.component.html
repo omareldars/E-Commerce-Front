@@ -20,12 +20,9 @@
             <div class="row">
                 <div class="col-md-6 col-12 mb-20">
                     <label>First Name</label>
-                    <input class="mb-0" type="text"  formControlName="firstname" #Firstname placeholder="First Name">
+                    <input class="mb-0" type="text"  formControlName="firstname" #Firstname placeholder="First Name" [(ngModel)]="nUser.fname">
                     
-                  <div *ngIf="
-                  firstname?.invalid &&
-                  (firstname?.dirty || firstname?.touched)
-                " class="alert alert-danger">
+                  <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="alert alert-danger">
                 <div *ngIf="firstname?.errors?.required">
                   firstname is required.
                 </div>
@@ -33,11 +30,8 @@
                 </div>
                 <div class="col-md-6 col-12 mb-20">
                     <label>Last Name</label>
-                    <input class="mb-0" type="text" formControlName="lastname" #Lastname placeholder="Last Name">
-                    <div *ngIf="
-                    lastname?.invalid &&
-                    (lastname?.dirty || lastname?.touched)
-                  " class="alert alert-danger">
+                    <input class="mb-0" type="text" formControlName="lastname" #Lastname placeholder="Last Name" [(ngModel)]="nUser.lname">
+                    <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="alert alert-danger">
                   <div *ngIf="lastname?.errors?.required">
                     lastname is required.
                   </div>
@@ -45,11 +39,8 @@
                 </div>
                 <div class="col-md-12 mb-20">
                     <label>Username</label>
-                    <input class="mb-0" type="text" formControlName="username" #Username  placeholder="Username">
-                    <div *ngIf="
-                    username?.invalid &&
-                    (username?.dirty || username?.touched)
-                  " class="alert alert-danger">
+                    <input class="mb-0" type="text" formControlName="username" #Username  placeholder="Username" [(ngModel)]="nUser.username">
+                    <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="alert alert-danger">
                   <div *ngIf="username?.errors?.required">
                     Username is required.
                   </div>
@@ -60,7 +51,7 @@
                 </div>
                 <div class="col-md-12 mb-20">
                     <label>Email Address*</label>
-                    <input class="mb-0" type="email" placeholder="Email Address" formControlName="email" #Email>
+                    <input class="mb-0" type="email" placeholder="Email Address" formControlName="email" #Email [(ngModel)]="nUser.email">
                     <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
                         <div *ngIf="email?.errors?.required">
                           Email is required.
@@ -72,11 +63,8 @@
                 </div>
                 <div class="col-md-12 mb-20">
                     <label>Phone</label>
-                    <input class="mb-0" type="tel" placeholder="Phone" formControlName="phone" #Phone>
-                    <div *ngIf="
-                    phone?.invalid &&
-                    (phone?.dirty || phone?.touched)
-                  " class="alert alert-danger">
+                    <input class="mb-0" type="tel" placeholder="Phone" formControlName="phone" #Phone [(ngModel)]="nUser.phone">
+                    <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert alert-danger">
                   <div *ngIf="phone?.errors?.required">
                     Phone  is required.
                   </div>
@@ -90,11 +78,8 @@
 
                 <div class="col-md-12 mb-20">
                   <label>ِAddress</label>
-                  <input class="mb-0" type="text" placeholder="Address"  formControlName="address" #Address>
-                  <div *ngIf="
-                  address?.invalid &&
-                  (address?.dirty || address?.touched)
-                " class="alert alert-danger">
+                  <input class="mb-0" type="text" placeholder="Address"  formControlName="address" #Address [(ngModel)]="nUser.address">
+                  <div *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="alert alert-danger">
                 <div *ngIf="address?.errors?.required">
                   address input  is required.
                 </div>
@@ -103,11 +88,8 @@
                 
                 <div class="col-md-6 mb-20">
                     <label>City</label>
-                    <input class="mb-0" type="text" placeholder="City"  formControlName="city" #City>
-                    <div *ngIf="
-                    city?.invalid &&
-                    (city?.dirty || city?.touched)
-                  " class="alert alert-danger">
+                    <input class="mb-0" type="text" placeholder="City"  formControlName="city" #City [(ngModel)]="nUser.city">
+                    <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="alert alert-danger">
                   <div *ngIf="city?.errors?.required">
                     city input  is required.
                   </div>
@@ -115,11 +97,8 @@
                 </div>
                 <div class="col-md-6 mb-20">
                     <label>Country</label>
-                    <input class="mb-0" type="text" placeholder="Country" formControlName="country" #Country>
-                    <div *ngIf="
-                    country?.invalid &&
-                    (country?.dirty || country?.touched)
-                  " class="alert alert-danger">
+                    <input class="mb-0" type="text" placeholder="Country" formControlName="country" #Country [(ngModel)]="nUser.country">
+                    <div *ngIf="country?.invalid && (country?.dirty || country?.touched)" class="alert alert-danger">
                   <div *ngIf="country?.errors?.required">
                     country input  is required.
                   </div>
@@ -130,11 +109,8 @@
 
                 <div class="col-md-6 mb-20">
                     <label>Password</label>
-                    <input class="mb-0" type="password" placeholder="Password" formControlName="password" name="password" #Password>
-                    <div *ngIf="
-                    password?.invalid &&
-                    (password?.dirty || password?.touched)
-                  " class="alert alert-danger">
+                    <input class="mb-0" type="password" placeholder="Password" formControlName="password" name="password" #Password [(ngModel)]="nUser.password">
+                    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="alert alert-danger">
                   <div *ngIf="password?.errors?.required">
                     password is required.
                   </div>
@@ -145,12 +121,9 @@
                 </div>
                 <div class="col-md-6 mb-20">
                     <label>Confirm Password</label>
-                    <input class="mb-0" type="password" name="confirmpassword" formControlName="confirmpassword" #Confirmpassword  placeholder="Confirm Password">
+                    <input class="mb-0" type="password" name="confirmpassword" formControlName="confirmpassword" #Confirmpassword  placeholder="Confirm Password" [(ngModel)]="nUser.confirmpassword">
                  
-                   <div *ngIf="
-                   confirmpassword?.invalid &&
-                   (confirmpassword?.dirty || confirmpassword?.touched)
-                 " class="alert alert-danger">
+                   <div *ngIf="confirmpassword?.invalid && (confirmpassword?.dirty || confirmpassword?.touched)" class="alert alert-danger">
                  <div *ngIf="confirmpassword?.errors?.required">
                    confirmpassword is required.
                  </div>
@@ -164,7 +137,8 @@
                     <input
                       type="file"
                       (input)="onselect($event)"
-                      class=""
+                      [(ngModel)]="nUser.avatar"
+                      class="hidenInput"
                       name="avatar"
                       autocorrect="off"
                       autocapitalize="off"
@@ -172,6 +146,10 @@
                       formControlName="avatar"
                       #Avatar
                     />
+                    <div (click)="Avatar.click()" class="UploadImg">
+                      <img src="{{url}}" onerror="this.onerror=null;this.src='../../../assets/images/menu/150.png';" alt="">
+                      <i class="fa fa-camera" aria-hidden="true"></i>
+                     </div>
                     <div *ngIf="avatar?.invalid && (avatar?.dirty || avatar?.touched)" class="alert alert-danger">
                         <div *ngIf="avatar?.errors?.required">Avatar is required.</div>
                     </div>
