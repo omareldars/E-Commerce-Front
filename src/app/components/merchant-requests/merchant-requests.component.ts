@@ -68,7 +68,8 @@ Approved(id:string) {
     (err)=>{console.log(err);}
   );
   this.merchants = this.merchants.filter((item: { id: any; }) => item.id != id);
-  this.router.navigateByUrl('/merchant-requests');
+  // this.router.navigateByUrl('/merchant-requests');
+  window.location.reload();
 }
 
 

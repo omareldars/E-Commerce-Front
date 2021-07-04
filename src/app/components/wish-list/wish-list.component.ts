@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 import { Cart } from "../_Models/Cart";
 import { Cartitem } from "../_Models/Cartitem";
 import { CartService } from "../_Services/cart.service";
@@ -188,17 +189,70 @@ export class WishListComponent implements OnInit {
     }
     return false;
   }
+  // addToCart(product: any) {
+  //   this.myCart.usercart().subscribe(
+  //     (data) => {
+  //       this.mycart = data["carts"][0]._id;
+
+  //       // console.log("from cart", data["carts"][0]._id);
+  //       //  debugger;
+  //       let cartProducts = data["carts"][0].products;
+  //       let exists = cartProducts.filter(
+  //         (s) => s.product == product["product"]._id
+  //       );
+  //       this.cartarr = [];
+  //       if (exists.length == 0) {
+  //         this.cartarr.push(this.nitem);
+  //         this.ncart = new Cart(this.cartarr);
+  //         this.nitem.product = product["product"]._id;
+  //         this.myCart.addToCart(data["carts"][0]._id, this.ncart).subscribe(
+  //           (p) => {
+  //             // console.log(p);
+  //             this.getCurrentCart();
+  //           },
+  //           (err) => (this.errors = "Error in adding to cart")
+  //         );
+  //       } else {
+  //         this.myCart
+  //           .increase(data["carts"][0]._id,, 1)
+  //           .subscribe(
+  //             (dd) => {
+  //               // console.log(dd);
+  //               this.getCurrentCart();
+  //               // this.router.navigateByUrl("/home");
+  //             },
+  //             (err) => (this.errors = "Could not authenticate")
+  //           );
+  //       }
+  //       this.getWishes();
+  //       // console.log(d[0]);
+  //       // this.router.navigateByUrl("/home");
+  //     },
+  //     (err) => (this.errors = "Could not authenticate")
+  //   );
+  // }
+  
   addToCart(product: any) {
+    let loggedIn = localStorage.getItem('access_id');
+    if(loggedIn){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Product Added To Cart",
+        iconColor: "#a5dc86",
+        timer: 1500,
+      });
+    console.log("product : ", product);
+
     this.myCart.usercart().subscribe(
       (data) => {
-        this.mycart = data["carts"][0]._id;
+        this.mycart = data["carts"][0]?._id;
 
         // console.log("from cart", data["carts"][0]._id);
         //  debugger;
-        let cartProducts = data["carts"][0].products;
-        let exists = cartProducts.filter(
-          (s) => s.product == product["product"]._id
-        );
+        let cartProducts =
+          data["carts"].length != 0 ? data["carts"][0]?.products : [];
+        let exists = cartProducts.filter((s) => s.product == product["product"]._id);
         this.cartarr = [];
         if (exists.length == 0) {
           this.cartarr.push(this.nitem);
@@ -212,22 +266,29 @@ export class WishListComponent implements OnInit {
             (err) => (this.errors = "Error in adding to cart")
           );
         } else {
-          this.myCart
-            .increase(data["carts"][0]._id, product["product"]._id, 1)
-            .subscribe(
-              (dd) => {
-                // console.log(dd);
-                this.getCurrentCart();
-                // this.router.navigateByUrl("/home");
-              },
-              (err) => (this.errors = "Could not authenticate")
-            );
+          this.myCart.increase(data["carts"][0]._id, product["product"]._id, 1).subscribe(
+            (dd) => {
+              // console.log(dd);
+              this.getCurrentCart();
+              // this.router.navigateByUrl("/home");
+            },
+            (err) => (this.errors = "Could not authenticate")
+          );
         }
-        this.getWishes();
         // console.log(d[0]);
         // this.router.navigateByUrl("/home");
       },
       (err) => (this.errors = "Could not authenticate")
-    );
+    );}
+    else{
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "You should Login First ",
+        iconColor: "#f27474",
+        timer: 1500,
+      });
+    }
   }
+
 }

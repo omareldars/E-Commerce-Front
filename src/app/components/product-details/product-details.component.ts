@@ -247,12 +247,13 @@ get isLiked() {
           this.myCart.increase(data["carts"][0]._id,product._id,1).subscribe(
             dd => {
               console.log(dd)
-              this.router.navigateByUrl('/home')
+             window.location.href="home";
             },
             err => this.errors = 'Could not authenticate');
          }
         // console.log(d[0]);
-        this.router.navigateByUrl('/home')
+        // this.router.navigateByUrl('/home')
+        window.location.href="/home";
       },
       err => this.errors = 'Could not authenticate'
     );}
@@ -286,7 +287,8 @@ get isLiked() {
       d => {
         this.nwishlist.isLiked=true;
         console.log(d)
-        this.router.navigateByUrl('/home')
+        // this.router.navigateByUrl('/home')
+        window.location.href= "/home";
       },
       err => this.errors = 'Could not authenticate'
     
@@ -321,7 +323,6 @@ get isLiked() {
       
 Rate( Productid){
   setTimeout(()=>{
-
     this.nreview.rating=this.currentRate;
     this.nreview.product=Productid;
   // this.index = i + 1;
@@ -334,7 +335,8 @@ Rate( Productid){
      this.myreview.add(this.nreview).subscribe(
         d => {
             console.log(d)
-            this.router.navigateByUrl('/home')
+            // this.router.navigateByUrl('/home')
+            window.location.href="/home";
           },
           err => this.errors = 'Could not authenticate'
           

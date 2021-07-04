@@ -34,7 +34,7 @@
                 <!-- <h2>Chamcham Galaxy S9 | S9+</h2> -->
                 <!-- <h3>Starting at <span>$589.00</span></h3> -->
                 <div class="default-btn slide-btn">
-                  <a class="links" href="/shop-list">Shopping Now</a>
+                  <a class="links" href="/home">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -47,7 +47,7 @@
                 <!-- <h2>Work Desk Surface Studio 2018</h2> -->
                 <!-- <h3>Starting at <span>$1599.00</span></h3> -->
                 <div class="default-btn slide-btn">
-                  <a class="links" href="/shop-list">Shopping Now</a>
+                  <a class="links" href="/home">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@
                 <!-- <h2>Phantom 4 Pro+ Obsidian</h2> -->
                 <!-- <h3>Starting at <span>$809.00</span></h3> -->
                 <div class="default-btn slide-btn">
-                  <a class="links" href="/shop-list">Shopping Now</a>
+                  <a class="links" href="/home">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -133,9 +133,9 @@
           <h2>
             <span>{{category?.name}}</span>
           </h2>
-          <h2 style="color:blue;">
+          <!-- <h2 style="color:blue;">
             <a routerLink="/category/products/{{ category?._id }}" >Show More >>></a>
-          </h2>
+          </h2> -->
         </div>
         <div *ngIf="wishlists" class="row">
           <!--          class="col-3"-->
@@ -149,6 +149,8 @@
                             <img
                               [src]="'http://localhost:3000/' + product.photo"
                               alt="Li's Product Image"
+                              width="255"
+                              height="255"
                             />
                           </a>
                           <span class="sticker">New</span>
@@ -163,15 +165,15 @@
                               </h5>
                               <div class="rating-box">
                               
-                                <ngb-rating *ngIf="userData"
+                                <!-- <ngb-rating *ngIf="userData"
                                   [max]="5"
-                                  [rate]="getRateOfProductById(product._id)"
-                                  (click)="userData.role=='ROLE_MEMBER'?Rate(i, product._id):null"
+                                  [rate]="countrate['product'+product._id]"
+                                  (click)="userData.role=='ROLE_MEMBER'?Rate($event,product._id):null"
                                   [readonly]="userData.role=='ROLE_MEMBER'?false:true"
-                                ></ngb-rating>
-                                <ngb-rating *ngIf="!authorized"
+                                ></ngb-rating> -->
+                                <ngb-rating
                                 [max]="5"
-                                [rate]="getRateOfProductById(product._id)"
+                                [rate]="countrate['product'+product._id]"
                                 [readonly]="true"
                               ></ngb-rating>
                               </div>

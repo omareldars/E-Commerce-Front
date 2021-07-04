@@ -5,16 +5,16 @@
         <div class="col-lg-12">
           <div class="li-section-title">
             <h2>
-              <span>Products for category : <strong>{{cat.name}} &nbsp;</strong>
+              <span>Products for category : <strong>{{cat?.name}} &nbsp;</strong>
                 <span class="fa-stack fa-sm" style="color: #fed700;">
                  <i class="fa fa-circle fa-stack-2x"></i>
-                 <strong class="fa-stack-1x" style="color: #363f4d;"> {{categories.length}}</strong>
+                 <strong class="fa-stack-1x" style="color: #363f4d;"> {{categories?.length}}</strong>
               </span>
 
                </span>
             </h2>
           </div>
-  <div class="row" *ngIf="categories.length > 0; else elseBlock">
+  <div class="row" *ngIf="categories?.length > 0; else elseBlock">
       <!--          class="col-3"-->
       <!--          <div class="special-product-active owl-carousel">-->
   
@@ -22,9 +22,9 @@
         <!-- single-product-wrap start -->
         <div class="single-product-wrap">
           <div class="product-image">
-            <a routerLink="/product-details/{{ product._id }}">
+            <a routerLink="/product-details/{{ product?._id }}">
               <img
-                [src]="'http://localhost:3000/' + product.photo"
+                [src]="'http://localhost:3000/' + product?.photo"
                 alt="Li's Product Image"
               />
             </a>
@@ -34,29 +34,35 @@
             <div class="product_desc_info">
               <div class="product-review">
                 <h5 class="manufacturer">
-                  <a routerLink="/product-details/{{ product._id }}">{{
-                    product.title
+                  <a routerLink="/product-details/{{ product?._id }}">{{
+                    product?.title
                   }}</a>
                 </h5>
                 <div class="rating-box">
                      
-                  <ngb-rating
+                  <!-- <ngb-rating
                     [max]="5"
                     [(rate)]="currentRate[i]"
-                    (click)="Rate(i, product._id)"
-                    [readonly]="false"
-                  ></ngb-rating>
+                    
+                    (click)="userData?.role=='ROLE_MEMBER'?Rate(i,product._id):null"
+                    [readonly]="userData?.role=='ROLE_MEMBER'?false:true"
+                  ></ngb-rating> -->
+                  <ngb-rating
+                  [max]="5"
+                  [rate]="getRateOfProductById(product._id)"
+                  [readonly]="true"
+                ></ngb-rating>
                 </div>
               </div>
               <h4>
                 <a
                   class="product_name"
-                  routerLink="/product-details/{{ product._id }}"
-                  >{{ product.title }}</a
+                  routerLink="/product-details/{{ product?._id }}"
+                  >{{ product?.title }}</a
                 >
               </h4>
               <div class="price-box">
-                <span class="new-price">{{ product.price }} EGP</span>
+                <span class="new-price">{{ product?.price }} EGP</span>
               </div>
               <div class="countersection">
                 <div class="li-countdown"></div>
@@ -67,25 +73,21 @@
                 <li class="add-cart active">
                   <a (click)="addToCart(product)">Add to cart</a>
                 </li>
+                
                 <li>
                   <a
-                    class="links-details"
-                    (click)="addtoWishlist(product._id)"
+                    (click)="checkIfExistInWhis(product._id)?UnlikeProduct(product._id,product.category):addtoWishlist(product._id,product.category)"
+                    style="color: darkred"
                   >
-                    <i class="fa fa-heart-o"></i>
-                  </a>
-                </li>
-                <li>
-                  <a (click)="UnlikeProduct(product._id)">
-                    <i
-                      style="color: darkblue"
-                      class="fas fa-thumbs-down"
-                    ></i>
+                    <!-- <i  *ngIf="nwishlist.isLiked" style="color: cyan;" class="fa fa-heart-o"></i> -->
+                  
+                    <i *ngIf="!checkIfExistInWhis(product._id)" style="color: darkred" class="fa fa-heart-o"></i>
+                    <i *ngIf="checkIfExistInWhis(product._id)" style="color: darkred" class="fa fa-heart"></i>
                   </a>
                 </li>
                 <li>
                   <a
-                  routerLink="/product-details/{{ product._id }}"
+                  routerLink="/product-details/{{ product?._id }}"
                     title="quick view"
                     class="quick-view-btn"
                     data-toggle="modal"

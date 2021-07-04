@@ -53,6 +53,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Cart } from '../_Models/Cart';
 import { Cartitem } from '../_Models/Cartitem';
 import { Review } from '../_Models/Review';
@@ -61,6 +62,7 @@ import { CartService } from '../_Services/cart.service';
 import { CategoryService } from '../_Services/category.service';
 import { ProductService } from '../_Services/product.service';
 import { ReviewService } from '../_Services/review.service';
+import { UserService } from '../_Services/user.service';
 import { WishlistService } from '../_Services/wishlist.service';
 
 
@@ -70,9 +72,10 @@ import { WishlistService } from '../_Services/wishlist.service';
   styleUrls: ['./category-products.component.css']
 })
 export class CategoryProductsComponent implements OnInit {
-
+  getAllProduectsByCategoryId = [];
   public errors: string = "";
-
+  userData: any;
+  authorized = false;
  
   profileForm = new FormGroup({
     title: new FormControl('', [
@@ -117,10 +120,21 @@ export class CategoryProductsComponent implements OnInit {
   productss:any[];
   reviews:any[];
   id:any;
-  constructor(public s:CategoryService,public ar:ActivatedRoute,private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService) {
+  constructor(public s:CategoryService,public ar:ActivatedRoute,private mycategory:CategoryService,private myproduct:ProductService,private router: Router, private myCart:CartService,private myreview:ReviewService,private mywishlist:WishlistService,private authServ: UserService) {
     this.id= ar.snapshot.params.id;
+    if (!localStorage.getItem("access_token")) {
+      this.authorized = false;
+      this.wishlists = [];
+    } else {
+      this.authorized = true;
+      this.getUserData();
+    }
   }
-
+  getUserData() {
+    this.authServ.getUser().subscribe((res) => {
+      this.userData = res;
+    });
+  }
   cat:any;
   currentRate:any[] = [0];
   mycart=[];
@@ -128,23 +142,31 @@ export class CategoryProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.s.getCategoryProduct(this.id).subscribe(
-      (res)=>{this.categories = res['category'];console.log("this categories",this.categories)},
+      (res)=>{this.categories = res['category'];},
       (err)=>{console.log(err);}
     );
-
+    this.mywishlist.getAllProductsWishlist().subscribe(
+      (res) => {
+        this.wishlists = res["wishlist"];
+        this.mywishlist.updatewhishesData(res["wishlist"]);
+      },
+      (err) => {
+        // console.log();
+      }
+    );
     this.s.getCategoryById(this.id).subscribe(
-      (res)=>{this.cat = res['category'];console.log("this cat",this.cat)},
+      (res)=>{this.cat = res['category'];},
       (err)=>{console.log(err);}
     );
     this.myproduct.getAllProducts().subscribe(
       (res)=>{this.productss = res;
-        console.log("products--->",JSON.stringify(res))
+        // console.log("products--->",JSON.stringify(res))
       },
        (err)=>{console.log(err);}
     );
     this.myreview.getAllApprovedReviews().subscribe(
       (res)=>{this.reviews = res["reviews"]; 
-      console.log("reviews--->",JSON.stringify(this.reviews))
+      // console.log("reviews--->",JSON.stringify(this.reviews))
       },
        (err)=>{console.log(err);}
     );
@@ -178,21 +200,40 @@ export class CategoryProductsComponent implements OnInit {
           this.myCart.increase(data["carts"][0]._id,product._id,1).subscribe(
             dd => {
               console.log(dd)
-              this.router.navigateByUrl('/home')
+             window.location.href="/home"
             },
             err => this.errors = 'Could not authenticate');
          }
         // console.log(d[0]);
-        this.router.navigateByUrl('/home')
+        window.location.href="/home"
       },
       err => this.errors = 'Could not authenticate'
     );
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Addedd Successfully",
+      showConfirmButton: false,
+      timer: 1700,
+    });
   }
  
    
     
-Rate(index:number,  Productid){
+Rate(index:number, Productid){
   setTimeout(()=>{
+
+    //  this.nreview.rating = this.rating?.value;
+    //   this. nreview.review = this.review?.value;
+    //   this.nreview.product=Productid;
+    //   this.myreview.add(this.nreview).subscribe(
+    //     d => {
+    //       console.log(d)
+    //       // window.location.reload();
+    //     },
+    //       err => this.errors = 'Could not authenticate'
+    //     );
+
 
     this.nreview.rating=this.currentRate[index];
     this.nreview.product=Productid;
@@ -206,7 +247,7 @@ Rate(index:number,  Productid){
      this.myreview.add(this.nreview).subscribe(
         d => {
             console.log(d)
-            this.router.navigateByUrl('/home')
+          //  window.location.reload();
           },
           err => this.errors = 'Could not authenticate'
           
@@ -219,20 +260,82 @@ Rate(index:number,  Productid){
     },300);
  }
 
-
- UnlikeProduct(id:any){
-  let result = confirm("Are you sure?");
-
-  if(result){
-    this.mywishlist.deleteWishlistById(id).subscribe(
-      (res)=>{console.log(res);},
-      (err)=>{console.log(err);}
-    );
-    this.nwishlist = this.wishlists.filter((item: { id: any; }) => item.id != id);
-    this.router.navigateByUrl('/home');
-
+  /////////////////////////////
+  UnlikeProduct(id: any, categoryId) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: "btn btn-danger",
+        confirmButton: "btn btn-success",
+      },
+      buttonsStyling: true,
+    });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't  to remove product from wishlist!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Product has been removed",
+            "success"
+          );
+          this.mywishlist.deleteWishlistById(id).subscribe(
+            (res) => {
+              // console.log(res);
+              this.getallWishes();
+              this.getAllProduectsByCategoryIId(categoryId);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+          this.nwishlist = this.wishlists.filter(
+            (item: { id: any }) => item.id != id
+          );
+          // this.router.navigateByUrl("/home");
+          window.location.href = "/home";
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Product in Wishlist :)",
+            "error"
+          );
+        }
+      });
   }
-}
+  
+  getallWishes() {
+    this.mywishlist.getAllProductsWishlist().subscribe((res) => {
+      this.wishlists = res["wishlist"];
+      this.mywishlist.updatewhishesData(res["wishlist"]);
+    });
+  }
+  ////////////////////////////////////
+
+//  UnlikeProduct(id:any){
+//   let result = confirm("Are you sure?");
+
+//   if(result){
+//     this.mywishlist.deleteWishlistById(id).subscribe(
+//       (res)=>{console.log(res);},
+//       (err)=>{console.log(err);}
+//     );
+//     this.nwishlist = this.wishlists.filter((item: { id: any; }) => item.id != id);
+//     this.router.navigateByUrl('/home');
+
+//   }
+// }
 
 
  addtoWishlist(Productid){
@@ -243,7 +346,7 @@ Rate(index:number,  Productid){
     d => {
       this.nwishlist.isLiked=true;
       console.log(d)
-      this.router.navigateByUrl('/home')
+      window.location.href="/home";
     },
     err => this.errors = 'Could not authenticate'
   
@@ -251,18 +354,152 @@ Rate(index:number,  Productid){
   // console.log(this.nreview);
   );
  }
- calculatePrdouctsReviews(){
-  for(let i=0; i<this.productss?.length; i++){
-    let rating = 0, numOfRaings = 0;
-    for(let j=0;j<this.reviews.length;j++){
-      if(this.productss[i]._id === this.reviews[j].product){
-        rating +=  this.reviews[j].rating ; numOfRaings++;
+ getRateOfProductById(productId) {
+  let rating = 0,
+    numOfRaings = 0;
+  for (let j = 0; j < this.reviews?.length; j++) {
+    if (productId == this.reviews[j]?.product) {
+      rating += this.reviews[j]?.rating;
+      numOfRaings++;
+    }
+  }
+  var rateValue = rating / numOfRaings;
+  return rateValue;
+}
+//  calculatePrdouctsReviews(){
+//   for(let i=0; i<this.productss?.length; i++){
+//     let rating = 0, numOfRaings = 0;
+//     for(let j=0;j<this.reviews.length;j++){
+//       if(this.productss[i]._id === this.reviews[j].product){
+//         rating +=  this.reviews[j].rating ; numOfRaings++;
+//       }
+//     }
+//     this.currentRate[i] = rating/numOfRaings;
+   
+//   }
+// }
+
+calculatePrdouctsReviews() {
+  for (let i = 0; i < this.productss?.length; i++) {
+    let rating = 0,
+      numOfRaings = 0;
+    for (let j = 0; j < this.reviews.length; j++) {
+      if (this.productss[i]._id === this.reviews[j].product) {
+        rating += this.reviews[j].rating;
+        numOfRaings++;
       }
     }
-    this.currentRate[i] = rating/numOfRaings;
-   
+    this.currentRate[i] = rating / numOfRaings;
+    // console.log('rating => ', rating);
+    // console.log('numOfRaings => ', numOfRaings);
+    // console.log(this.currentRate[i] => ,  this.currentRate[i]);
+    // console.log(this.currentRate);
   }
 }
+
+getAllProduectsByCategoryIId(categoryId) {
+  this.mycategory.getCategoryProduct(categoryId).subscribe(
+    (res) => {
+      this.getAllProduectsByCategoryId.push(res["category"]);
+      for (let i = 0; i < res["category"].length; i++) {
+        this.productss.push(res["category"][i]);
+      }
+      // console.log("productss : ", this.productss);
+
+      // console.log("cats--->", JSON.stringify(this.categories));
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+checkIfExistInWhis(productId) {
+  var i;
+  for (i = 0; i < this.wishlists.length; i++) {
+    if (this.wishlists[i].product?._id === productId) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+rateProduct(Productid){
+  let loggedIn = localStorage.getItem('access_id');
+  if(loggedIn){
+    Swal.fire({
+      position: "center",
+      icon: "info",
+      title: "Pending Approval",
+      iconColor: "#3fc3ee",
+      timer: 1500,
+    });
+    this.nreview.rating = this.rating?.value;
+    this. nreview.review = this.review?.value;
+    this.nreview.product=Productid;
+    this.myreview.add(this.nreview).subscribe(
+      d => {
+        console.log(d)
+        window.location.reload();
+      },
+        err => this.errors = 'Could not authenticate'
+      );
+  } else {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: "btn btn-danger",
+        confirmButton: "btn btn-success",
+      },
+      buttonsStyling: true,
+    });
+    swalWithBootstrapButtons
+      .fire({
+        position: "center",
+        icon: "error",
+        title: "Not Accepted",
+        text:" You Should LogIn First",
+        iconColor: "#f27474",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "LogIn",
+        cancelButtonText: "Cancel",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Redirecting",
+            "You will be redirected to login page",
+            "success"
+          );
+          // this.router.url;
+          window.location.href="/login";
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your review won't be written",
+            "error"
+          );
+        }
+      });
+
+    // Swal.fire({
+    //   position: "center",
+    //   icon: "error",
+    //   title: "Not Accepted",
+    //   text:" You Should LogIn First",
+    //   iconColor: "#f27474",
+    //   timer: 1500,
+    // });
+    // window.location.href = environment.mainUrl;
+  }
+ }
+
+
 
 
 

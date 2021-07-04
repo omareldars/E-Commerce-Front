@@ -22,6 +22,7 @@ export class AdminDashboardHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getAllReviews();
     this.getAdminOrders();
+    this.getAllMerchants();
   }
   getAllReviews() {
     this.reviewsServ.getAllwaitingReviews().subscribe((res) => {

@@ -184,6 +184,7 @@ export class CartComponent implements OnInit {
           );
           this.cart = "";
           this.router.url;
+          window.location.reload();
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
@@ -242,10 +243,19 @@ export class CartComponent implements OnInit {
           this.myCart.removeFromCart(cartId, item._id).subscribe(
             (res2) => {
               // console.log(res2);
-              alert("Product Was Removed From Cart");
+              Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: " Removing ...",
+                text: "Product will be removed",
+                showConfirmButton: false,
+                iconColor: "#f8bb86",
+                timer: 1500,
+              });
+              window.location.reload();
             },
             (err2) => {
-              console.log(err2);
+              // console.log(err2);
             }
           );
         }

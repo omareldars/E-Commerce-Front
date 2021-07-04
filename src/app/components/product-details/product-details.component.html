@@ -39,13 +39,12 @@
                   <ngb-rating *ngIf="userData"
                   [max]="5"
                   [(rate)]="currentRate"
-                  (click)="userData.role=='ROLE_MEMBER'?Rate(product._id):null"
+                  (click)="userData.role=='ROLE_MEMBER'?rateProduct(product._id):null"
                   [readonly]="userData.role=='ROLE_MEMBER'?false:true"
                 ></ngb-rating>
                 <ngb-rating *ngIf="!authorized"
                     [max]="5"
                     [(rate)]="currentRate"
-                    (click)="Rate(product._id)"
                     [readonly]="true"
                   ></ngb-rating>
                 </div>

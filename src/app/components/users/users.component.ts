@@ -68,7 +68,8 @@ export class UsersComponent implements OnInit {
           (err)=>{console.log(err);}
         );
         this.users = this.users.filter((user: { id: any; }) => user.id != id);
-        this.router.navigateByUrl('/users');
+      //  window.location.href='/users';
+      window.location.reload();
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel

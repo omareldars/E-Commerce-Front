@@ -39,17 +39,63 @@ export class ReviewComponent implements OnInit {
  
 Approved(id:string){
 
-  let result = confirm("Are you sure?");
+  // let result = confirm("Are you sure?");
 
-    if(result){
-      this.review.approveReview(id).subscribe(
-        (res)=>{console.log(res);},
-        (err)=>{console.log(err);}
-      );
-      this.reviews = this.reviews.filter((item: { id: any; }) => item.id != id);
-      this.router.navigateByUrl('/review');
+    // if(result){
+    //   this.review.approveReview(id).subscribe(
+    //     (res)=>{console.log(res);},
+    //     (err)=>{console.log(err);}
+    //   );
+    //   this.reviews = this.reviews.filter((item: { id: any; }) => item.id != id);
+    //   window.location.reload();
 
-    }
+    // }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: "btn btn-danger",
+        confirmButton: "btn btn-success",
+      },
+      buttonsStyling: true,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You wont to approve this merchant !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Approve it!",
+        cancelButtonText: "No, cancel!",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Approved!",
+            "Merchant has been Approved.",
+            "success"
+          );
+          if(result){
+              this.review.approveReview(id).subscribe(
+                (res)=>{console.log(res);},
+                (err)=>{console.log(err);}
+              );
+              this.reviews = this.reviews.filter((item: { id: any; }) => item.id != id);
+              window.location.reload();
+        
+            }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your Data is safe :)",
+            "error"
+          );
+        }
+      });
 
 }
 

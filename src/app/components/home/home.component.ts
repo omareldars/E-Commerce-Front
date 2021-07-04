@@ -21,6 +21,7 @@ import { UserService } from "../_Services/user.service";
   styles: [],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  countrate={};
   public errors: string = "";
   userData: any;
   cartProduct = [];
@@ -126,7 +127,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     }
     var rateValue = rating / numOfRaings;
-    return rateValue;
+    this.countrate["product"+productId]=rateValue?rateValue:0;
+    // console.log("countrate : ",this.countrate)
+    // return rateValue;
   }
   getAllCategories() {
     this.mycategory.getAllCategories().subscribe(
@@ -161,6 +164,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.getAllProduectsByCategoryId.push(res["category"]);
         for (let i = 0; i < res["category"].length; i++) {
           this.productss.push(res["category"][i]);
+          this.getRateOfProductById(res["category"][i]._id);
         }
         // console.log("productss : ", this.productss);
 
@@ -217,14 +221,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
           numOfRaings++;
         }
       }
-      this.currentRate[i] = rating / numOfRaings;
+      this.currentRate = rating / numOfRaings;
       // console.log('rating => ', rating);
       // console.log('numOfRaings => ', numOfRaings);
       // console.log(this.currentRate[i] => ,  this.currentRate[i]);
       // console.log(this.currentRate);
     }
   }
-  currentRate: any[] = [0];
+  currentRate = 0;
   mycart = [];
   ncart: Cart;
 
@@ -298,9 +302,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  Rate(index: number, Productid) {
+  Rate(e,Productid) {
     setTimeout(() => {
-      this.nreview.rating = this.currentRate[index];
+      console.log("events :  ",e);
+      // console.log("product  :  ",Productid);
+      this.nreview.rating = this.countrate['product'+Productid];
+      // console.log("currrate  :  ",this.nreview.rating);
       this.nreview.product = Productid;
       // this.index = i + 1;
       //     this.snackBar.open(this.response[i], '', {
@@ -312,8 +319,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.myreview.add(this.nreview).subscribe(
         (d) => {
           console.log(d);
+          console.log("nreview : ",this.nreview);
+
           // this.router.navigateByUrl("/home");
-          window.location.href = "/home";
+          // window.location.href = "/home";
         },
         (err) => (this.errors = "Could not authenticate")
 
@@ -323,27 +332,84 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }, 300);
   }
 
-  UnlikeProduct(id: any, categoryId) {
-    let result = confirm("Are you sure?");
 
-    if (result) {
-      this.mywishlist.deleteWishlistById(id).subscribe(
-        (res) => {
-          // console.log(res);
-          this.getallWishes();
-          this.getAllProduectsByCategoryIId(categoryId);
-        },
-        (err) => {
-          console.log(err);
+  /////////////////////////////
+  UnlikeProduct(id: any, categoryId) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: "btn btn-danger",
+        confirmButton: "btn btn-success",
+      },
+      buttonsStyling: true,
+    });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't  to remove product from wishlist!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Product has been removed",
+            "success"
+          );
+          this.mywishlist.deleteWishlistById(id).subscribe(
+            (res) => {
+              // console.log(res);
+              this.getallWishes();
+              this.getAllProduectsByCategoryIId(categoryId);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+          this.nwishlist = this.wishlists.filter(
+            (item: { id: any }) => item.id != id
+          );
+          // this.router.navigateByUrl("/home");
+          window.location.href = "/home";
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Product in Wishlist :)",
+            "error"
+          );
         }
-      );
-      this.nwishlist = this.wishlists.filter(
-        (item: { id: any }) => item.id != id
-      );
-      // this.router.navigateByUrl("/home");
-      window.location.href = "/home";
-    }
+      });
   }
+  ////////////////////////////////////
+
+  // UnlikeProduct(id: any, categoryId) {
+  //   let result = confirm("Are you sure?");
+
+  //   if (result) {
+  //     this.mywishlist.deleteWishlistById(id).subscribe(
+  //       (res) => {
+  //         // console.log(res);
+  //         this.getallWishes();
+  //         this.getAllProduectsByCategoryIId(categoryId);
+  //       },
+  //       (err) => {
+  //         console.log(err);
+  //       }
+  //     );
+  //     this.nwishlist = this.wishlists.filter(
+  //       (item: { id: any }) => item.id != id
+  //     );
+  //     // this.router.navigateByUrl("/home");
+  //     window.location.href = "/home";
+  //   }
+  // }
 
   getallWishes() {
     this.mywishlist.getAllProductsWishlist().subscribe((res) => {

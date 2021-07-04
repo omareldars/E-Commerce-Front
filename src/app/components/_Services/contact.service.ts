@@ -11,8 +11,6 @@ export class ContactService {
   constructor(private http: HttpClient) {}
 
   add(ncontact: Contact) {
-    return this.http.post<Contact>(`${this.baseurl}contact/add`, ncontact, {
-      headers: { authorization: this.token },
-    });
+    return this.http.post<Contact>(`${this.baseurl}contact/add`, ncontact);
   }
 }
