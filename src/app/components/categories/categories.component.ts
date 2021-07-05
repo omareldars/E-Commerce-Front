@@ -71,6 +71,7 @@ export class CategoriesComponent implements OnInit {
           (err)=>{console.log(err);}
         );
         this.categories = this.categories.filter((item: { id: any; }) => item.id != id);
+        window.location.reload();
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel

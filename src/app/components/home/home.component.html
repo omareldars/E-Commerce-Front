@@ -131,7 +131,9 @@
       <div *ngIf="getAllProduectsByCategoryId[c]?.length !=0"  class="col-lg-12">
         <div class="li-section-title">
           <h2>
-            <span>{{category?.name}}</span>
+            <a routerLink="/category/products/{{ category._id }}">
+              <span>{{category?.name}}. . .</span>
+            </a>
           </h2>
           <!-- <h2 style="color:blue;">
             <a routerLink="/category/products/{{ category?._id }}" >Show More >>></a>

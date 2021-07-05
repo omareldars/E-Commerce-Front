@@ -180,6 +180,15 @@ export class CategoryProductsComponent implements OnInit {
   
   addToCart(product: any)
   {
+    let loggedIn = localStorage.getItem('access_id');
+    if(loggedIn){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Product Added To Cart",
+        iconColor: "#a5dc86",
+        timer: 1500,
+      });
     
     this.myCart.usercart().subscribe(
       data => {
@@ -216,6 +225,16 @@ export class CategoryProductsComponent implements OnInit {
       showConfirmButton: false,
       timer: 1700,
     });
+  }
+  else{
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "You should Login First ",
+      iconColor: "#f27474",
+      timer: 1500,
+    });
+  }
   }
  
    
@@ -339,6 +358,15 @@ Rate(index:number, Productid){
 
 
  addtoWishlist(Productid){
+  let loggedIn = localStorage.getItem('access_id');
+  if(loggedIn){
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Product Added To Wishlist",
+      iconColor: "#a5dc86",
+      timer: 1500,
+    });
   this.nwishlist.product=Productid;
   this.nwishlist.isLiked=true;
 
@@ -352,7 +380,16 @@ Rate(index:number, Productid){
   
   // console.log(rating,Productid);
   // console.log(this.nreview);
-  );
+  );}
+  else{
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "You should Login First ",
+      iconColor: "#f27474",
+      timer: 1500,
+    });
+  }
  }
  getRateOfProductById(productId) {
   let rating = 0,
